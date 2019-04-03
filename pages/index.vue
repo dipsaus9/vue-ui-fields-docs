@@ -43,6 +43,17 @@ export default {
 				}
 			}
 		]);
+
+		this.uiFields.setNewCondition({
+			key: 'last_name',
+			depth: 'personalInfo',
+			condition: {
+				key: 'first_name',
+				value(val) {
+					return val.length;
+				}
+			}
+		});
 	},
 	mounted() {
 		this.$store.dispatch('uiFields/setNewForm', this.uiFields.getFieldSettings());
