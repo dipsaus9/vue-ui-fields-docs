@@ -1,6 +1,6 @@
 # vue-ui-fields-tests
 
-> My gnarly Matise Nuxt.js project
+> My grand Matise Nuxt.js project
 
 ## Build Setup
 

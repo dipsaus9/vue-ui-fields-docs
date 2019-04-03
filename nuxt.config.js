@@ -5,7 +5,7 @@ if (config.env === 'development') {
 	process.env.DEBUG = 'nuxt:*';
 }
 
-module.exports = {
+export default {
 	mode: 'universal',
 	env: {
 		environment: config.env || 'production'
@@ -35,17 +35,16 @@ module.exports = {
 	/*
 	 ** Plugins to load before mounting the App
 	 */
-	plugins: ['~plugins/ui-fields'],
+	plugins: [],
 
 	/*
 	 ** Nuxt.js modules
 	 */
 	modules: [
 		'nuxt-rfg-icon',
-		'@nuxtjs/manifest',
-		'@nuxtjs/pwa',
 		// '@nuxtjs/google-analytics',
-		'@nuxtjs/axios'
+		'@nuxtjs/axios',
+		'@matise/ui-fields'
 	],
 
 	/*
@@ -75,10 +74,11 @@ module.exports = {
 		 */
 		plugins: [],
 
-		babel: {
-			babelrc: true,
-			cacheDirectory: undefined
-		},
+		// babel: {
+		// 	babelrc: true,
+		// 	cacheDirectory: undefined
+		// },
+
 		transpile: [], // Name of NPM packages to be transpiled
 
 		/*
