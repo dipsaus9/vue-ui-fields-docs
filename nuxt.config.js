@@ -6,7 +6,7 @@ if (config.env === 'development') {
 }
 
 export default {
-	mode: 'universal',
+	mode: 'spa',
 	env: {
 		environment: config.env || 'production'
 	},
@@ -44,7 +44,11 @@ export default {
 		'nuxt-rfg-icon',
 		// '@nuxtjs/google-analytics',
 		'@nuxtjs/axios',
-		'@matise/ui-fields'
+		['@matise/ui-fields', {
+			veeValidate: {
+				preload: true
+			}
+		}]
 	],
 
 	/*

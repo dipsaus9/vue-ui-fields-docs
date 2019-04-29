@@ -1,5 +1,7 @@
 <template>
-	<ui-fields field-name="checkout" />
+	<form data-vv-scope="uiFields">
+		<ui-fields field-name="checkout" />
+	</form>
 </template>
 <script>
 export default {
@@ -28,18 +30,22 @@ export default {
 				depth: 'personalInfo',
 				name: 'first_name',
 				placeholder: 'Enter your first name',
+				reequired: true,
 				errors: {
 					validation: 'required',
-					message: 'This field is required'
+					message: 'This field is required',
+					veeValidateScope: 'uiFields'
 				}
 			},
 			{
 				depth: 'personalInfo',
 				name: 'last_name',
 				placeholder: 'Enter your last name',
+				required: true,
 				errors: {
 					validation: 'required',
-					message: 'This field is required'
+					message: 'This field is required',
+					veeValidateScope: 'uiFields'
 				}
 			}
 		]);
