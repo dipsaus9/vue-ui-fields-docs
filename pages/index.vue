@@ -35,6 +35,16 @@ export default {
 					validation: 'required',
 					message: 'This field is required',
 					veeValidateScope: 'uiFields'
+				},
+				hooks: (val) => {
+					if (!val) {
+						this.$store.dispatch('uiFields/updateFieldValue', {
+							name: 'checkout',
+							depth: 'personalInfo',
+							index: 'last_name',
+							value: ''
+						});
+					}
 				}
 			},
 			{
@@ -47,6 +57,29 @@ export default {
 					message: 'This field is required',
 					veeValidateScope: 'uiFields'
 				}
+			},
+			{
+				depth: 'personalInfo',
+				type: 'radio',
+				name: 'list',
+				placeholder: 'Enter your last name',
+				options: [
+					{
+						label: 'optie 1',
+						value: 1,
+						component: {
+							name: 'h1',
+							props: {
+								class: 'hoallo'
+							},
+							content: 'hoij'
+						}
+					},
+					{
+						label: 'optie 2',
+						value: 2
+					}
+				]
 			}
 		]);
 
