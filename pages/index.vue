@@ -1,7 +1,6 @@
 <template>
 	<form data-vv-scope="uiFields" @submit.prevent="sub">
-		<ui-fields field-name="checkout" />
-		<button type="submit" name="button"></button>
+		<!-- <ui-fields field-name="checkout" /> -->
 	</form>
 </template>
 <script>
@@ -12,58 +11,61 @@ export default {
 		};
 	},
 	created() {
-		this.uiFields = this.createNewUiFieldsInstance({
-			key: 'checkout',
-			container: {
-				classes: 'checkout'
-			}
-		});
-		this.uiFields.setFieldSet({
-			key: 'personalInfo',
-			container: {
-				classes: ['personal', 'extra-large']
-			}
+		const uiFields = this.createNewUiFieldsInstance({
+			name: 'checkout',
+			classes: 'checkout'
 		});
 
-		this.uiFields.setField([
+		uiFields.setFieldset({
+			name: 'personalInfo',
+			classes: ['personal', 'extra-large']
+		});
+
+		uiFields.setFieldsetClassesAll('nog meer');
+
+		uiFields.setFields([
 			{
-				depth: 'personalInfo',
+				fieldsetName: 'personalInfo',
+				label: 'Wow awesome label you got there',
 				name: 'first_name',
 				type: 'text',
-				placeholder: 'Enter your first name'
+				autocomplete: 'on',
+				disabled: true,
+				max: 500,
+				maxlength: 500,
+				min: 5,
+				minlength: 5,
+				multiple: true,
+				placeholder: 'test',
+				required: true,
+				classes: ['asdfasdf'],
+				step: 10,
+				hooks: () => {
+					console.log('awesome');
+				},
+				persistent: false
 			},
 			{
-				depth: 'personalInfo',
-				name: 'last_name',
-				type: 'text',
-				placeholder: 'Enter your last name',
-				required: true
-			},
-			{
-				depth: 'personalInfo',
-				name: 'list',
-				placeholder: 'Enter your last name',
-				label: 'hoi'
+				fieldsetName: 'personalInfo',
+				label: 'Wow awesome label you got there',
+				name: 'test',
+				type: 'select',
+				required: true,
+				options: [
+					{
+						label: 'test',
+						value: 'test'
+					},
+					{
+						label: 'test2',
+						value: 'test2',
+						price: 100
+					}
+				]
 			}
 		]);
-
-		this.uiFields.setNewCondition({
-			key: 'last_name',
-			depth: 'personalInfo',
-			condition: {
-				key: 'first_name',
-				value(val) {
-					return val.length;
-				}
-			}
-		});
-
-		this.uiFields.finishForm();
-	},
-	methods: {
-		async sub() {
-			const valid = await this.$validator.validate('uiFields.*');
-		}
+		console.log(uiFields.getFields());
+		// uiFields.finishForm();
 	}
 };
 </script>
