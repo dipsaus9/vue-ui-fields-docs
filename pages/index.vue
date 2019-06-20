@@ -1,6 +1,7 @@
 <template>
-	<form data-vv-scope="uiFields">
+	<form data-vv-scope="uiFields" @submit.prevent="sub">
 		<ui-fields field-name="checkout" />
+		<button type="submit" name="button"></button>
 	</form>
 </template>
 <script>
@@ -17,7 +18,6 @@ export default {
 				classes: 'checkout'
 			}
 		});
-
 		this.uiFields.setFieldSet({
 			key: 'personalInfo',
 			container: {
@@ -29,57 +29,21 @@ export default {
 			{
 				depth: 'personalInfo',
 				name: 'first_name',
-				placeholder: 'Enter your first name',
-				reequired: true,
-				errors: {
-					validation: 'required',
-					message: 'This field is required',
-					veeValidateScope: 'uiFields'
-				},
-				hooks: (val) => {
-					if (!val) {
-						this.$store.dispatch('uiFields/updateFieldValue', {
-							name: 'checkout',
-							depth: 'personalInfo',
-							index: 'last_name',
-							value: ''
-						});
-					}
-				}
+				type: 'text',
+				placeholder: 'Enter your first name'
 			},
 			{
 				depth: 'personalInfo',
 				name: 'last_name',
+				type: 'text',
 				placeholder: 'Enter your last name',
-				required: true,
-				errors: {
-					validation: 'required',
-					message: 'This field is required',
-					veeValidateScope: 'uiFields'
-				}
+				required: true
 			},
 			{
 				depth: 'personalInfo',
-				type: 'radio',
 				name: 'list',
 				placeholder: 'Enter your last name',
-				options: [
-					{
-						label: 'optie 1',
-						value: 1,
-						component: {
-							name: 'h1',
-							props: {
-								class: 'hoallo'
-							},
-							content: 'hoij'
-						}
-					},
-					{
-						label: 'optie 2',
-						value: 2
-					}
-				]
+				label: 'hoi'
 			}
 		]);
 
@@ -93,9 +57,25 @@ export default {
 				}
 			}
 		});
+
+		this.uiFields.finishForm();
 	},
-	mounted() {
-		this.$store.dispatch('uiFields/setNewForm', this.uiFields.getFieldSettings());
+	methods: {
+		async sub() {
+			const valid = await this.$validator.validate('uiFields.*');
+		}
 	}
 };
 </script>
+<style lang="scss">
+@import '~tools';
+form {
+	display: flex;
+	margin: rem(100) auto;
+	flex-direction: column;
+	width: grid(14);
+}
+h1 {
+	font-size: grid(1);
+}
+</style>

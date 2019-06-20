@@ -35,7 +35,7 @@ export default {
 	/*
 	 ** Plugins to load before mounting the App
 	 */
-	plugins: ['./plugins/ui-fields.js'],
+	plugins: [],
 
 	/*
 	 ** Nuxt.js modules
@@ -44,11 +44,14 @@ export default {
 		'nuxt-rfg-icon',
 		// '@nuxtjs/google-analytics',
 		'@nuxtjs/axios',
-		['@matise/ui-fields', {
-			veeValidate: {
-				preload: true
+		[
+			'@matise/ui-fields',
+			{
+				veeValidate: {
+					preload: true
+				}
 			}
-		}]
+		]
 	],
 
 	/*
@@ -96,8 +99,7 @@ export default {
 				config.module.rules.push({
 					enforce: 'pre',
 					test: /\.(js|vue)$/,
-					loader: 'eslint-loader',
-					exclude: /(node_modules)/
+					loader: 'eslint-loader'
 				});
 			}
 		}

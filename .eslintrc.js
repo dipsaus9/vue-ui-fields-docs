@@ -30,8 +30,10 @@ module.exports = {
 			}
 		],
 		semi: ['warn', 'always'],
-		'no-console': 'off',
+		'no-console': 'warn',
+		yoda: 'warn',
 		'no-trailing-spaces': 'warn',
+		'no-unreachable': 'warn',
 		'no-undef': 'warn',
 		'no-irregular-whitespace': 'warn',
 		indent: [
@@ -59,6 +61,7 @@ module.exports = {
 				ignoreChainWithDepth: 2
 			}
 		],
+		'no-unused-vars': 'warn',
 		'no-mixed-spaces-and-tabs': 'warn',
 		//base
 		'vue/comment-directive': 'warn',
@@ -113,18 +116,7 @@ module.exports = {
 				ignores: []
 			}
 		],
-		'vue/html-self-closing': [
-			'warn',
-			{
-				html: {
-					void: 'never',
-					normal: 'never',
-					component: 'always'
-				},
-				svg: 'any',
-				math: 'always'
-			}
-		],
+		'vue/html-self-closing': 0,
 		'vue/html-closing-bracket-spacing': [
 			'warn',
 			{
@@ -136,7 +128,7 @@ module.exports = {
 		'vue/max-attributes-per-line': [
 			'warn',
 			{
-				singleline: 3,
+				singleline: 4,
 				multiline: {
 					max: 1,
 					allowFirstLine: false
@@ -154,6 +146,7 @@ module.exports = {
 		'vue/html-quotes': 'warn',
 		'vue/order-in-components': 'warn',
 		'vue/this-in-template': 'error',
-		'vue/attributes-order': 'warn'
+		'vue/attributes-order': 'warn',
+		'vue/max-attributes-per-line': 0
 	}
 };
