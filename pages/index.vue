@@ -84,7 +84,15 @@ export default {
 				required: true,
 				classes: ['asdfasdf'],
 				step: 10,
-				persistent: false
+				persistent: false,
+				component: {
+					props: {
+						'v-cloak': true
+					},
+					classes: ['awesome'],
+					name: 'div',
+					content: 'Nog meer beter'
+				}
 			}
 			// {
 			// 	fieldsetName: 'personalInfo',
