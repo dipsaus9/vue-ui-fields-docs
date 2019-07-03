@@ -46,7 +46,12 @@ export default {
 				required: true,
 				classes: ['asdfasdf'],
 				step: 10,
-				persistent: false
+				persistent: false,
+				errors: {
+					validation: 'required',
+					message: 'Wow, niet invullen enzo',
+					veeValidateScope: 'uiFields'
+				}
 			},
 			{
 				fieldsetName: 'personalInfo2',
@@ -69,12 +74,11 @@ export default {
 			},
 			{
 				fieldsetName: 'personalInfo2',
-				label: 'Wow awesome label you got there',
 				name: 'third_name',
 				props: {
 					autocomplete: 'on'
 				},
-				type: 'text',
+				type: 'component',
 				max: 500,
 				maxlength: 500,
 				min: 5,
@@ -90,7 +94,7 @@ export default {
 						'v-cloak': true
 					},
 					classes: ['awesome'],
-					name: 'div',
+					name: 'h1',
 					content: 'Nog meer beter'
 				}
 			}
@@ -113,17 +117,17 @@ export default {
 			// 	]
 			// }
 		]);
-		uiFields.setNewCondition({
-			dependent: {
-				fieldsetName: 'personalInfo',
-				fieldName: 'first_name'
-			},
-			fieldsetName: 'personalInfo2',
-			condition: (val) => {
-				console.log(val);
-				return val === 'test';
-			}
-		});
+		// uiFields.setNewCondition({
+		// 	dependent: {
+		// 		fieldsetName: 'personalInfo',
+		// 		fieldName: 'first_name'
+		// 	},
+		// 	fieldsetName: 'personalInfo2',
+		// 	// fieldName: 'third_name',
+		// 	condition: (val) => {
+		// 		return val === 'test';
+		// 	}
+		// });
 
 		uiFields.finishForm();
 	},
