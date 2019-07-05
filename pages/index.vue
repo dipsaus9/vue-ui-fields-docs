@@ -36,17 +36,22 @@ export default {
 				props: {
 					autocomplete: 'on'
 				},
-				type: 'text',
-				max: 500,
-				maxlength: 500,
-				min: 5,
-				minlength: 5,
-				multiple: true,
+				type: 'checkbox',
+				options: [
+					{
+						label: 'Hoi',
+						value: 'hoi'
+					},
+					{
+						label: 'hallo',
+						value: 'hallo',
+						selected: true
+					}
+				],
+				value: [],
 				placeholder: 'test',
 				required: true,
 				classes: ['asdfasdf'],
-				step: 10,
-				persistent: false,
 				errors: {
 					validation: 'required',
 					message: 'Wow, niet invullen enzo',
@@ -69,8 +74,7 @@ export default {
 				placeholder: 'test',
 				required: true,
 				classes: ['asdfasdf'],
-				step: 10,
-				persistent: false
+				step: 10
 			},
 			{
 				fieldsetName: 'personalInfo2',
@@ -88,7 +92,6 @@ export default {
 				required: true,
 				classes: ['asdfasdf'],
 				step: 10,
-				persistent: false,
 				component: {
 					props: {
 						'v-cloak': true
@@ -123,7 +126,7 @@ export default {
 		// 		fieldName: 'first_name'
 		// 	},
 		// 	fieldsetName: 'personalInfo2',
-		// 	// fieldName: 'third_name',
+		// 	fieldName: 'third_name',
 		// 	condition: (val) => {
 		// 		return val === 'test';
 		// 	}
@@ -132,12 +135,12 @@ export default {
 		uiFields.finishForm();
 	},
 	mounted() {
-		this.$store.dispatch('uiFields/updateFieldValue', {
-			formName: 'checkout',
-			fieldsetIndex: 'personalInfo',
-			fieldIndex: 'first_name',
-			value: 'wow'
-		});
+		// this.$store.dispatch('uiFields/updateFieldValue', {
+		// 	formName: 'checkout',
+		// 	fieldsetIndex: 'personalInfo',
+		// 	fieldIndex: 'first_name',
+		// 	value: 'wow'
+		// });
 	}
 };
 </script>
