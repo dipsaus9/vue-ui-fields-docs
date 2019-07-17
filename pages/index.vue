@@ -1,6 +1,7 @@
 <template>
 	<form data-vv-scope="uiFields" @submit.prevent="submit">
 		<ui-fields field-name="checkout" />
+		<ui-errors field-name="custom-errors" />
 		<button type="submit">Submit</button>
 	</form>
 </template>
@@ -8,11 +9,12 @@
 export default {
 	data() {
 		return {
-			uiFields: null
+			uiFields: null,
+			submitted: false
 		};
 	},
 	created() {
-		const uiFields = this.createNewUiFieldsInstance({
+		const uiFields = this.$uiFields.new({
 			name: 'checkout',
 			classes: 'checkout'
 		});
@@ -27,23 +29,45 @@ export default {
 			{
 				fieldsetName: 'personalInfo',
 				label: 'Enter your first name',
-				name: 'email',
+				name: 'password',
 				autocomplete: 'given-name',
-				type: 'email',
+				type: 'password',
 				placeholder: 'What is your first name',
-				required: true,
-				validation: ['required', 'email']
+				validation: ['required']
+				// validation: [
+				// 	{
+				// 		name: 'url',
+				// 		options: () => {
+				// 			return this.getCorrectField({
+				// 				formName: 'checkout',
+				// 				fieldsetName: 'personalInfo',
+				// 				fieldName: 'last_name'
+				// 			})
+				// 		},
+				// 		message: () => 'min 10 man'
+				// 	}
+				// ]
 			},
 			{
 				fieldsetName: 'personalInfo',
 				label: 'Enter your last name',
-				name: 'last_name',
+				name: 'passwordRepeat',
 				autocomplete: 'additional-name',
-				type: 'text',
-				maxlength: 10,
-				minlength: 5,
+				type: 'password',
 				placeholder: 'test 2',
-				required: true,
+				validation: [
+					'required',
+					{
+						name: 'equalTo',
+						options: () => {
+							return this.getCorrectField({
+								formName: 'checkout',
+								fieldsetName: 'personalInfo',
+								fieldName: 'password'
+							});
+						}
+					}
+				],
 				classes: ['asdfasdf']
 			},
 			{
@@ -52,19 +76,18 @@ export default {
 				name: 'address',
 				autocomplete: 'street-address',
 				type: 'text',
-				required: true
+				validation: ['required']
 			},
 			{
 				fieldsetName: 'personalInfo',
 				label: 'Enter your country',
 				name: 'country',
 				autocomplete: 'country',
-				type: 'select',
+				type: 'radio',
+				validation: ['required'],
 				options: [
 					{
 						label: 'Select something',
-						selected: true,
-						disabled: true,
 						value: ''
 					},
 					{
@@ -75,37 +98,32 @@ export default {
 						label: 'Duitsland',
 						value: 'DE'
 					}
-				],
-				required: true
+				]
 			}
 		]);
-		// uiFields.setNewCondition({
-		// 	dependent: {
-		// 		fieldsetName: 'personalInfo',
-		// 		fieldName: 'first_name'
-		// 	},
-		// 	fieldsetName: 'personalInfo2',
-		// 	fieldName: 'third_name',
-		// 	condition: (val) => {
-		// 		return val === 'test';
-		// 	}
-		// });
 
 		uiFields.finishForm();
+	},
+	methods: {
+		async submit() {
+			this.submitted = true;
+			const result = await this.$uiFields.validate('checkout');
+			if (result.valid) {
+				this.$uiFields.setError({
+					formName: 'custom-errors',
+					fieldIndex: 'custom_error',
+					message: 'You have succesfully pushed this form'
+				});
+				setTimeout(() => {
+					this.$uiFields.removeError({
+						formName: 'custom-errors',
+						fieldIndex: 'custom_error',
+						message: 'You have succesfully pushed this form'
+					});
+				}, 2000);
+			}
+		}
 	}
-	// methods: {
-	// 	submit() {
-	// 		const result = await this.uiFields.validate('checkout');
-	// 		if(!result){
-	// 			console.log(' yeah fuck.. post the fucking thing.');
-	// 			//post fucntion
-	// 			.catch((error) => {
-	// 				this.uiFields.addError('checkout', 'first_name', 'message')
-	// 			});
-	// 		}
-	// 		console.log('submit dit eens');
-	// 	}
-	// }
 };
 </script>
 <style lang="scss">
@@ -118,5 +136,8 @@ form {
 }
 h1 {
 	font-size: grid(1);
+}
+.uiFields__fieldset {
+	margin: 50px 0;
 }
 </style>
