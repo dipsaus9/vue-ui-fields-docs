@@ -1,6 +1,7 @@
 <template>
-	<form data-vv-scope="uiFields" @submit.prevent="sub">
+	<form data-vv-scope="uiFields" @submit.prevent="submit">
 		<ui-fields field-name="checkout" />
+		<button type="submit">Submit</button>
 	</form>
 </template>
 <script>
@@ -17,108 +18,66 @@ export default {
 		});
 
 		uiFields.setFieldset({
-			name: 'personalInfo',
-			classes: ['personal', 'extra-large']
+			name: 'personalInfo'
 		});
 
-		uiFields.setFieldset({
-			name: 'personalInfo2',
-			classes: ['personal', 'extra-large']
-		});
-
-		uiFields.setFieldsetClassesAll('nog meer');
+		uiFields.setFieldsetClassesAll('personalInfo');
 
 		uiFields.setFields([
 			{
 				fieldsetName: 'personalInfo',
-				label: 'Wow awesome label you got there',
-				name: 'first_name',
-				props: {
-					autocomplete: 'on'
-				},
-				type: 'checkbox',
+				label: 'Enter your first name',
+				name: 'email',
+				autocomplete: 'given-name',
+				type: 'email',
+				placeholder: 'What is your first name',
+				required: true,
+				validation: ['required', 'email']
+			},
+			{
+				fieldsetName: 'personalInfo',
+				label: 'Enter your last name',
+				name: 'last_name',
+				autocomplete: 'additional-name',
+				type: 'text',
+				maxlength: 10,
+				minlength: 5,
+				placeholder: 'test 2',
+				required: true,
+				classes: ['asdfasdf']
+			},
+			{
+				fieldsetName: 'personalInfo',
+				label: 'Enter your address',
+				name: 'address',
+				autocomplete: 'street-address',
+				type: 'text',
+				required: true
+			},
+			{
+				fieldsetName: 'personalInfo',
+				label: 'Enter your country',
+				name: 'country',
+				autocomplete: 'country',
+				type: 'select',
 				options: [
 					{
-						label: 'Hoi',
-						value: 'hoi'
+						label: 'Select something',
+						selected: true,
+						disabled: true,
+						value: ''
 					},
 					{
-						label: 'hallo',
-						value: 'hallo',
-						selected: true
+						label: 'Nederland',
+						value: 'NL'
+					},
+					{
+						label: 'Duitsland',
+						value: 'DE'
 					}
 				],
-				value: [],
-				placeholder: 'test',
-				required: true,
-				classes: ['asdfasdf'],
-				errors: {
-					validation: 'required',
-					message: 'Wow, niet invullen enzo',
-					veeValidateScope: 'uiFields'
-				}
-			},
-			{
-				fieldsetName: 'personalInfo2',
-				label: 'Wow awesome label you got there',
-				name: 'last_name',
-				props: {
-					autocomplete: 'on'
-				},
-				type: 'text',
-				max: 500,
-				maxlength: 500,
-				min: 5,
-				minlength: 5,
-				multiple: true,
-				placeholder: 'test',
-				required: true,
-				classes: ['asdfasdf'],
-				step: 10
-			},
-			{
-				fieldsetName: 'personalInfo2',
-				name: 'third_name',
-				props: {
-					autocomplete: 'on'
-				},
-				type: 'component',
-				max: 500,
-				maxlength: 500,
-				min: 5,
-				minlength: 5,
-				multiple: true,
-				placeholder: 'test',
-				required: true,
-				classes: ['asdfasdf'],
-				step: 10,
-				component: {
-					props: {
-						'v-cloak': true
-					},
-					classes: ['awesome'],
-					name: 'h1',
-					content: 'Nog meer beter'
-				}
+				required: true
 			}
-			// {
-			// 	fieldsetName: 'personalInfo',
-			// 	label: 'Wow awesome label you got there',
-			// 	name: 'test',
-			// 	type: 'select',
-			// 	required: true,
-			// 	options: [
-			// 		{
-			// 			label: 'test',
-			// 			value: 'test'
-			// 		},
-			// 		{
-			// 			label: 'test2',
-			// 			value: 'test2',
-			// 			price: 100
-			// 		}
-			// 	]
-			// }
 		]);
 		// uiFields.setNewCondition({
 		// 	dependent: {
@@ -133,15 +92,20 @@ export default {
 		// });
 
 		uiFields.finishForm();
-	},
-	mounted() {
-		// this.$store.dispatch('uiFields/updateFieldValue', {
-		// 	formName: 'checkout',
-		// 	fieldsetIndex: 'personalInfo',
-		// 	fieldIndex: 'first_name',
-		// 	value: 'wow'
-		// });
 	}
+	// methods: {
+	// 	submit() {
+	// 		const result = await this.uiFields.validate('checkout');
+	// 		if(!result){
+	// 			console.log(' yeah fuck.. post the fucking thing.');
+	// 			//post fucntion
+	// 			.catch((error) => {
+	// 				this.uiFields.addError('checkout', 'first_name', 'message')
+	// 			});
+	// 		}
+	// 		console.log('submit dit eens');
+	// 	}
+	// }
 };
 </script>
 <style lang="scss">

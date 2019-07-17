@@ -47,8 +47,8 @@ export default {
 		[
 			'@matise/ui-fields',
 			{
-				veeValidate: {
-					preload: true
+				validation: {
+					i18n: 'nl'
 				}
 			}
 		]
