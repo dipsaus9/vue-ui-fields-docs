@@ -5,36 +5,27 @@ module.exports = {
 		node: true
 	},
 	parserOptions: {
-		parser: 'babel-eslint',
-		sourceType: 'module'
+		parser: 'babel-eslint'
 	},
 	extends: [
-		// https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
+		'eslint:recommended',
 		'plugin:vue/recommended',
-		'eslint:recommended'
+		'plugin:nuxt/recommended'
 	],
 	// required to lint *.vue files
-	plugins: ['prettier', 'vue'],
+	plugins: [
+		'only-warn'
+	],
 	// add your custom rules here
 	rules: {
-		'prettier/prettier': [
-			'warn',
-			{
-				printWidth: 120,
-				semi: true,
-				useTabs: true,
-				tabWidth: 1,
-				singleQuote: true,
-				bracketSpacing: true,
-				arrowParens: 'always'
-			}
-		],
 		semi: ['warn', 'always'],
-		'no-console': 'warn',
+		quotes: ['warn', 'single'],
+		'no-console': 'off',
 		yoda: 'warn',
 		'no-trailing-spaces': 'warn',
-		'no-unreachable': 'warn',
 		'no-undef': 'warn',
+		'no-unused-vars': 'warn',
+		'no-async-promise-executor': 'warn',
 		'no-irregular-whitespace': 'warn',
 		indent: [
 			'warn',
@@ -61,7 +52,8 @@ module.exports = {
 				ignoreChainWithDepth: 2
 			}
 		],
-		'no-unused-vars': 'warn',
+		'nuxt/no-cjs-in-config': 0,
+		'vue/no-unused-components': 'warn',
 		'no-mixed-spaces-and-tabs': 'warn',
 		//base
 		'vue/comment-directive': 'warn',
@@ -147,6 +139,7 @@ module.exports = {
 		'vue/order-in-components': 'warn',
 		'vue/this-in-template': 'error',
 		'vue/attributes-order': 'warn',
-		'vue/max-attributes-per-line': 0
+		'vue/max-attributes-per-line': 0,
+		'vue/no-v-html': 0
 	}
 };

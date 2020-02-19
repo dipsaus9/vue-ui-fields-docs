@@ -6,7 +6,7 @@ if (config.env === 'development') {
 }
 
 export default {
-	mode: 'spa',
+	mode: 'universal',
 	env: {
 		environment: config.env || 'production'
 	},
@@ -45,7 +45,7 @@ export default {
 		// '@nuxtjs/google-analytics',
 		'@nuxtjs/axios',
 		[
-			'@matise/ui-fields',
+			'~modules/ui-fields/index.js',
 			{
 				validation: {
 					i18n: 'nl'
