@@ -1,67 +1,54 @@
 <template>
-	<div
-		v-if="fieldData"
-		:class="[
-			`ui-fields__field ui-fields__field--${fieldData.type} ${fieldData.HTMLProperties.classes}`,
-			!pristine ? `ui-fields__field--${fieldData.errors.classes.pristine}` : '',
-			canBeValid && valid === true ? `ui-fields__field--${fieldData.errors.classes.valid}` : '',
-			valid === false ? `ui-fields__field--${fieldData.errors.classes.error}` : ''
-		]"
-	>
+	<div>
 		<input
-			v-if="visibleField"
-			:id="`${fieldsetName}__${fieldData.name}`"
-			v-model="fieldDataValue"
-			:name="fieldData.name"
-			:type="fieldData.type"
-			v-bind="fieldData.HTMLProperties"
-			:class="`ui-fields__input ${fieldData.type}__input`"
-			@input="checkErrors('input')"
-			@change="checkErrors('change')"
-			@blur="checkErrors('blur')"
+			:id="`${form}__${name}`"
+			v-model="fieldData.basisSettings.value"
+			:name="fieldData.basisSettings.name"
+			:type="fieldData.basisSettings.type"
+			v-bind="fieldData.htmlSettings"
+			:class="`ui-fields__input ${fieldData.basisSettings.type}__input`"
 		/>
-		<label :class="`ui-fields__element ${fieldData.type}__element`" :for="`${fieldsetName}__${fieldData.name}`">
+		<label :class="`ui-fields__element ${fieldData.basisSettings.type}__element`" :for="`${form}__${name}`">
 			<span
 				:class="[
-					fieldData.HTMLProperties.required
-						? `${fieldData.type}__label--is-required ui-fields__label ${fieldData.type}__label`
-						: `ui-fields__label ${fieldData.type}__label`
+					fieldData.htmlSettings.required
+						? `${fieldData.basisSettings.type}__label--is-required ui-fields__label ${fieldData.basisSettings.type}__label`
+						: `ui-fields__label ${fieldData.basisSettings.type}__label`
 				]"
-				v-html="fieldData.label"
+				v-html="fieldData.inputSettings.label"
 			>
 			</span>
 			<span
-				v-if="fieldData.HTMLProperties.required"
-				:class="`ui-fields__label--required ${fieldData.type}__label ${fieldData.type}__label--required`"
+				v-if="fieldData.htmlSettings.required"
+				:class="`ui-fields__label--required ${fieldData.basisSettings.type}__label ${fieldData.basisSettings.type}__label--required`"
 			>
-				{{ fieldData.uiFieldsData.requiredText }}
+				{{ fieldData.dependentSettings.requiredText }}
 			</span>
 		</label>
-		<ui-error
-			v-if="fieldData.errors.showErrors"
-			:form-name="formName"
-			:fieldset-index="fieldsetIndex"
-			:field-index="fieldData.name"
-			:component-name="component"
-		/>
-		<component
-			:is="fieldData.component.name"
-			v-if="fieldData.component"
-			v-bind="fieldData.component.props"
-			:class="fieldData.component.classes"
-		>
-			{{ fieldData.component.content }}
-		</component>
 	</div>
 </template>
 <script>
-import mixinSettings from './../mixins/field.js';
 export default {
-	mixins: [mixinSettings],
+	props: {
+		name: {
+			type: String,
+			default: ''
+		},
+		form: {
+			type: String,
+			default: ''
+		}
+	},
 	data() {
 		return {
-			component: 'ui-text'
+			component: 'ui-text',
+			fieldDataValue: ''
 		};
+	},
+	computed: {
+		fieldData() {
+			return this.$uiFields.getField(this.form, this.name);
+		}
 	}
 };
 </script>

@@ -5,7 +5,6 @@ import {
 	DEFAULT_OPTIONS,
 	HELPERS_DIR,
 	MESSAGES_DIR,
-	STORE_DIR,
 	ROOT_DIR,
 	RULES_DIR
 } from './constants.js';
@@ -16,12 +15,11 @@ export default function (moduleoptions) {
 	const helpersPath = join(__dirname, HELPERS_DIR);
 	const templatesPath = join(__dirname, TEMPLATES_DIR);
 	const messagesPath = join(__dirname, MESSAGES_DIR);
-	const storePath = join(__dirname, STORE_DIR);
 	const rulesPath = join(__dirname, RULES_DIR);
 
 	const options = { ...DEFAULT_OPTIONS };
 
-	const requiredPlugins = ['store', 'prototype', 'mixins'];
+	const requiredPlugins = ['mixins', 'prototype'];
 
 	const templatesOptions = {
 		...options,
@@ -52,16 +50,6 @@ export default function (moduleoptions) {
 		});
 	}
 
-	/**
-	 * Create template files
-	 */
-	for (const file of readdirSync(storePath)) {
-		this.addTemplate({
-			src: resolve(storePath, file),
-			fileName: join(ROOT_DIR, file),
-			options: templatesOptions
-		});
-	}
 
 	/**
 	 * Add all plugins

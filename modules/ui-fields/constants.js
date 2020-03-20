@@ -1,7 +1,6 @@
 export const PLUGINS_DIR = 'plugins/';
 export const MESSAGES_DIR = 'messages/';
 export const TEMPLATES_DIR = 'template/';
-export const STORE_DIR = 'store/';
 export const HELPERS_DIR = 'helpers/';
 export const RULES_DIR = 'rules/';
 export const ROOT_DIR = 'ui-fields/';
