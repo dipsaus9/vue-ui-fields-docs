@@ -4,19 +4,19 @@ import getters from './getters';
 
 export default async ({ store }) => {
   store.registerModule(
-    "uiFields",
-    {
-      namespaced: true,
-      state: () => ({
-        fields: [],
-        errors: []
-      }),
-      actions,
-      mutations,
-      getters
-    },
-    {
-      preserveState: !!store.state.uiFields
-    }
+	"uiFields",
+	{
+	  namespaced: true,
+	  state: () => ({
+		fields: [],
+		errors: []
+	  }),
+	  actions,
+	  mutations,
+	  getters
+	},
+	{
+	  preserveState: !!store.state.uiFields
+	}
   );
 };

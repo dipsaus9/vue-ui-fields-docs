@@ -2,7 +2,9 @@
 	<form data-vv-scope="uiFields" @submit.prevent="submit">
 		<ui-fields field-name="checkout" />
 		<ui-errors field-name="custom-errors" />
-		<button type="submit">Submit</button>
+		<button type="submit">
+			Submit
+		</button>
 	</form>
 </template>
 <script>
@@ -18,7 +20,6 @@ export default {
 			name: 'checkout',
 			classes: 'checkout'
 		});
-
 		uiFields.setFieldset({
 			name: 'personalInfo'
 		});

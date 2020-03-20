@@ -1,6 +1,6 @@
 <template>
-	<div v-else-if="uiFieldsErrors.length" :class="`uiFields__errors`">
-		<span :class="`uiFields__error`" v-for="error in uiFieldsErrors">
+	<div v-if="uiFieldsErrors.length" :class="`uiFields__errors`">
+		<span v-for="(error, index) in uiFieldsErrors" :key="index">
 			{{ error.message }}
 		</span>
 	</div>
@@ -32,3 +32,4 @@ export default {
 	}
 };
 </script>
+ :class="`uiFields__error`"

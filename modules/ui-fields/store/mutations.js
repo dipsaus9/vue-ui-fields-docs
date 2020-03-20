@@ -59,6 +59,7 @@ export default {
 			const form2 = state.fields.find((form) => form.name === conditionObj.formName);
 			const field2 = form2.fieldsets[conditionObj.fieldsetIndex].fields[conditionObj.fieldIndex];
 			if (typeof conditionObj.condition !== 'function') {
+				//Do something here
 			} else if (typeof conditionObj.condition === 'function') {
 				field2.conditionValue = field.value === conditionObj.condition;
 				field2.conditionValue = conditionObj.condition(field.value);

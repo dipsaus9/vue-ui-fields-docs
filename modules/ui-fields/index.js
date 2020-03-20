@@ -21,7 +21,7 @@ export default function (moduleoptions) {
 
 	const options = { ...DEFAULT_OPTIONS };
 
-	const requiredPlugins = ['store', 'instance'];
+	const requiredPlugins = ['store', 'prototype', 'mixins'];
 
 	const templatesOptions = {
 		...options,

@@ -8,7 +8,7 @@
 		</span>
 	</div>
 	<div v-else-if="uiFieldsErrors.length" :class="`uiFields__errors ${componentName}__errors`">
-		<span :class="`uiFields__error ${componentName}__error`" v-for="error in uiFieldsErrors">
+		<span v-for="(error, index) in uiFieldsErrors" :key="index" :class="`uiFields__error ${componentName}__error`">
 			{{ error.message }}
 		</span>
 	</div>

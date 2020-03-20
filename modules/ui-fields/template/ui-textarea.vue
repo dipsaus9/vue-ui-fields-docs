@@ -12,13 +12,13 @@
 			v-if="visibleField"
 			:id="`${fieldsetName}__${fieldData.name}`"
 			v-model="fieldDataValue"
-			@input="checkErrors('input')"
-			@change="checkErrors('change')"
-			@blur="checkErrors('blur')"
 			:name="fieldData.name"
 			:type="fieldData.type"
 			v-bind="fieldData.HTMLProperties"
 			:class="`ui-fields__input ${fieldData.type}__input`"
+			@input="checkErrors('input')"
+			@change="checkErrors('change')"
+			@blur="checkErrors('blur')"
 		/>
 		<label :class="`ui-fields__element ${fieldData.type}__element`" :for="`${fieldsetName}__${fieldData.name}`">
 			<span
@@ -38,8 +38,8 @@
 			</span>
 		</label>
 		<component
-			v-if="fieldData.component"
 			:is="fieldData.component.name"
+			v-if="fieldData.component"
 			v-bind="fieldData.component.props"
 			:class="fieldData.component.classes"
 		>
@@ -55,7 +55,7 @@
 	</div>
 </template>
 <script>
-import mixinSettings from './mixins';
+import mixinSettings from './../mixins/field.js';
 export default {
 	mixins: [mixinSettings],
 	data() {

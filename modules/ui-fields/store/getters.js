@@ -22,8 +22,8 @@ export default {
 		if (options) {
 			if (options.formName) {
 				let errors = options.formName.reduce((accum, error) => {
-					if (!!options.fieldsetIndex) {
-						if (!!options.fieldIndex) {
+					if (options.fieldsetIndex) {
+						if (options.fieldIndex) {
 							accum = accum.concat(state.errors.filter((item) => item.formName === error && item.fieldsetIndex === options.fieldsetIndex && item.fieldIndex === options.fieldIndex));
 						} else {
 							accum = accum.concat(state.errors.filter((item) => item.formName === error && item.fieldsetIndex === options.fieldsetIndex));
@@ -33,7 +33,7 @@ export default {
 					}
 					return accum;
 				}, []);
-				errors.sort((a, b) => a.sortIndex > b.sortIndex ? 1 : -1)
+				errors.sort((a, b) => a.sortIndex > b.sortIndex ? 1 : -1);
 				return errors;
 			}
 		}
@@ -46,7 +46,7 @@ export default {
 				if (curr.fields) {
 					accum = accum.concat(curr.fields.map((field) => ({ ...field, fieldsetName: curr.name, fieldsetShow: curr.conditionValue })));
 					if (fieldsetName) {
-						accum = accum.filter((item) => item.fieldsetName === fieldsetName)
+						accum = accum.filter((item) => item.fieldsetName === fieldsetName);
 					}
 				}
 				return accum;
@@ -54,4 +54,4 @@ export default {
 		}
 		return [];
 	}
-}
+};

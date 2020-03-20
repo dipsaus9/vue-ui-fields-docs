@@ -1,11 +1,11 @@
-// import persistentTime from './options';
+import { persistentTime } from './options';
 
 const time = new Date();
 
 export default {
 	setNewForm({ commit }, form) {
 		if (!process.server) {
-			commit("setForm", form);
+			commit('setForm', form);
 		}
 	},
 	updateFieldValue({ commit, state }, fieldOptions) {
@@ -23,7 +23,7 @@ export default {
 		commit('updateFieldValue', fieldOptions);
 		if (fieldOptions) {
 			if (process.client && fieldOptions.persistent !== false) {
-				const uiFieldsLocal = localStorage.getItem("uiFields");
+				const uiFieldsLocal = localStorage.getItem('uiFields');
 				if (uiFieldsLocal) {
 					let uiFields = JSON.parse(uiFieldsLocal);
 					const findIndex = uiFields.data.findIndex((item) => item.fieldIndex === fieldOptions.fieldIndex && item.fieldsetIndex === fieldOptions.fieldsetIndex && item.formName === fieldOptions.formName);
@@ -32,9 +32,9 @@ export default {
 					} else {
 						uiFields.data.push(fieldOptions);
 					}
-					localStorage.setItem("uiFields", JSON.stringify({ data: uiFields.data, time: time.getTime() }));
+					localStorage.setItem('uiFields', JSON.stringify({ data: uiFields.data, time: time.getTime() }));
 				} else {
-					localStorage.setItem("uiFields", JSON.stringify({ data: [fieldOptions], time: time.getTime() }));
+					localStorage.setItem('uiFields', JSON.stringify({ data: [fieldOptions], time: time.getTime() }));
 				}
 			}
 		}
@@ -59,21 +59,21 @@ export default {
 		}
 	},
 	resetFields({ commit }) {
-		commit("resetFields");
+		commit('resetFields');
 	},
 	updateFromLocalStorage({ dispatch }) {
 		if (process.client) {
-			let uiFields = localStorage.getItem("uiFields");
+			let uiFields = localStorage.getItem('uiFields');
 			if (uiFields) {
 				uiFields = JSON.parse(uiFields);
 				let time = new Date();
 				time = time.getTime();
 				if (time - uiFields.time < persistentTime) {
 					uiFields.data.forEach(field => {
-						dispatch("updateFieldValue", field);
+						dispatch('updateFieldValue', field);
 					});
 				} else {
-					localStorage.removeItem("uiFields");
+					localStorage.removeItem('uiFields');
 				}
 			}
 		}
@@ -120,7 +120,7 @@ export default {
 								fieldIndex: field.name,
 								name: item.name
 							});
-						})
+						});
 					}
 				}
 				return accum;
@@ -171,14 +171,14 @@ export default {
 						});
 					}
 					resolveMap();
-				})
+				});
 			}));
 			const errors = getters.errors({ formName: [formName] });
 			resolve({
 				valid: errors.length === 0,
 				errors
 			});
-		})
+		});
 	},
 	extraCondition({ commit, getters }, options) {
 		const dependentOptions = options.dependent;
@@ -196,7 +196,7 @@ export default {
 						formName: dependentOptions.formName,
 						fieldIndex: fieldForCondition,
 						fieldSetForCondition,
-					}
+					};
 					//depObject found, condition object needs to be created
 
 					const form2 = getters['field'](options.formName);
@@ -225,13 +225,13 @@ export default {
 						}
 					}
 				} else {
-					console.warn('setNewCondition will be ignored, field not found')
+					console.warn('setNewCondition will be ignored, field not found');
 				}
 			} else {
-				console.warn('setNewCondition will be ignored, field not found')
+				console.warn('setNewCondition will be ignored, field not found');
 			}
 		} else {
-			console.warn('setNewCondition will be ignored, incorrect formName')
+			console.warn('setNewCondition will be ignored, incorrect formName');
 		}
 	}
 };

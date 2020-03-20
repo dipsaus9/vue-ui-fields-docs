@@ -58,7 +58,7 @@
 	</div>
 </template>
 <script>
-import mixinSettings from './mixins';
+import mixinSettings from './../mixins/field.js';
 export default {
 	mixins: [mixinSettings],
 	data() {
