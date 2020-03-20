@@ -26,7 +26,7 @@ export default {
 					if (field.conditions) {
 						field.conditions.forEach((condition) => {
 							const form = state.fields.find((form) => form.name === condition.formName);
-							if (condition.hasOwnProperty('fieldIndex')) {
+							if (Object.prototype.hasOwnProperty.call(condition, 'fieldIndex')) {
 								const field = form.fieldsets[condition.fieldsetIndex].fields[condition.fieldIndex];
 								if (typeof condition.condition !== 'function') {
 									field.conditionValue = options.value === condition.condition;
@@ -37,7 +37,8 @@ export default {
 								//fieldset condition
 								const fieldset = form.fieldsets[condition.fieldsetIndex];
 								if (typeof condition.condition !== 'function') {
-									fieldset.conditionValue = options.value === condition.condition;
+									fieldset.conditionValue =
+                    options.value === condition.condition;
 								} else if (typeof condition.condition === 'function') {
 									fieldset.conditionValue = condition.condition(options.value);
 								}
@@ -52,7 +53,7 @@ export default {
 		const form = state.fields.find((form) => form.name === depObj.formName);
 		if (form) {
 			const field = form.fieldsets[depObj.fieldSetForCondition].fields[depObj.fieldIndex];
-			if (!field.hasOwnProperty('conditions')) {
+			if (!Object.prototype.hasOwnProperty.call(field, 'conditions')) {
 				field.conditions = [];
 			}
 			field.conditions.push(conditionObj);

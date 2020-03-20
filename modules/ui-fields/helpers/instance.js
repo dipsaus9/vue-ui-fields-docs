@@ -16,7 +16,7 @@ if (errorOptions) {
 	if (errorOptions.event) {
 		errorObject.event = errorOptions.event;
 	}
-	if (errorOptions.hasOwnProperty('showErrors')) {
+	if (Object.prototype.hasOwnProperty.call(errorOptions, 'showErrors')) {
 		errorObject.showErrors = errorOptions.showErrors;
 	}
 	if (errorOptions.i18n) {
@@ -127,7 +127,7 @@ export class uiFieldsInstance {
 		const formatedClasses = this.formatClasses(classes);
 
 		const form = this.getForm();
-		if (!form.hasOwnProperty('classes')) {
+		if (!Object.prototype.hasOwnProperty.call(form, 'classes')) {
 			form.classes = [];
 		}
 
@@ -139,7 +139,9 @@ export class uiFieldsInstance {
 	setFormErrorSettings(options) {
 		if (options) {
 			this.errorSettings.event = options.event || errorObject.event;
-			this.errorSettings.showErrors = options.hasOwnProperty('showErrors') ? options.showErrors : errorObject.showErrors;
+			this.errorSettings.showErrors = Object.prototype.hasOwnProperty.call(options, 'showErrors')
+				? options.showErrors
+				: errorObject.showErrors;
 			this.errorSettings.i18n = options.i18n || errorObject.i18n;
 
 			if (options.classes) {
@@ -169,7 +171,7 @@ export class uiFieldsInstance {
 		const form = this.getForm();
 
 		//if the form has no fieldsets yet create a data property
-		if (!form.hasOwnProperty('fieldsets')) {
+		if (!Object.prototype.hasOwnProperty.call(form, 'fieldsets')) {
 			form.fieldsets = [];
 		}
 
@@ -226,7 +228,9 @@ export class uiFieldsInstance {
 		//first we need to decide all the props
 		const fieldset = this.getFieldsetByName(options.fieldsetName);
 		if (fieldset) {
-			if (!fieldset.hasOwnProperty('fields')) {
+			if (
+				!Object.prototype.hasOwnProperty.call(fieldset, 'fields')
+			) {
 				fieldset.fields = [];
 			}
 			const fieldExsist = fieldset.fields.some((field) => field.name === options.name);
@@ -245,7 +249,11 @@ export class uiFieldsInstance {
 
 			let newField = {};
 
-			let value = remainingProperties.hasOwnProperty('value') ? remainingProperties.value : componentProperties.type === 'checkbox' ? [] : '';
+			let value = Object.prototype.hasOwnProperty.call(remainingProperties, 'value')
+				? remainingProperties.value
+				: componentProperties.type === 'checkbox'
+					? []
+					: '';
 
 			//we need options for these elements
 			//format things when select or radio
@@ -327,41 +335,44 @@ export class uiFieldsInstance {
 			}
 
 			newField.errors = { ...this.errorSettings };
-			if (remainingProperties.hasOwnProperty('validation')) {
+			if (Object.prototype.hasOwnProperty.call(remainingProperties, 'validation')) {
 				//set validation elements
 				if (Array.isArray(remainingProperties.validation)) {
-					newField.errors.validation = remainingProperties.validation.map((validation) => {
-						if (typeof validation === 'string') {
-							const data = uiFieldsValidationRules[validation];
-							return {
-								message: () => messages[this.errorSettings.i18n][validation],
-								validation: data,
-								name: validation,
-								options: {}
-							};
-						} else if (typeof validation.custom === 'function') {
-							return {
-								message: validation.message,
-								validation: validation.custom,
-								name: validation.custom,
-								options: validation.options
-							};
-						} else if (typeof validation === 'object') {
-							const data = uiFieldsValidationRules[validation.name];
-							let message = () => messages[this.errorSettings.i18n][validation.name];
-							if (typeof validation.message === 'function') {
-								message = validation.message;
-							} else if (validation.message) {
-								message = () => validation.message;
+					newField.errors.validation = remainingProperties.validation.map(
+						validation => {
+							if (typeof validation === 'string') {
+								const data = uiFieldsValidationRules[validation];
+								return {
+									message: () => messages[this.errorSettings.i18n][validation],
+									validation: data,
+									name: validation,
+									options: {}
+								};
+							} else if (typeof validation.custom === 'function') {
+								return {
+									message: validation.message,
+									validation: validation.custom,
+									name: validation.custom,
+									options: validation.options
+								};
+							} else if (typeof validation === 'object') {
+								const data = uiFieldsValidationRules[validation.name];
+								let message = () =>
+									messages[this.errorSettings.i18n][validation.name];
+								if (typeof validation.message === 'function') {
+									message = validation.message;
+								} else if (validation.message) {
+									message = () => validation.message;
+								}
+								return {
+									message,
+									validation: data,
+									name: validation.name,
+									options: validation.options
+								};
 							}
-							return {
-								message,
-								validation: data,
-								name: validation.name,
-								options: validation.options
-							};
 						}
-					});
+					);
 				}
 			}
 			newField = { ...newField, ...componentProperties };
@@ -406,18 +417,21 @@ export class uiFieldsInstance {
 			this.createWarning('setNewCondition will be ignored, missing condition');
 		}
 
-		if (dependentOptions.hasOwnProperty('formName')) {
+		if (Object.prototype.hasOwnProperty.call(dependentOptions, 'formName')) {
 			this.createWarning('create new condition with the dispatch function');
 		} else {
 			if (!options.fieldName) {
 				//condition is on fieldset level
-				const fieldForCondition = this.getFieldByName(dependentOptions.fieldName, dependentOptions.fieldsetName);
+				const fieldForCondition = this.getFieldByName(
+					dependentOptions.fieldName,
+					dependentOptions.fieldsetName
+				);
 				if (fieldForCondition) {
-					if (!fieldForCondition.hasOwnProperty('conditions')) {
+					if (!Object.prototype.hasOwnProperty.call(fieldForCondition, 'conditions')) {
 						fieldForCondition.conditions = [];
 					}
 					if (Array.isArray(options.fieldsetName)) {
-						options.fieldsetName.forEach((fieldName) => {
+						options.fieldsetName.forEach(fieldName => {
 							let optionDup = { ...options };
 							optionDup.fieldsetName = fieldName;
 							this._setNewFieldsetConditionHelper(optionDup, fieldForCondition);
@@ -427,17 +441,24 @@ export class uiFieldsInstance {
 					}
 				}
 			} else {
-				if (!dependentOptions.hasOwnProperty('formName') || dependentOptions.formName === this.getFormName()) {
-
-					const fieldForCondition = this.getFieldByName(dependentOptions.fieldName, dependentOptions.fieldsetName);
+				if (
+					!Object.prototype.hasOwnProperty.call(dependentOptions, 'formName') ||
+          dependentOptions.formName === this.getFormName()
+				) {
+					const fieldForCondition = this.getFieldByName(
+						dependentOptions.fieldName,
+						dependentOptions.fieldsetName
+					);
 
 					if (fieldForCondition) {
-						if (!fieldForCondition.hasOwnProperty('conditions')) {
+						if (
+							!Object.prototype.hasOwnProperty.call(fieldForCondition, 'conditions')
+						) {
 							fieldForCondition.conditions = [];
 						}
 
 						if (Array.isArray(options.fieldName)) {
-							options.fieldName.forEach((fieldName) => {
+							options.fieldName.forEach(fieldName => {
 								let optionDup = { ...options };
 								optionDup.fieldName = fieldName;
 								this._setNewFieldConditionHelper(optionDup, fieldForCondition);
@@ -445,9 +466,12 @@ export class uiFieldsInstance {
 						} else {
 							this._setNewFieldConditionHelper(options, fieldForCondition);
 						}
-
 					} else {
-						this.createWarning(`setNewCondition will be ignored for the following field: dependent: ${dependentOptions.formName}, ${dependentOptions.fieldsetName}, ${this.getFormName()}`);
+						this.createWarning(
+							`setNewCondition will be ignored for the following field: dependent: ${
+								dependentOptions.formName
+							}, ${dependentOptions.fieldsetName}, ${this.getFormName()}`
+						);
 					}
 				}
 			}

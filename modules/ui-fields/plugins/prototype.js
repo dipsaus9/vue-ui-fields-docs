@@ -6,32 +6,30 @@ export default async ({ store }) => {
 		new(options) {
 			return new uiFieldsInstance(options, store);
 		},
-		validate(formName, options) {
-			return new Promise(async (resolve) => {
-				const result = await store.dispatch('uiFields/validate', { formName, options });
-				if (!result.valid) {
-					const errors = result.errors.filter((error) => error.custom_error);
-					if (errors.length === result.errors.length) {
-						//only custom errors, delete and return
-						errors.forEach((error) => store.dispatch('uiFields/removeError', error));
-						result.errors = [];
-						result.valid = true;
-					} else {
-						//there are only own errors, scroll to the first error
-						const element = document.getElementById(`${result.errors[0].fieldsetIndex}__${result.errors[0].fieldIndex}`);
-						if (element) {
-							element.scrollIntoView({
-								behavior: 'smooth',
-								block: 'center'
-							});
-						}
+		async validate(formName, options) {
+			const result = await store.dispatch('uiFields/validate', { formName, options });
+			if (!result.valid) {
+				const errors = result.errors.filter((error) => error.custom_error);
+				if (errors.length === result.errors.length) {
+					//only custom errors, delete and return
+					errors.forEach((error) => store.dispatch('uiFields/removeError', error));
+					result.errors = [];
+					result.valid = true;
+				} else {
+					//there are only own errors, scroll to the first error
+					const element = document.getElementById(`${result.errors[0].fieldsetIndex}__${result.errors[0].fieldIndex}`);
+					if (element) {
+						element.scrollIntoView({
+							behavior: 'smooth',
+							block: 'center'
+						});
 					}
 				}
-				if (options && 'silent' in options && options.silent) {
-					store.dispatch('uiFields/removeErrors');
-				}
-				resolve(result);
-			});
+			}
+			if (options && 'silent' in options && options.silent) {
+				store.dispatch('uiFields/removeErrors');
+			}
+			return result;
 		},
 		setError(options) {
 			store.dispatch('uiFields/setError', { ...options, custom_error: true });
