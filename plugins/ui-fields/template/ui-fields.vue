@@ -1,11 +1,9 @@
 <template>
-	<keep-alive>
-		<component :is="component">
-			<template v-for="field of uiFields">
-				<uiField :key="field" :name="field" :form="name" />
-			</template>
-		</component>
-	</keep-alive>
+	<component :is="component">
+		<template v-for="field of uiFields">
+			<uiField :key="field" :name="field" :form="name" />
+		</template>
+	</component>
 </template>
 
 <script>

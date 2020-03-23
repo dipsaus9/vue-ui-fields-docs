@@ -2,9 +2,9 @@ import { uiFieldsInstance } from './instance.js';
 
 export default {
 	/**
-		 * Create a new form
-		 * @param {String} name
-		 */
+	* Create a new form
+	* @param {String} name
+	*/
 	new(name) {
 		if (!name) {
 			return;
@@ -15,45 +15,11 @@ export default {
 		return form;
 	},
 	/**
-		 * Set new field
-		 * @param {String} name
-		 * @param {Object} options
-		 */
-	setField(name, options) {
-		if (!name) {
-			return;
-		}
-
-		const form = this.getForm(name);
-		if (!form) {
-			console.log('No form found');
-			return;
-		}
-		form.setField(options);
-	},
-	/**
-		 * Set multiple fields
-		 * @param {name} name
-		 * @param {Array} options
-		 */
-	setFields(name, options) {
-		if (!name) {
-			return;
-		}
-
-		const form = this.getForm(name);
-		if (!form) {
-			console.log('No form found');
-			return;
-		}
-		form.setFields(options);
-	},
-	/**
-		 * Set value to array
-		 * @param {String} name
-		 * @param {String || Array} value
-		 */
-	setValue(formName, name, value) {
+	* Set value to array
+	* @param {String} formName
+	* @param {String || Array} value
+	*/
+	getValue(formName, name) {
 		if (!formName || !name) {
 			return;
 		}
@@ -63,14 +29,12 @@ export default {
 			console.log('No form found');
 			return;
 		}
-		form.setValue(name, value);
-
-		this._listen(formName, name, value);
+		return form.getValue(name);
 	},
 	/**
-		 * Get all fields of formname
-		 * @param {String} formName
-		 */
+	* Get all fields of formname
+	* @param {String} formName
+	*/
 	getFieldKeys(formName) {
 		const form = this.getForm(formName);
 		if (!form) {
@@ -79,10 +43,10 @@ export default {
 		return form.getFieldKeys();
 	},
 	/**
-		 * Get single field
-		 * @param {String} formName
-		 * @param {String} fieldName
-		 */
+	* Get single field
+	* @param {String} formName
+	* @param {String} fieldName
+	*/
 	getField(formName, fieldName) {
 		const form = this.getForm(formName);
 		if (!form) {
@@ -91,9 +55,9 @@ export default {
 		return form.getField(fieldName);
 	},
 	/**
-		 * Get all fields
-		 * @param {String} formName
-		 */
+	* Get all fields
+	* @param {String} formName
+	*/
 	getFields(formName) {
 		const form = this.getForm(formName);
 		if (!form) {
@@ -102,15 +66,15 @@ export default {
 		return form.getFields();
 	},
 	/**
-		 * Get form
-		 * @param {String} name
-		 */
+	* Get form
+	* @param {String} name
+	*/
 	getForm(name) {
 		return this.forms.get(name);
 	},
 	/**
-		 * Get all values mapped
-		 */
+	* Get all values mapped
+	*/
 	getValues(formName) {
 		if (!formName) {
 			return;
@@ -125,10 +89,64 @@ export default {
 
 	},
 	/**
-		 * Subscriber
-		 * @param {String} formName
-		 * @param {Function} listener
-		 */
+	* Set new field
+	* @param {String} name
+	* @param {Object} options
+	*/
+	setField(name, options) {
+		if (!name) {
+			return;
+		}
+
+		const form = this.getForm(name);
+		if (!form) {
+			console.log('No form found');
+			return;
+		}
+		form.setField(options);
+	},
+	/**
+	* Set multiple fields
+	* @param {name} name
+	* @param {Array} options
+	*/
+	setFields(name, options) {
+		if (!name) {
+			return;
+		}
+
+		const form = this.getForm(name);
+		if (!form) {
+			console.log('No form found');
+			return;
+		}
+		form.setFields(options);
+	},
+	/**
+	* Set value to array
+	* @param {String} name
+	* @param {String || Array} value
+	*/
+	setValue(formName, name, value) {
+		if (!formName || !name) {
+			return;
+		}
+
+		const form = this.getForm(formName);
+		if (!form) {
+			console.log('No form found');
+			return;
+		}
+		form.setValue(name, value);
+
+		this._listen(formName, name, value);
+		this.checkError(formName, name, value);
+	},
+	/**
+	* Subscriber
+	* @param {String} formName
+	* @param {Function} listener
+	*/
 	subscribe(formName, listener) {
 		if (this.formListeners.has(formName)) {
 			this.formListeners.set(formName, [...this.formListeners.get(formName), listener]);
@@ -137,17 +155,22 @@ export default {
 		}
 	},
 	/**
-		 * Unsubscribe
-		 * @param {String} formname
-		 */
-	unsubscribe(formname) {
-		this.formListeners.delete(formname);
+	* Subscriber
+	* @param {String} formName
+	* @param {Function} listener
+	*/
+	subscribeError(formName, fieldName, listener) {
+		if (this.errorListeners.has(`${formName}_${fieldName}`)) {
+			this.errorListeners.set(`${formName}_${fieldName}`, [...this.errorListeners.get(`${formName}_${fieldName}`), listener]);
+		} else {
+			this.errorListeners.set(`${formName}_${fieldName}`, [listener]);
+		}
 	},
 	/**
-		 * Subscriber
-		 * @param {String} formName
-		 * @param {Function} listener
-		 */
+	* Subscriber
+	* @param {String} formName
+	* @param {Function} listener
+	*/
 	subscribeField(formName, fieldName, listener) {
 		if (this.fieldListeners.has(`${formName}_${fieldName}`)) {
 			this.fieldListeners.set(`${formName}_${fieldName}`, [...this.fieldListeners.get(`${formName}_${fieldName}`), listener]);
@@ -156,25 +179,35 @@ export default {
 		}
 	},
 	/**
-		 * Unsubscribe
-		 * @param {String} formname
-		 */
-	unsubscribeField(formName, fieldName) {
-		this.fieldListeners.delete(`${formName}_${fieldName}`);
+	* Unsubscribe
+	* @param {String} formname
+	*/
+	unsubscribe(formname) {
+		if (this.formListeners.has(formname)) {
+			this.formListeners.delete(formname);
+		}
 	},
 	/**
-		 * Current form instance
-		 */
+	* Unsubscribe
+	* @param {String} formname
+	*/
+	unsubscribeField(formName, fieldName) {
+		if (this.fieldListeners.has(`${formName}_${fieldName}`)) {
+			this.fieldListeners.delete(`${formName}_${fieldName}`);
+		}
+	},
+	/**
+	* Current form instance
+	*/
 	forms: new Map(),
 	formListeners: new Map(),
 	fieldListeners: new Map(),
-	errors: new Map(),
+	errorListeners: new Map(),
 	/**
-		 * Listen to event
-		 * @param {String} formName
-		 * @param {String} fieldName
-		 * @param {String} value
-		 */
+	* Listen to event
+	* @param {String} formName
+	* @param {String} fieldName* @param {String} value
+	*/
 	_listen(formName, fieldName, value) {
 		//form event
 		if (this.formListeners.has(formName)) {
@@ -190,5 +223,71 @@ export default {
 				event(value, fieldName);
 			});
 		}
+	},
+	/**
+	* Listen to event
+	* @param {String} formName
+	* @param {String} fieldName* @param {String} value
+	*/
+	checkError(formName, fieldName, value) {
+		//Field event
+		if (this.errorListeners.has(`${formName}_${fieldName}`)) {
+			const fieldEvents = this.errorListeners.get(`${formName}_${fieldName}`);
+			fieldEvents.forEach((event) => {
+				event(value, fieldName);
+			});
+		}
+	},
+	/**
+	 * Set error
+	 * @param {String} formname
+	 * @param {String} fieldName
+	 * @param {String} error
+	 */
+	setError(formName, fieldName, error) {
+		if (!formName || !fieldName) {
+			return;
+		}
+
+		const form = this.getForm(formName);
+		if (!form) {
+			console.log('No form found');
+			return;
+		}
+		form.setError(fieldName, error);
+	},
+	/**
+	 * Set error
+	 * @param {String} formname
+	 * @param {String} fieldName
+	 */
+	removeError(formName, fieldName) {
+		if (!formName || !fieldName) {
+			return;
+		}
+
+		const form = this.getForm(formName);
+		if (!form) {
+			console.log('No form found');
+			return;
+		}
+		form.removeError(fieldName);
+	},
+	/**
+	 *
+	 * @param {String} formName
+	 * @param {String} fieldName
+	 */
+	getError(formName, fieldName) {
+		if (!formName || !fieldName) {
+			return;
+		}
+
+		const form = this.getForm(formName);
+		if (!form) {
+			console.log('No form found');
+			return;
+		}
+		return form.getError(fieldName);
 	}
 };

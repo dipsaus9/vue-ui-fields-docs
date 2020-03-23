@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import formatProperties from './formatProperties.js';
-import path from 'path';
 
 export class uiFieldsInstance {
 	/**
@@ -11,6 +10,7 @@ export class uiFieldsInstance {
 		this.name = name;
 		this.fields = new Map();
 		this.values = new Map();
+		this.errors = new Map();
 	}
 
 	/**
@@ -106,7 +106,7 @@ export class uiFieldsInstance {
 			{ key: 'dependentSettings', values: defaultDependentSettings }
 		);
 
-		const { name, value, type, label, requiredText } = baseSettings;
+		let { name, value, type, label, requiredText } = baseSettings;
 		const componentType = this.formatComponentType(type);
 		const formattedField = {
 			customData: remaining,
@@ -130,13 +130,15 @@ export class uiFieldsInstance {
 			formattedField.options = options;
 		}
 
-		const validationObject = await this.validator(dependentSettings.validation);
-
-		if (validationObject) {
-			console.log(validationObject.default('hallo'));
+		if (!value) {
+			value = '';
 		}
+
 		this.fields.set(name, formattedField);
-		this.values.set(value, value);
+		this.setValue(name, value);
+
+		//Set dependent options after setting the field
+		this.defineValidation(dependentSettings.validation);
 	}
 
 	/**
@@ -146,6 +148,14 @@ export class uiFieldsInstance {
 	 */
 	setValue(fieldName, value) {
 		this.values.set(fieldName, value);
+	}
+
+	/**
+	 * Set single value
+	 * @param {String} fieldName
+	 */
+	getValue(fieldName) {
+		return this.values.get(fieldName);
 	}
 
 	/**
@@ -197,6 +207,15 @@ export class uiFieldsInstance {
 	}
 
 	/**
+ * Subscribe field
+ * @param {String} fieldName
+ * @param {Function} listener
+ */
+	subscribeError(fieldName, listener) {
+		Vue.prototype.$uiFields.subscribeError(this.getFormName(), fieldName, listener);
+	}
+
+	/**
 	 * Unsubscribe form
 	 */
 	unsubscribe(){
@@ -211,11 +230,41 @@ export class uiFieldsInstance {
 	}
 
 	/**
+	 * Set error on field
+	 * @param {String} fieldName
+	 * @param {String} error
+	 */
+	setError(fieldName, error) {
+		this.errors.set(fieldName, error);
+	}
+	/**
+	 * get error on field
+	 * @param {String} fieldName
+	 */
+	getError(fieldName) {
+		return this.errors.get(fieldName);
+	}
+
+	/**
+	 * Get error keys
+	 */
+	getErrorKeys() {
+		return [...this.errors.keys()];
+	}
+
+	/**
+	 * Remove single error
+	 * @param {String} fieldName
+	 */
+	removeError(fieldName) {
+		this.errors.delete(fieldName);
+	}
+	/**
 	 * Validator Object
 	 */
 	async validator(type) {
 		let rules;
-		switch (type[0]) {
+		switch (type) {
 			case 'required':
 				rules = await import('../rules/required.js');
 				break;
@@ -262,6 +311,42 @@ export class uiFieldsInstance {
 				rules = await import('../rules/phone.js');
 				break;
 		}
-		return rules;
+		if (rules) {
+			return rules.default;
+		}
+		return false;
+	}
+	/**
+	 * Add valiation subscriber
+	 * @param {Array} validation
+	 */
+	defineValidation(validation) {
+		validation.forEach((validator) => {
+			let validationType = '';
+			if (typeof validator === 'string') {
+				validationType = validator;
+			} else {
+				validationType = validator.name;
+			}
+
+			let options = null;
+			if (Object.prototype.hasOwnProperty.call(validator, 'options')) {
+				options = validator.options;
+			}
+
+			if (validationType !== 'custom') {
+				this.validator(validationType).then((validationChecker) => {
+					this.subscribeError(name, (value) => {
+						const validation = validationChecker(value);
+						if (validation === false) {
+							this.setError(name, 'Er gings iets fout');
+						} else {
+							this.removeError(name);
+						}
+					});
+				});
+			}
+
+		});
 	}
 }

@@ -2,10 +2,10 @@
 	<div
 		:class="[
 			`ui-fields__field ui-fields__field--${fieldData.type}`,
-			`${fieldData.classes}`,
+			`${fieldData.classes || []}`,
 			{ 'ui-fields__field--pristine' : pristine },
-			{ 'ui-fields__field--valid' : !pristine && valid },
-			{ 'ui-fields__field--invalid' : !pristine && !valid }
+			{ 'ui-fields__field--valid' : valid },
+			{ 'ui-fields__field--invalid' : !valid }
 		]"
 	>
 		<input
@@ -50,7 +50,7 @@ export default {
 	data() {
 		return {
 			component: 'ui-text',
-			pristine: true,
+			pristine: false,
 			valid: true
 		};
 	},
@@ -60,10 +60,7 @@ export default {
 		},
 		value: {
 			get() {
-				if (this.fieldData) {
-					return this.fieldData.value;
-				}
-				return '';
+				return this.$uiFields.getValue(this.form + '', this.name);
 			},
 			set(value) {
 				this.$uiFields.setValue(this.form, this.name, value);

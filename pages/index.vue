@@ -25,8 +25,7 @@ export default {
 				autocomplete: 'given-name',
 				type: 'text',
 				placeholder: 'What is your first name',
-				validation: ['required'],
-				required: true
+				validation: ['email']
 				// validation: [
 				// 	{
 				// 		name: 'url',
@@ -90,17 +89,13 @@ export default {
 			// 	]
 			// }
 		]);
-
-		this.$uiFields.subscribeField('checkout', 'passwordRepeat', this.test);
 	},
 	methods: {
-		test(value, fieldName) {
-			console.log(value, fieldName);
-		},
 		async submit() {
 			this.submitted = true;
-			const result = await this.$uiFields.getFields('checkout');
-			console.log(result);
+			console.log(this.$uiFields);
+			// const result = await this.$uiFields.getFields('checkout');
+			// console.log(result);
 			// if (result.valid) {
 			// 	this.$uiFields.setError({
 			// 		formName: 'custom-errors',
