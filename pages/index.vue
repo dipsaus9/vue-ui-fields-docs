@@ -40,26 +40,26 @@ export default {
 				// 	}
 				// ]
 			},
-			// {
-			// 	label: 'Enter your last name',
-			// 	name: 'passwordRepeat',
-			// 	autocomplete: 'additional-name',
-			// 	type: 'text',
-			// 	placeholder: 'test 2',
-			// 	validation: [
-			// 		'required',
-			// 		{
-			// 			name: 'equalTo',
-			// 			options: () => {
-			// 				return this.getCorrectField({
-			// 					form: 'checkout',
-			// 					field: 'password'
-			// 				});
-			// 			}
-			// 		}
-			// 	],
-			// classes: ['asdfasdf']
-			// },
+			{
+				label: 'Enter your last name',
+				name: 'passwordRepeat',
+				autocomplete: 'additional-name',
+				type: 'text',
+				placeholder: 'test 2',
+				validation: [
+					'required',
+					// {
+					// 	name: 'equalTo',
+					// 	options: () => {
+					// 		return this.getCorrectField({
+					// 			form: 'checkout',
+					// 			field: 'password'
+					// 		});
+					// 	}
+					// }
+				],
+				classes: ['asdfasdf']
+			},
 			// {
 			// 	label: 'Enter your address',
 			// 	name: 'address',

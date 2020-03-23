@@ -7,6 +7,7 @@
 			:type="fieldData.type"
 			v-bind="fieldData.htmlSettings"
 			:class="`ui-fields__input ${fieldData.type}__input`"
+			@blur="setValue"
 		/>
 		<label :class="`ui-fields__element ${fieldData.type}__element`" :for="`${form}__${name}`">
 			<span
@@ -56,6 +57,11 @@ export default {
 			set(value) {
 				this.$uiFields.setValue(this.form, this.name, value);
 			}
+		}
+	},
+	methods: {
+		setValue($event) {
+			this.$uiFields.setValue(this.form, this.name, $event.target.value);
 		}
 	}
 };
