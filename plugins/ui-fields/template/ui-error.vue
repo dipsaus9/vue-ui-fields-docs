@@ -1,46 +1,36 @@
 <template>
 	<div
-		v-if="uiFieldsErrors.length && uiFieldsErrors.some((error) => error.name === 'required')"
-		:class="`uiFields__errors ${componentName}__errors`"
+		v-if="error"
+		class="uiFields__errors"
 	>
-		<span :class="`uiFields__error ${componentName}__error`">
-			{{ uiFieldsErrors.find((error) => error.name === 'required').message }}
-		</span>
-	</div>
-	<div v-else-if="uiFieldsErrors.length" :class="`uiFields__errors ${componentName}__errors`">
-		<span v-for="(error, index) in uiFieldsErrors" :key="index" :class="`uiFields__error ${componentName}__error`">
-			{{ error.message }}
+		<span class="uiFields__error">
+			{{ error }}
 		</span>
 	</div>
 </template>
 <script>
 export default {
 	props: {
-		formName: {
+		form: {
 			type: String,
 			default: 'null'
 		},
-		fieldIndex: {
-			type: String,
-			default: ''
-		},
-		fieldsetIndex: {
-			type: Number,
-			default: null
-		},
-		componentName: {
+		name: {
 			type: String,
 			default: ''
 		}
 	},
-	computed: {
-		uiFieldsErrors() {
-			return this.$store.getters['uiFields/error']({
-				formName: this.formName,
-				fieldIndex: this.fieldIndex,
-				fieldsetIndex: this.fieldsetIndex
-			});
-		}
+	data() {
+		return {
+			count: 0,
+			error: ''
+		};
+	},
+	created() {
+		this.$uiFields.subscribeField(this.form, this.name, () => {
+			console.log(this.$uiFields.getError(this.form, this.name));
+			this.error = this.$uiFields.getError(this.form, this.name);
+		});
 	}
 };
 </script>

@@ -15,7 +15,7 @@ export default {
 			testValue: 'hoi'
 		};
 	},
-	created() {
+	mounted() {
 		const uiFields = this.$uiFields.new('checkout');
 
 		uiFields.setFields([

@@ -1,5 +1,13 @@
 <template>
-	<component :is="field.componentType" v-if="field && field.componentType" :name="name" :form="form" />
+	<component :is="field.componentType"
+		v-if="field && field.componentType" :class="[
+			`ui-fields__field ui-fields__field--${field.type}`,
+			`${field.classes || []}`,
+			{ 'ui-fields__field--pristine' : pristine },
+			{ 'ui-fields__field--valid' : error },
+			{ 'ui-fields__field--invalid' : !pristine && !error }
+		]" :name="name" :form="form"
+	/>
 </template>
 
 <script>
@@ -21,10 +29,22 @@ export default {
 			default: ''
 		}
 	},
+	data() {
+		return {
+			error: false,
+			pristine: true
+		};
+	},
 	computed: {
 		field() {
 			return this.$uiFields.getField(this.form, this.name);
 		}
+	},
+	created() {
+		this.$uiFields.subscribeField(this.form, this.name, () => {
+			this.pristine = false;
+			this.error = !this.$uiFields.getError(this.form, this.name);
+		});
 	}
 };
 </script>

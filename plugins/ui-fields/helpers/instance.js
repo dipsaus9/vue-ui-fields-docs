@@ -138,7 +138,7 @@ export class uiFieldsInstance {
 		this.setValue(name, value);
 
 		//Set dependent options after setting the field
-		this.defineValidation(dependentSettings.validation);
+		this.defineValidation(dependentSettings.validation, name);
 	}
 
 	/**
@@ -320,7 +320,7 @@ export class uiFieldsInstance {
 	 * Add valiation subscriber
 	 * @param {Array} validation
 	 */
-	defineValidation(validation) {
+	defineValidation(validation, name) {
 		validation.forEach((validator) => {
 			let validationType = '';
 			if (typeof validator === 'string') {
@@ -346,7 +346,6 @@ export class uiFieldsInstance {
 					});
 				});
 			}
-
 		});
 	}
 }

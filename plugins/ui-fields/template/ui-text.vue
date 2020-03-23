@@ -1,13 +1,5 @@
 <template>
-	<div
-		:class="[
-			`ui-fields__field ui-fields__field--${fieldData.type}`,
-			`${fieldData.classes || []}`,
-			{ 'ui-fields__field--pristine' : pristine },
-			{ 'ui-fields__field--valid' : valid },
-			{ 'ui-fields__field--invalid' : !valid }
-		]"
-	>
+	<div>
 		<input
 			:id="`${form}__${name}`"
 			v-model="value"
@@ -32,6 +24,7 @@
 			>
 				{{ fieldData.requiredText }}
 			</span>
+			<ui-error :form="form" :name="name" />
 		</label>
 	</div>
 </template>
@@ -47,11 +40,9 @@ export default {
 			default: ''
 		}
 	},
-	data() {
+	data: () => {
 		return {
-			component: 'ui-text',
-			pristine: false,
-			valid: true
+			component: 'ui-text'
 		};
 	},
 	computed: {
@@ -60,7 +51,7 @@ export default {
 		},
 		value: {
 			get() {
-				return this.$uiFields.getValue(this.form + '', this.name);
+				return this.$uiFields.getValue(this.form, this.name);
 			},
 			set(value) {
 				this.$uiFields.setValue(this.form, this.name, value);

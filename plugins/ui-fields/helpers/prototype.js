@@ -139,8 +139,8 @@ export default {
 		}
 		form.setValue(name, value);
 
-		this._listen(formName, name, value);
 		this.checkError(formName, name, value);
+		this._listen(formName, name, value);
 	},
 	/**
 	* Subscriber
