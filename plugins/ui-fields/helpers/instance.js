@@ -1,7 +1,8 @@
 import Vue from 'vue';
-import formatProperties from './formatProperties';
+import formatProperties from './formatProperties.js';
+import path from 'path';
 
-export class uiFields {
+export class uiFieldsInstance {
 	/**
 		*
 		* @param {String} name
@@ -56,7 +57,7 @@ export class uiFields {
 		*
 		* @param {Object} field - Set a field
 	*/
-	setField(field) {
+	async setField(field) {
 		const defaultSettings = [
 			{ key: 'name', type: 'string' },
 			{ key: 'value', type: 'string' },
@@ -129,7 +130,11 @@ export class uiFields {
 			formattedField.options = options;
 		}
 
+		const validationObject = await this.validator(dependentSettings.validation);
 
+		if (validationObject) {
+			console.log(validationObject.default('hallo'));
+		}
 		this.fields.set(name, formattedField);
 		this.values.set(value, value);
 	}
@@ -203,5 +208,60 @@ export class uiFields {
 	 */
 	unsubscribeField(fieldName) {
 		Vue.prototype.$uiFields.unsubscribe(this.getFormName(), fieldName);
+	}
+
+	/**
+	 * Validator Object
+	 */
+	async validator(type) {
+		let rules;
+		switch (type[0]) {
+			case 'required':
+				rules = await import('../rules/required.js');
+				break;
+			case 'email':
+				rules = await import('../rules/email.js');
+				break;
+			case 'postalcode':
+				rules = await import('../rules/postalcode.js');
+				break;
+			case 'number':
+				rules = await import('../rules/number.js');
+				break;
+			case 'minlength':
+				rules = await import('../rules/minlength.js');
+				break;
+			case 'maxlength':
+				rules = await import('../rules/maxlength.js');
+				break;
+			case 'min':
+				rules = await import('../rules/min.js');
+				break;
+			case 'max':
+				rules = await import('../rules/max.js');
+				break;
+			case 'creditcard':
+				rules = await import('../rules/creditcard.js');
+				break;
+			case 'date':
+				rules = await import('../rules/date.js');
+				break;
+			case 'url':
+				rules = await import('../rules/url.js');
+				break;
+			case 'equalTo':
+				rules = await import('../rules/equalTo.js');
+				break;
+			case 'notEqualTo':
+				rules = await import('../rules/notEqualTo.js');
+				break;
+			case 'vat':
+				rules = await import('../rules/vat.js');
+				break;
+			case 'phone':
+				rules = await import('../rules/phone.js');
+				break;
+		}
+		return rules;
 	}
 }

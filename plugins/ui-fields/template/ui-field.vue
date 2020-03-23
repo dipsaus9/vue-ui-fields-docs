@@ -5,11 +5,11 @@
 <script>
 export default {
 	components: {
-		'uiText': () => import('UiText'),
-		'uiCheckbox': () => import('UiCheckbox'),
-		'uiSelect': () => import('UiSelect'),
-		'uiRadio': () => import('UiRadio'),
-		'uiTextarea': () => import('UiTextarea')
+		'uiText': () => import('./ui-text.vue'),
+		'uiCheckbox': () => import('./ui-checkbox.vue'),
+		'uiSelect': () => import('./ui-select.vue'),
+		'uiRadio': () => import('./ui-radio.vue'),
+		'uiTextarea': () => import('./ui-textarea.vue')
 	},
 	props: {
 		name: {

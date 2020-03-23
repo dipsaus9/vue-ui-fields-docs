@@ -35,7 +35,9 @@ export default {
 	/*
 	 ** Plugins to load before mounting the App
 	 */
-	plugins: [],
+	plugins: [
+		'~plugins/ui-fields/index.js'
+	],
 
 	/*
 	 ** Nuxt.js modules
@@ -44,14 +46,14 @@ export default {
 		'nuxt-rfg-icon',
 		// '@nuxtjs/google-analytics',
 		'@nuxtjs/axios',
-		[
-			'~modules/ui-fields/index.js',
-			{
-				validation: {
-					i18n: 'nl'
-				}
-			}
-		]
+		// [
+		// 	'~modules/ui-fields/index.js',
+		// 	{
+		// 		validation: {
+		// 			i18n: 'nl'
+		// 		}
+		// 	}
+		// ]
 	],
 
 	/*

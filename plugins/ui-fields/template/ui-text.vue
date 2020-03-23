@@ -27,8 +27,8 @@
 			>
 			</span>
 			<span
-				v-if="fieldData.htmlSettings.required"
-				:class="`ui-fields__label--required ${fieldData.type}__label ${fieldData.type}__label--required`"
+				v-if="fieldData.htmlSettings.required && fieldData.requiredText"
+				:class="`ui-fields__label--required ui-fields__label ${fieldData.type}__label ${fieldData.type}__label--required`"
 			>
 				{{ fieldData.requiredText }}
 			</span>
