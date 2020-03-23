@@ -9,6 +9,7 @@ export class uiFields {
 	constructor(name) {
 		this.name = name;
 		this.fields = new Map();
+		this.values = new Map();
 	}
 
 	/**
@@ -56,6 +57,15 @@ export class uiFields {
 		* @param {Object} field - Set a field
 	*/
 	setField(field) {
+		const defaultSettings = [
+			{ key: 'name', type: 'string' },
+			{ key: 'value', type: 'string' },
+			{ key: 'type', type: 'string' },
+			{ key: 'label', type: 'string', default: '' },
+			{ key: 'requiredText', type: 'string', default: '*' },
+			{ key: 'classes', type: 'array', default: [] }
+		];
+
 		const defaultHTMLSettings = [
 			{ key: 'autocomplete', type: 'string' },
 			{ key: 'disabled', type: 'boolean' },
@@ -66,45 +76,71 @@ export class uiFields {
 			{ key: 'multiple', type: 'boolean' },
 			{ key: 'placeholder', type: 'string' },
 			{ key: 'required', type: 'boolean' },
-			{ key: 'step', type: 'number' }
+			{ key: 'step', type: 'number' },
+			{ key: 'autofocus', type: 'boolean' },
 		];
 
-		const defaultInputSettings = [
-			{ key: 'label', type: 'string', default: '' },
+		const defaultOptionsSettings = [
 			{ key: 'selected', type: 'boolean', default: false },
 			{ key: 'disabled', type: 'boolean' },
-			{ key: 'classes', type: 'any' }
+			{ key: 'value', type: 'string', default: '' }
 		];
 
 		const defaultDependentSettings = [
+			{ key: 'validation', type: 'any' },
 			{ key: 'persistent', type: 'boolean', default: true },
 			{ key: 'errors', type: 'object' },
-			{ key: 'requiredText', type: 'string', default: '*' },
 			{ key: 'hooks', type: 'function' }
 		];
 
-		const {
+		let {
+			baseSettings,
 			dependentSettings,
-			inputSettings,
 			htmlSettings,
 			...remaining
 		} = formatProperties(
 			field,
+			{ key: 'baseSettings', values: defaultSettings },
 			{ key: 'htmlSettings', values: defaultHTMLSettings },
-			{ key: 'inputSettings', values: defaultInputSettings },
 			{ key: 'dependentSettings', values: defaultDependentSettings }
 		);
 
-		const componentType = this.formatComponentType(remaining.type);
-		this.fields.set(remaining.name, {
+		const { name, value, type, label, requiredText } = baseSettings;
+		const componentType = this.formatComponentType(type);
+		const formattedField = {
+			customData: remaining,
 			dependentSettings,
-			inputSettings,
 			htmlSettings,
-			basisSettings: {
-				componentType,
-				...remaining
-			}
-		});
+			componentType,
+			type,
+			name,
+			label,
+			requiredText
+		};
+		if (Object.prototype.hasOwnProperty.call(remaining, 'options')) {
+			const {
+				options,
+				...rest
+			} = formatProperties(
+				field,
+				{ key: 'options', values: defaultOptionsSettings }
+			);
+			remaining = rest;
+			formattedField.options = options;
+		}
+
+
+		this.fields.set(name, formattedField);
+		this.values.set(value, value);
+	}
+
+	/**
+	 * Set single value
+	 * @param {String} fieldName
+	 * @param {*} value
+	 */
+	setValue(fieldName, value) {
+		this.values.set(fieldName, value);
 	}
 
 	/**
@@ -136,5 +172,36 @@ export class uiFields {
 			default:
 				return type;
 		}
+	}
+
+	/**
+	 * Subscribe form
+	 * @param {Function} listener
+	 */
+	subscribe(listener) {
+		Vue.prototype.$uiFields.subscribe(this.getFormName(), listener);
+	}
+
+	/**
+	 * Subscribe field
+	 * @param {String} fieldName
+	 * @param {Function} listener
+	 */
+	subscribeField(fieldName, listener) {
+		Vue.prototype.$uiFields.subscribeField(this.getFormName(), fieldName, listener);
+	}
+
+	/**
+	 * Unsubscribe form
+	 */
+	unsubscribe(){
+		Vue.prototype.$uiFields.unsubscribe(this.getFormName());
+	}
+
+	/**
+	 * Unsubscribe field
+	 */
+	unsubscribeField(fieldName) {
+		Vue.prototype.$uiFields.unsubscribe(this.getFormName(), fieldName);
 	}
 }

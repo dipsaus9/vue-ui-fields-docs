@@ -1,28 +1,36 @@
 <template>
-	<div>
+	<div
+		:class="[
+			`ui-fields__field ui-fields__field--${fieldData.type}`,
+			`${fieldData.classes}`,
+			{ 'ui-fields__field--pristine' : pristine },
+			{ 'ui-fields__field--valid' : !pristine && valid },
+			{ 'ui-fields__field--invalid' : !pristine && !valid }
+		]"
+	>
 		<input
 			:id="`${form}__${name}`"
-			v-model="fieldData.basisSettings.value"
-			:name="fieldData.basisSettings.name"
-			:type="fieldData.basisSettings.type"
+			v-model="value"
+			:name="fieldData.name"
+			:type="fieldData.type"
 			v-bind="fieldData.htmlSettings"
-			:class="`ui-fields__input ${fieldData.basisSettings.type}__input`"
+			:class="`ui-fields__input ${fieldData.type}__input`"
 		/>
-		<label :class="`ui-fields__element ${fieldData.basisSettings.type}__element`" :for="`${form}__${name}`">
+		<label :class="`ui-fields__element ${fieldData.type}__element`" :for="`${form}__${name}`">
 			<span
 				:class="[
 					fieldData.htmlSettings.required
-						? `${fieldData.basisSettings.type}__label--is-required ui-fields__label ${fieldData.basisSettings.type}__label`
-						: `ui-fields__label ${fieldData.basisSettings.type}__label`
+						? `${fieldData.type}__label--is-required ui-fields__label ${fieldData.type}__label`
+						: `ui-fields__label ${fieldData.type}__label`
 				]"
-				v-html="fieldData.inputSettings.label"
+				v-html="fieldData.label"
 			>
 			</span>
 			<span
 				v-if="fieldData.htmlSettings.required"
-				:class="`ui-fields__label--required ${fieldData.basisSettings.type}__label ${fieldData.basisSettings.type}__label--required`"
+				:class="`ui-fields__label--required ${fieldData.type}__label ${fieldData.type}__label--required`"
 			>
-				{{ fieldData.dependentSettings.requiredText }}
+				{{ fieldData.requiredText }}
 			</span>
 		</label>
 	</div>
@@ -42,12 +50,24 @@ export default {
 	data() {
 		return {
 			component: 'ui-text',
-			fieldDataValue: ''
+			pristine: true,
+			valid: true
 		};
 	},
 	computed: {
 		fieldData() {
 			return this.$uiFields.getField(this.form, this.name);
+		},
+		value: {
+			get() {
+				if (this.fieldData) {
+					return this.fieldData.value;
+				}
+				return '';
+			},
+			set(value) {
+				this.$uiFields.setValue(this.form, this.name, value);
+			}
 		}
 	}
 };

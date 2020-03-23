@@ -1,6 +1,6 @@
 <template>
 	<form data-vv-scope="uiFields" @submit.prevent="submit">
-		<ui-fields name="checkout" />
+		<ui-fields name="checkout" class="tte" />
 		<button type="submit">
 			Submit
 		</button>
@@ -11,21 +11,9 @@ export default {
 	data() {
 		return {
 			uiFields: null,
-			submitted: false
+			submitted: false,
+			testValue: 'hoi'
 		};
-	},
-	computed: {
-		form() {
-			return this.$uiFields.getFields('checkout');
-		}
-	},
-	watch: {
-		form: {
-			handler() {
-				console.log('hallo');
-			},
-			deep: true
-		}
 	},
 	created() {
 		const uiFields = this.$uiFields.new('checkout');
@@ -37,7 +25,8 @@ export default {
 				autocomplete: 'given-name',
 				type: 'text',
 				placeholder: 'What is your first name',
-				validation: ['required']
+				validation: ['required'],
+				required: true
 				// validation: [
 				// 	{
 				// 		name: 'url',
@@ -52,26 +41,26 @@ export default {
 				// 	}
 				// ]
 			},
-			// {
-			// 	label: 'Enter your last name',
-			// 	name: 'passwordRepeat',
-			// 	autocomplete: 'additional-name',
-			// 	type: 'password',
-			// 	placeholder: 'test 2',
-			// 	validation: [
-			// 		'required',
-			// 		{
-			// 			name: 'equalTo',
-			// 			options: () => {
-			// 				return this.getCorrectField({
-			// 					form: 'checkout',
-			// 					field: 'password'
-			// 				});
-			// 			}
-			// 		}
-			// 	],
-			// 	classes: ['asdfasdf']
-			// },
+			{
+				label: 'Enter your last name',
+				name: 'passwordRepeat',
+				autocomplete: 'additional-name',
+				type: 'text',
+				placeholder: 'test 2',
+				validation: [
+					'required',
+					{
+						name: 'equalTo',
+						options: () => {
+							return this.getCorrectField({
+								form: 'checkout',
+								field: 'password'
+							});
+						}
+					}
+				],
+				classes: ['asdfasdf']
+			},
 			// {
 			// 	label: 'Enter your address',
 			// 	name: 'address',
@@ -101,8 +90,13 @@ export default {
 			// 	]
 			// }
 		]);
+
+		this.$uiFields.subscribeField('checkout', 'passwordRepeat', this.test);
 	},
 	methods: {
+		test(value, fieldName) {
+			console.log(value, fieldName);
+		},
 		async submit() {
 			this.submitted = true;
 			const result = await this.$uiFields.getFields('checkout');

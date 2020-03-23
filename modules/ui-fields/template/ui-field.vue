@@ -1,5 +1,5 @@
 <template>
-	<component :is="field.basisSettings.componentType" v-if="field && field.basisSettings && field.basisSettings.componentType" :name="name" :form="form" />
+	<component :is="field.componentType" v-if="field && field.componentType" :name="name" :form="form" />
 </template>
 
 <script>

@@ -1,9 +1,11 @@
 <template>
-	<div>
-		<template v-for="field of uiFields">
-			<uiField :key="field" :name="field" :form="name" />
-		</template>
-	</div>
+	<keep-alive>
+		<component :is="component">
+			<template v-for="field of uiFields">
+				<uiField :key="field" :name="field" :form="name" />
+			</template>
+		</component>
+	</keep-alive>
 </template>
 
 <script>
@@ -12,6 +14,10 @@ export default {
 		name: {
 			type: String,
 			default: ''
+		},
+		component: {
+			type: String,
+			default: 'fieldset'
 		}
 	},
 	computed: {

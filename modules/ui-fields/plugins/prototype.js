@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { uiFields } from './instance.js';
 
-export default async ({ store }) => {
+export default async () => {
 	Vue.prototype.$uiFields = {
 		/**
      * Create a new form
@@ -13,7 +13,7 @@ export default async ({ store }) => {
 			}
 
 			const form = new uiFields(name);
-			this.currentForms.set(name, form);
+			this.forms.set(name, form);
 			return form;
 		},
 		/**
@@ -49,6 +49,25 @@ export default async ({ store }) => {
 				return;
 			}
 			form.setFields(options);
+		},
+		/**
+		 * Set value to array
+		 * @param {String} name
+		 * @param {String || Array} value
+		 */
+		setValue(formName, name, value) {
+			if (!formName || !name) {
+				return;
+			}
+
+			const form = this.getForm(formName);
+			if (!form) {
+				console.log('No form found');
+				return;
+			}
+			form.setValue(name, value);
+
+			this._listen(formName, name, value);
 		},
 		/**
      * Get all fields of formname
@@ -89,60 +108,89 @@ export default async ({ store }) => {
      * @param {String} name
      */
 		getForm(name) {
-			return this.currentForms.get(name);
+			return this.forms.get(name);
+		},
+		/**
+		 * Get all values mapped
+		 */
+		getValues(formName) {
+			if (!formName) {
+				return;
+			}
+
+			const form = this.getForm(formName);
+			if (!form) {
+				console.log('No form found');
+				return;
+			}
+			return [...form.values.values()];
+
+		},
+		/**
+		 * Subscriber
+		 * @param {String} formName
+		 * @param {Function} listener
+		 */
+		subscribe(formName, listener) {
+			if (this.formListeners.has(formName)) {
+				this.formListeners.set(formName, [...this.formListeners.get(formName), listener]);
+			} else {
+				this.formListeners.set(formName, [listener]);
+			}
+		},
+		/**
+		 * Unsubscribe
+		 * @param {String} formname
+		 */
+		unsubscribe(formname) {
+			this.formListeners.delete(formname);
+		},
+		/**
+		 * Subscriber
+		 * @param {String} formName
+		 * @param {Function} listener
+		 */
+		subscribeField(formName, fieldName, listener) {
+			if (this.fieldListeners.has(`${formName}_${fieldName}`)) {
+				this.fieldListeners.set(`${formName}_${fieldName}`, [...this.fieldListeners.get(`${formName}_${fieldName}`), listener]);
+			} else {
+				this.fieldListeners.set(`${formName}_${fieldName}`, [listener]);
+			}
+		},
+		/**
+		 * Unsubscribe
+		 * @param {String} formname
+		 */
+		unsubscribeField(formName, fieldName) {
+			this.fieldListeners.delete(`${formName}_${fieldName}`);
 		},
 		/**
      * Current form instance
      */
-		currentForms: new Map(),
-		async validate(name, options) {
-			const result = await store.dispatch('uiFields/validate', {
-				name,
-				options
-			});
-			if (!result.valid) {
-				const errors = result.errors.filter(error => error.custom_error);
-				if (errors.length === result.errors.length) {
-					//only custom errors, delete and return
-					errors.forEach(error =>
-						store.dispatch('uiFields/removeError', error)
-					);
-					result.errors = [];
-					result.valid = true;
-				} else {
-					//there are only own errors, scroll to the first error
-					const element = document.getElementById(
-						`${result.errors[0].fieldsetIndex}__${result.errors[0].fieldIndex}`
-					);
-					if (element) {
-						element.scrollIntoView({
-							behavior: 'smooth',
-							block: 'center'
-						});
-					}
-				}
-			}
-			if (options && 'silent' in options && options.silent) {
-				store.dispatch('uiFields/removeErrors');
-			}
-			return result;
-		},
+		forms: new Map(),
+		formListeners: new Map(),
+		fieldListeners: new Map(),
 		/**
-     * Set error
-     * @param {Objec} options
-     */
-		setError(options) {
-			store.dispatch('uiFields/setError', { ...options, custom_error: true });
-		},
-		/**
-     * Remove an error
-     * @param {Object} options
-     */
-		removeError(options) {
-			store.dispatch('uiFields/removeError', {
-				...options,
-				custom_error: true
-			});
+		 * Listen to event
+		 * @param {String} formName
+		 * @param {String} fieldName
+		 * @param {String} value
+		 */
+		_listen(formName, fieldName, value) {
+			//form event
+			if (this.formListeners.has(formName)) {
+				const events = this.formListeners.get(formName);
+				events.forEach((event) => {
+					event(value, fieldName);
+				});
+			}
+			//Field event
+			if (this.fieldListeners.has(`${formName}_${fieldName}`)) {
+				const fieldEvents = this.fieldListeners.get(`${formName}_${fieldName}`);
+				fieldEvents.forEach((event) => {
+					event(value, fieldName);
+				});
+			}
 		}
 	};
 };
