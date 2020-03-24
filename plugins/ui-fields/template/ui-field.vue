@@ -41,9 +41,9 @@ export default {
 		}
 	},
 	created() {
-		this.$uiFields.subscribeField(this.form, this.name, () => {
+		this.$uiFields.subscribeError(this.form, this.name, (value, errorObject) => {
 			this.pristine = false;
-			this.error = !this.$uiFields.getError(this.form, this.name);
+			this.error = errorObject.valid;
 		});
 	}
 };

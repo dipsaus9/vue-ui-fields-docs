@@ -10,35 +10,21 @@
 export default {
 	data() {
 		return {
-			uiFields: null,
-			submitted: false,
-			testValue: 'hoi'
+			submitted: false
 		};
 	},
 	mounted() {
-		const uiFields = this.$uiFields.new('checkout');
-
-		uiFields.setFields([
+		this.$uiFields.new('checkout');
+		this.$uiFields.setFields('checkout', [
+		]);
+		this.$uiFields.setFields('checkout', [
 			{
 				label: 'Enter your first name',
 				name: 'password',
 				autocomplete: 'given-name',
 				type: 'text',
 				placeholder: 'What is your first name',
-				validation: ['email']
-				// validation: [
-				// 	{
-				// 		name: 'url',
-				// 		options: () => {
-				// 			return this.getCorrectField({
-				// 				formName: 'checkout',
-				// 				fieldsetName: 'personalInfo',
-				// 				fieldName: 'last_name'
-				// 			})
-				// 		},
-				// 		message: () => 'min 10 man'
-				// 	}
-				// ]
+				validation: ['required', 'email', { name: 'minlength', options: 5, message: (value) => `${value.length} is nog niet voldoende ` } ]
 			},
 			{
 				label: 'Enter your last name',
@@ -46,18 +32,6 @@ export default {
 				autocomplete: 'additional-name',
 				type: 'text',
 				placeholder: 'test 2',
-				validation: [
-					'required',
-					// {
-					// 	name: 'equalTo',
-					// 	options: () => {
-					// 		return this.getCorrectField({
-					// 			form: 'checkout',
-					// 			field: 'password'
-					// 		});
-					// 	}
-					// }
-				],
 				classes: ['asdfasdf']
 			},
 			// {
@@ -89,11 +63,15 @@ export default {
 			// 	]
 			// }
 		]);
+
+		this.$uiFields.subscribe('checkout', () => {
+			console.log('jasdlfjasdf');
+		});
 	},
 	methods: {
 		async submit() {
 			this.submitted = true;
-			console.log(this.$uiFields);
+			console.log(this.$uiFields.validate('checkout'));
 			// const result = await this.$uiFields.getFields('checkout');
 			// console.log(result);
 			// if (result.valid) {

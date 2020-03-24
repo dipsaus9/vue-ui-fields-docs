@@ -1,35 +1,34 @@
 <template>
-	<div v-if="uiFieldsErrors.length" :class="`uiFields__errors`">
-		<span v-for="(error, index) in uiFieldsErrors" :key="index">
-			{{ error.message }}
-		</span>
+	<div v-if="errors && errors.length">
+		<uiError v-for="(error, index) of errors" :key="index" :error="error" />
 	</div>
 </template>
 <script>
 export default {
 	props: {
-		fieldName: {
+		form: {
 			type: String,
-			default: ''
+			default: 'null'
 		},
-		fieldIndex: {
-			type: String,
-			default: ''
-		},
-		fieldsetIndex: {
+		name: {
 			type: String,
 			default: ''
 		}
 	},
-	computed: {
-		uiFieldsErrors() {
-			return this.$store.getters['uiFields/errors']({
-				formName: this.fieldName.split('|'),
-				fieldIndex: this.fieldIndex,
-				fieldsetIndex: this.fieldsetIndex
-			});
-		}
+	data() {
+		return {
+			errors: []
+		};
+	},
+	created() {
+		this.$uiFields.subscribeError(this.form, this.name, (value, errors) => {
+			errors = errors.filter((error) => !error.valid);
+			this.errors = errors;
+			if (errors.length && errors[0].name == 'required') {
+				this.errors.length = 1;
+			}
+		});
 	}
 };
 </script>
- :class="`uiFields__error`"
+ :name="error"

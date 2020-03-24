@@ -1,12 +1,3 @@
-// import {
-// 	PLUGINS_DIR,
-// 	TEMPLATES_DIR,
-// 	DEFAULT_OPTIONS,
-// 	HELPERS_DIR,
-// 	MESSAGES_DIR,
-// 	ROOT_DIR,
-// 	RULES_DIR
-// } from './constants.js';
 import prototype from './helpers/prototype.js';
 import Vue from 'vue';
 
@@ -30,8 +21,8 @@ const uiFields = {
 		// };
 
 		//global mixin functions
-		Vue.component('uiError', () => import('./template/ui-error.vue'));
 		Vue.component('uiErrors', () => import('./template/ui-errors.vue'));
+		Vue.component('uiError', () => import('./template/ui-error.vue'));
 		Vue.component('uiFields', () => import('./template/ui-fields.vue'));
 		Vue.component('uiField', () => import('./template/ui-field.vue'));
 

@@ -14,6 +14,7 @@ export default {
 		this.forms.set(name, form);
 		return form;
 	},
+
 	/**
 	* Set value to array
 	* @param {String} formName
@@ -31,6 +32,7 @@ export default {
 		}
 		return form.getValue(name);
 	},
+
 	/**
 	* Get all fields of formname
 	* @param {String} formName
@@ -42,6 +44,7 @@ export default {
 		}
 		return form.getFieldKeys();
 	},
+
 	/**
 	* Get single field
 	* @param {String} formName
@@ -54,6 +57,7 @@ export default {
 		}
 		return form.getField(fieldName);
 	},
+
 	/**
 	* Get all fields
 	* @param {String} formName
@@ -65,6 +69,7 @@ export default {
 		}
 		return form.getFields();
 	},
+
 	/**
 	* Get form
 	* @param {String} name
@@ -72,6 +77,7 @@ export default {
 	getForm(name) {
 		return this.forms.get(name);
 	},
+
 	/**
 	* Get all values mapped
 	*/
@@ -88,6 +94,7 @@ export default {
 		return [...form.values.values()];
 
 	},
+
 	/**
 	* Set new field
 	* @param {String} name
@@ -105,6 +112,7 @@ export default {
 		}
 		form.setField(options);
 	},
+
 	/**
 	* Set multiple fields
 	* @param {name} name
@@ -122,12 +130,14 @@ export default {
 		}
 		form.setFields(options);
 	},
+
 	/**
 	* Set value to array
 	* @param {String} name
 	* @param {String || Array} value
+	* @param {Boolean} checkError
 	*/
-	setValue(formName, name, value) {
+	setValue(formName, name, value, checkError = true) {
 		if (!formName || !name) {
 			return;
 		}
@@ -138,10 +148,13 @@ export default {
 			return;
 		}
 		form.setValue(name, value);
+		if (checkError) {
+			this.checkError(formName, name, value);
+		}
 
-		this.checkError(formName, name, value);
 		this._listen(formName, name, value);
 	},
+
 	/**
 	* Subscriber
 	* @param {String} formName
@@ -154,6 +167,21 @@ export default {
 			this.formListeners.set(formName, [listener]);
 		}
 	},
+
+	/**
+	* Subscriber prototype, only used by fields
+	* @param {String} name
+	* @param {Object} data
+	*/
+	_subscribeError(name, data) {
+		if (this.errorListeners.has(name)) {
+			const oldError = this.errorListeners.get(name);
+			this.errorListeners.set(name, { functions: oldError.functions, data: [...oldError.data, data] });
+		} else {
+			this.errorListeners.set(name, { functions: [], data: [data]});
+		}
+	},
+
 	/**
 	* Subscriber
 	* @param {String} formName
@@ -161,11 +189,12 @@ export default {
 	*/
 	subscribeError(formName, fieldName, listener) {
 		if (this.errorListeners.has(`${formName}_${fieldName}`)) {
-			this.errorListeners.set(`${formName}_${fieldName}`, [...this.errorListeners.get(`${formName}_${fieldName}`), listener]);
-		} else {
-			this.errorListeners.set(`${formName}_${fieldName}`, [listener]);
+			const error = this.errorListeners.get(`${formName}_${fieldName}`);
+			error.functions.push(listener);
+			this.errorListeners.set(`${formName}_${fieldName}`, error);
 		}
 	},
+
 	/**
 	* Subscriber
 	* @param {String} formName
@@ -178,6 +207,7 @@ export default {
 			this.fieldListeners.set(`${formName}_${fieldName}`, [listener]);
 		}
 	},
+
 	/**
 	* Unsubscribe
 	* @param {String} formname
@@ -187,6 +217,7 @@ export default {
 			this.formListeners.delete(formname);
 		}
 	},
+
 	/**
 	* Unsubscribe
 	* @param {String} formname
@@ -196,6 +227,7 @@ export default {
 			this.fieldListeners.delete(`${formName}_${fieldName}`);
 		}
 	},
+
 	/**
 	* Current form instance
 	*/
@@ -203,6 +235,7 @@ export default {
 	formListeners: new Map(),
 	fieldListeners: new Map(),
 	errorListeners: new Map(),
+
 	/**
 	* Listen to event
 	* @param {String} formName
@@ -224,6 +257,7 @@ export default {
 			});
 		}
 	},
+
 	/**
 	* Listen to event
 	* @param {String} formName
@@ -233,19 +267,34 @@ export default {
 		//Field event
 		if (this.errorListeners.has(`${formName}_${fieldName}`)) {
 			const fieldEvents = this.errorListeners.get(`${formName}_${fieldName}`);
-			fieldEvents.forEach((event) => {
-				event(value, fieldName);
+			const result = fieldEvents.data.map((event) => {
+				const validationResult = event.validation(value, event.options);
+				if (!validationResult) {
+					this.setError(formName, fieldName, event.validationType, event.message);
+				} else {
+					this.removeError(formName, fieldName, event.validationType);
+				}
+				return {
+					name: event.validationType,
+					message: event.message(value, fieldName),
+					valid: validationResult
+				};
+			});
+			fieldEvents.functions.forEach((customFunction) => {
+				customFunction(value, result);
 			});
 		}
 	},
+
 	/**
 	 * Set error
 	 * @param {String} formname
 	 * @param {String} fieldName
-	 * @param {String} error
+	 * @param {String} errorName
+	 * @param {String} error - message
 	 */
-	setError(formName, fieldName, error) {
-		if (!formName || !fieldName) {
+	setError(formName, fieldName, errorName, error) {
+		if (!formName || !fieldName || !errorName) {
 			return;
 		}
 
@@ -254,15 +303,17 @@ export default {
 			console.log('No form found');
 			return;
 		}
-		form.setError(fieldName, error);
+		form.setError(fieldName, errorName, error);
 	},
+
 	/**
 	 * Set error
 	 * @param {String} formname
 	 * @param {String} fieldName
+	 * @param {String} errorName
 	 */
-	removeError(formName, fieldName) {
-		if (!formName || !fieldName) {
+	removeError(formName, fieldName, errorName) {
+		if (!formName || !fieldName || !errorName) {
 			return;
 		}
 
@@ -271,8 +322,9 @@ export default {
 			console.log('No form found');
 			return;
 		}
-		form.removeError(fieldName);
+		form.removeError(fieldName, errorName);
 	},
+
 	/**
 	 *
 	 * @param {String} formName
@@ -289,5 +341,40 @@ export default {
 			return;
 		}
 		return form.getError(fieldName);
+	},
+
+	/**
+	 * Get all errors of a form
+	 * @param {String} formName
+	 */
+	getErrors(formName) {
+		if (!formName) {
+			return;
+		}
+
+		const form = this.getForm(formName);
+		if (!form) {
+			console.log('No form found');
+			return;
+		}
+		return form.getErrors();
+	},
+
+	/**
+	 * Validate form
+	 * @param {String} formName
+	 */
+	validate(formName){
+		this.errorListeners.forEach((data , key) => {
+			if (key.includes(formName)) {
+				const [newFormName, fieldName] = key.split('_');
+				this.checkError(newFormName, fieldName, this.getValue(newFormName, fieldName));
+			}
+		});
+		const errors = this.getErrors(formName);
+		return {
+			valid: !errors.size,
+			errors
+		};
 	}
 };

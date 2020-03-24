@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import formatProperties from './formatProperties.js';
+import messagesNL from '../messages/nl.json';
 
 export class uiFieldsInstance {
 	/**
@@ -88,7 +89,7 @@ export class uiFieldsInstance {
 		];
 
 		const defaultDependentSettings = [
-			{ key: 'validation', type: 'any' },
+			{ key: 'validation', type: 'any', default: [] },
 			{ key: 'persistent', type: 'boolean', default: true },
 			{ key: 'errors', type: 'object' },
 			{ key: 'hooks', type: 'function' }
@@ -118,6 +119,7 @@ export class uiFieldsInstance {
 			label,
 			requiredText
 		};
+
 		if (Object.prototype.hasOwnProperty.call(remaining, 'options')) {
 			const {
 				options,
@@ -138,7 +140,9 @@ export class uiFieldsInstance {
 		this.setValue(name, value);
 
 		//Set dependent options after setting the field
-		this.defineValidation(dependentSettings.validation, name);
+		if (Object.prototype.hasOwnProperty.call(dependentSettings, 'validation') && dependentSettings.validation) {
+			this.defineValidation(dependentSettings.validation, name);
+		}
 	}
 
 	/**
@@ -232,17 +236,26 @@ export class uiFieldsInstance {
 	/**
 	 * Set error on field
 	 * @param {String} fieldName
+	 * @param {String} errorName
 	 * @param {String} error
 	 */
-	setError(fieldName, error) {
-		this.errors.set(fieldName, error);
+	setError(fieldName, errorName, error) {
+		this.errors.set(`${fieldName}_${errorName}`, error);
 	}
+
 	/**
 	 * get error on field
 	 * @param {String} fieldName
 	 */
-	getError(fieldName) {
-		return this.errors.get(fieldName);
+	getError(fieldName, errorName) {
+		return this.errors.get(`${fieldName}_${errorName}`);
+	}
+
+	/**
+	 * get all errors
+	 */
+	getErrors() {
+		return this.errors;
 	}
 
 	/**
@@ -255,9 +268,10 @@ export class uiFieldsInstance {
 	/**
 	 * Remove single error
 	 * @param {String} fieldName
+	 * @param {String} errorName
 	 */
-	removeError(fieldName) {
-		this.errors.delete(fieldName);
+	removeError(fieldName, errorName) {
+		this.errors.delete(`${fieldName}_${errorName}`);
 	}
 	/**
 	 * Validator Object
@@ -334,15 +348,23 @@ export class uiFieldsInstance {
 				options = validator.options;
 			}
 
-			if (validationType !== 'custom') {
+			let message = null;
+			if (Object.prototype.hasOwnProperty.call(validator, 'message')) {
+				if (typeof validator.message == 'function') {
+					message = validator.message;
+				} else {
+					message = () => validator.message;
+				}
+			} else {
+				message = () => messagesNL[validationType];
+			}
+			if (validationType && validationType !== 'custom') {
 				this.validator(validationType).then((validationChecker) => {
-					this.subscribeError(name, (value) => {
-						const validation = validationChecker(value);
-						if (validation === false) {
-							this.setError(name, 'Er gings iets fout');
-						} else {
-							this.removeError(name);
-						}
+					Vue.prototype.$uiFields._subscribeError(`${this.getFormName()}_${name}`, {
+						validation: validationChecker,
+						options,
+						validationType: validationType,
+						message
 					});
 				});
 			}

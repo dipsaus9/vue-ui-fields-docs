@@ -25,7 +25,7 @@
 			>
 				{{ fieldData.requiredText }}
 			</span>
-			<ui-error :form="form" :name="name" />
+			<uiErrors :form="form" :name="name" />
 		</label>
 	</div>
 </template>
@@ -55,7 +55,7 @@ export default {
 				return this.$uiFields.getValue(this.form, this.name);
 			},
 			set(value) {
-				this.$uiFields.setValue(this.form, this.name, value);
+				this.$uiFields.setValue(this.form, this.name, value, false);
 			}
 		}
 	},
