@@ -36,7 +36,7 @@ export default {
 	 ** Plugins to load before mounting the App
 	 */
 	plugins: [
-		'~plugins/ui-fields.js'
+		'~plugins/ui-fields.client.js'
 	],
 
 	/*

@@ -1,6 +1,9 @@
 import Vue from 'vue';
 import formatProperties from './formatProperties.js';
 import messagesNL from '../messages/nl.json';
+import SimpleCrypto from 'simple-crypto-js';
+
+const simpleCrypto = new SimpleCrypto('uiFields');
 
 export class uiFieldsInstance {
 	/**
@@ -65,7 +68,7 @@ export class uiFieldsInstance {
 			{ key: 'type', type: 'string' },
 			{ key: 'label', type: 'string', default: '' },
 			{ key: 'requiredText', type: 'string', default: '*' },
-			{ key: 'classes', type: 'array', default: [] }
+			{ key: 'classes', type: 'any', default: [] }
 		];
 
 		const defaultHTMLSettings = [
@@ -107,7 +110,7 @@ export class uiFieldsInstance {
 			{ key: 'dependentSettings', values: defaultDependentSettings }
 		);
 
-		let { name, value, type, label, requiredText } = baseSettings;
+		let { name, value, type, label, requiredText, classes } = baseSettings;
 		const componentType = this.formatComponentType(type);
 		const formattedField = {
 			customData: remaining,
@@ -117,6 +120,7 @@ export class uiFieldsInstance {
 			type,
 			name,
 			label,
+			classes,
 			requiredText
 		};
 
@@ -136,8 +140,12 @@ export class uiFieldsInstance {
 			value = '';
 		}
 
+		const oldValue = this.getOldValue(name);
+		if (oldValue) {
+			value = oldValue;
+		}
 		this.fields.set(name, formattedField);
-		this.setValue(name, value);
+		this.setValue(name, value, false);
 
 		//Set dependent options after setting the field
 		if (Object.prototype.hasOwnProperty.call(dependentSettings, 'validation') && dependentSettings.validation) {
@@ -150,8 +158,11 @@ export class uiFieldsInstance {
 	 * @param {String} fieldName
 	 * @param {*} value
 	 */
-	setValue(fieldName, value) {
+	setValue(fieldName, value, addToStorage = true) {
 		this.values.set(fieldName, value);
+		if (addToStorage) {
+			this.addToLocalStorage(fieldName, value);
+		}
 	}
 
 	/**
@@ -384,5 +395,37 @@ export class uiFieldsInstance {
 				});
 			}
 		});
+	}
+
+	addToLocalStorage(name, value) {
+		if (typeof window !== 'undefined' && window.localStorage) {
+			const oldData = localStorage.getItem('VueUiFields');
+			let data = null;
+			if (oldData) {
+				data = new Map(JSON.parse(oldData));
+			} else {
+				data = new Map();
+			}
+			data.set(`${this.getFormName()}_${name}`, simpleCrypto.encrypt(value));
+			localStorage.setItem(
+				'VueUiFields',
+				JSON.stringify(Array.from(data.entries()))
+			);
+		}
+	}
+
+	getOldValue(name) {
+		if (typeof window !== 'undefined' && window.localStorage) {
+			const oldData = localStorage.getItem('VueUiFields');
+			let data = null;
+			if (oldData) {
+				data = new Map(JSON.parse(oldData));
+			}
+			if (data.has(`${this.getFormName()}_${name}`)) {
+				const value = data.get(`${this.getFormName()}_${name}`);
+				return simpleCrypto.decrypt(value);
+			}
+			return false;
+		}
 	}
 }

@@ -2,7 +2,7 @@
 	<component :is="field.componentType"
 		v-if="field && field.componentType" :class="[
 			`ui-fields__field ui-fields__field--${field.type}`,
-			`${field.classes || []}`,
+			field.classes,
 			{ 'ui-fields__field--pristine' : pristine },
 			{ 'ui-fields__field--valid' : error },
 			{ 'ui-fields__field--invalid' : !pristine && !error }
@@ -37,6 +37,7 @@ export default {
 	},
 	computed: {
 		field() {
+			console.log(this.$uiFields.getField(this.form, this.name));
 			return this.$uiFields.getField(this.form, this.name);
 		}
 	},

@@ -1,6 +1,6 @@
 <template>
 	<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
-		<uiFields name="checkout" class="tte" component="fieldset" />
+		<uiFields name="checkout" />
 		<button type="submit">
 			Submit
 		</button>
@@ -13,7 +13,7 @@ export default {
 			submitted: false
 		};
 	},
-	created() {
+	mounted() {
 		const test = this.$uiFields.new('checkout');
 		test.setFields([
 			{
@@ -22,6 +22,7 @@ export default {
 				autocomplete: 'given-name',
 				type: 'email',
 				required: true,
+				classes: 'hoi',
 				placeholder: 'What is your first name',
 				validation: ['email']
 			},

@@ -1,7 +1,7 @@
 import prototype from './helpers/prototype.js';
 
 const uiFields = {
-	install(Vue, options) {
+	install(Vue) {
 
 		//global mixin functions
 		Vue.component('uiErrors', () => import('./template/ui-errors.vue'));

@@ -16,6 +16,7 @@
 	"dependencies": {
 		"@nuxtjs/axios": "^5.9.5",
 		"nuxt": "^2.11.0",
+		"simple-crypto-js": "^2.2.0",
 		"validator": "^12.2.0"
 	},
 	"devDependencies": {
