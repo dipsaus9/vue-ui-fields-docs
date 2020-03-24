@@ -8,11 +8,6 @@
 </template>
 <script>
 export default {
-	data() {
-		return {
-			submitted: false
-		};
-	},
 	mounted() {
 		const test = this.$uiFields.new('checkout');
 		test.setFields([
