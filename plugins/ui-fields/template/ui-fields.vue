@@ -15,7 +15,7 @@ export default {
 		},
 		component: {
 			type: String,
-			default: 'fieldset'
+			default: 'div'
 		}
 	},
 	computed: {

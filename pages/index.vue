@@ -1,6 +1,6 @@
 <template>
-	<form data-vv-scope="uiFields" @submit.prevent="submit">
-		<uiFields name="checkout" class="tte" />
+	<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
+		<uiFields name="checkout" class="tte" component="fieldset" />
 		<button type="submit">
 			Submit
 		</button>
@@ -13,25 +13,17 @@ export default {
 			submitted: false
 		};
 	},
-	mounted() {
-		this.$uiFields.new('checkout');
-		this.$uiFields.setFields('checkout', [
-		]);
-		this.$uiFields.setFields('checkout', [
+	created() {
+		const test = this.$uiFields.new('checkout');
+		test.setFields([
 			{
 				label: 'Enter your first name',
 				name: 'password',
 				autocomplete: 'given-name',
-				type: 'text',
+				type: 'email',
+				required: true,
 				placeholder: 'What is your first name',
-				validation: [{
-					name: 'custom',
-					validation(val) {
-						return val === 'hoi';
-					},
-					message: () => 'ik wil hoi als antwoord'
-				}]
-				// validation: ['required', 'email', { name: 'minlength', options: 5, message: (value) => `${value.length} is nog niet voldoende ` } ]
+				validation: ['email']
 			},
 			{
 				label: 'Enter your last name',
@@ -40,59 +32,12 @@ export default {
 				type: 'text',
 				placeholder: 'test 2',
 				classes: ['asdfasdf']
-			},
-			// {
-			// 	label: 'Enter your address',
-			// 	name: 'address',
-			// 	autocomplete: 'street-address',
-			// 	type: 'text',
-			// 	validation: ['required']
-			// },
-			// {
-			// 	label: 'Enter your country',
-			// 	name: 'country',
-			// 	autocomplete: 'country',
-			// 	type: 'radio',
-			// 	validation: ['required'],
-			// 	options: [
-			// 		{
-			// 			label: 'Select something',
-			// 			value: ''
-			// 		},
-			// 		{
-			// 			label: 'Nederland',
-			// 			value: 'NL'
-			// 		},
-			// 		{
-			// 			label: 'Duitsland',
-			// 			value: 'DE'
-			// 		}
-			// 	]
-			// }
+			}
 		]);
-
 	},
 	methods: {
 		async submit() {
-			this.submitted = true;
-			// this.$uiFields.setError('checkout', 'password', 'Nie goed he');
 			console.log(this.$uiFields.validate('checkout'));
-			// const result = await this.$uiFields.getFields('checkout');
-			// console.log(result);
-			// if (result.valid) {
-			// 	this.$uiFields.setError({
-			// 		formName: 'custom-errors',
-			// 		fieldIndex: 'custom_error',
-			// 		message: 'You have succesfully pushed this form'
-			// 	});
-			// 	setTimeout(() => {
-			// 		this.$uiFields.removeError({
-			// 			formName: 'custom-errors',
-			// 			fieldIndex: 'custom_error',
-			// 			message: 'You have succesfully pushed this form'
-			// 		});
-			// 	}, 2000);
-			// }
 		}
 	}
 };
