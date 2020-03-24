@@ -239,7 +239,7 @@ export class uiFieldsInstance {
 	 * @param {String} errorName
 	 * @param {String} error
 	 */
-	setError(fieldName, errorName, error) {
+	_setError(fieldName, errorName, error) {
 		this.errors.set(`${fieldName}_${errorName}`, error);
 	}
 
@@ -356,7 +356,11 @@ export class uiFieldsInstance {
 					message = () => validator.message;
 				}
 			} else {
-				message = () => messagesNL[validationType];
+				if (validationType && validationType !== 'custom') {
+					message = () => messagesNL[validationType];
+				} else {
+					message = () => '';
+				}
 			}
 			if (validationType && validationType !== 'custom') {
 				this.validator(validationType).then((validationChecker) => {
@@ -366,6 +370,17 @@ export class uiFieldsInstance {
 						validationType: validationType,
 						message
 					});
+				});
+			} else {
+				let validationFunction = () => true;
+				if (Object.prototype.hasOwnProperty.call(validator, 'validation')) {
+					validationFunction = validator.validation;
+				}
+				Vue.prototype.$uiFields._subscribeError(`${this.getFormName()}_${name}`, {
+					validation: validationFunction,
+					options,
+					validationType: validationType,
+					message
 				});
 			}
 		});

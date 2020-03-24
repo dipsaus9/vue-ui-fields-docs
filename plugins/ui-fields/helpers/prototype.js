@@ -149,6 +149,7 @@ export default {
 		}
 		form.setValue(name, value);
 		if (checkError) {
+			this.removeCustomErrors(formName, name);
 			this.checkError(formName, name, value);
 		}
 
@@ -181,6 +182,20 @@ export default {
 			this.errorListeners.set(name, { functions: [], data: [data]});
 		}
 	},
+
+	/**
+	* Unsubscriber custom errors prototype, only used by fields
+	* @param {String} name
+	* @param {Object} data
+	*/
+	_unsubscribeCustomErrors(name) {
+		if (this.errorListeners.has(name)) {
+			const oldError = this.errorListeners.get(name);
+			const data = oldError.data.filter((error) => !error.custom);
+			this.errorListeners.set(name, { functions: oldError.functions, data });
+		}
+	},
+
 
 	/**
 	* Subscriber
@@ -270,7 +285,7 @@ export default {
 			const result = fieldEvents.data.map((event) => {
 				const validationResult = event.validation(value, event.options);
 				if (!validationResult) {
-					this.setError(formName, fieldName, event.validationType, event.message);
+					this._setError(formName, fieldName, event.validationType, event.message);
 				} else {
 					this.removeError(formName, fieldName, event.validationType);
 				}
@@ -279,7 +294,7 @@ export default {
 					message: event.message(value, fieldName),
 					valid: validationResult
 				};
-			});
+			}).filter((err) => err);
 			fieldEvents.functions.forEach((customFunction) => {
 				customFunction(value, result);
 			});
@@ -293,7 +308,7 @@ export default {
 	 * @param {String} errorName
 	 * @param {String} error - message
 	 */
-	setError(formName, fieldName, errorName, error) {
+	_setError(formName, fieldName, errorName, error) {
 		if (!formName || !fieldName || !errorName) {
 			return;
 		}
@@ -303,7 +318,33 @@ export default {
 			console.log('No form found');
 			return;
 		}
-		form.setError(fieldName, errorName, error);
+		form._setError(fieldName, errorName, error);
+	},
+
+	/**
+	 * Set error
+	 * @param {String} formname
+	 * @param {String} fieldName
+	 * @param {String} errorName
+	 * @param {String} error - message
+	 */
+	setError(formName, fieldName, error) {
+		if (!formName || !fieldName) {
+			return;
+		}
+
+		const form = this.getForm(formName);
+		if (!form) {
+			console.log('No form found');
+			return;
+		}
+		this._subscribeError(`${formName}_${fieldName}`, {
+			custom: true,
+			validation: () =>  false,
+			options: null,
+			validationType: 'custom',
+			message: () => error
+		});
 	},
 
 	/**
@@ -376,5 +417,33 @@ export default {
 			valid: !errors.size,
 			errors
 		};
+	},
+
+	/**
+	 * Remove all custom errors
+	 * @param {String} formName
+	 * @param {String} fieldName
+	 */
+	removeCustomErrors(formName, fieldName) {
+		this._unsubscribeCustomErrors(`${formName}_${fieldName}`);
+		if (this.errorListeners.has(`${formName}_${fieldName}`)) {
+			const fieldEvents = this.errorListeners.get(`${formName}_${fieldName}`);
+			const value = this.getValue(formName, fieldName);
+			const result = fieldEvents.data.map((event) => {
+				let validationResult = false;
+				if (event.custom) {
+					this.removeError(formName, fieldName, event.validationType);
+					validationResult = true;
+				}
+				return {
+					name: event.validationType,
+					message: event.message(value, fieldName),
+					valid: validationResult
+				};
+			});
+			fieldEvents.functions.forEach((customFunction) => {
+				customFunction(value, result);
+			});
+		}
 	}
 };

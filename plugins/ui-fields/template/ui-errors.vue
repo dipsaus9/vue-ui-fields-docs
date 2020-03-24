@@ -31,4 +31,3 @@ export default {
 	}
 };
 </script>
- :name="error"

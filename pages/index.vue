@@ -1,6 +1,6 @@
 <template>
 	<form data-vv-scope="uiFields" @submit.prevent="submit">
-		<ui-fields name="checkout" class="tte" />
+		<uiFields name="checkout" class="tte" />
 		<button type="submit">
 			Submit
 		</button>
@@ -24,7 +24,14 @@ export default {
 				autocomplete: 'given-name',
 				type: 'text',
 				placeholder: 'What is your first name',
-				validation: ['required', 'email', { name: 'minlength', options: 5, message: (value) => `${value.length} is nog niet voldoende ` } ]
+				validation: [{
+					name: 'custom',
+					validation(val) {
+						return val === 'hoi';
+					},
+					message: () => 'ik wil hoi als antwoord'
+				}]
+				// validation: ['required', 'email', { name: 'minlength', options: 5, message: (value) => `${value.length} is nog niet voldoende ` } ]
 			},
 			{
 				label: 'Enter your last name',
@@ -64,13 +71,11 @@ export default {
 			// }
 		]);
 
-		this.$uiFields.subscribe('checkout', () => {
-			console.log('jasdlfjasdf');
-		});
 	},
 	methods: {
 		async submit() {
 			this.submitted = true;
+			// this.$uiFields.setError('checkout', 'password', 'Nie goed he');
 			console.log(this.$uiFields.validate('checkout'));
 			// const result = await this.$uiFields.getFields('checkout');
 			// console.log(result);
