@@ -37,7 +37,6 @@ export default {
 	},
 	computed: {
 		field() {
-			console.log(this.$uiFields.getField(this.form, this.name));
 			return this.$uiFields.getField(this.form, this.name);
 		}
 	},

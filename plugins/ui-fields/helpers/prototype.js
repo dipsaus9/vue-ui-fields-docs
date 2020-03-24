@@ -413,6 +413,16 @@ export default {
 			}
 		});
 		const errors = this.getErrors(formName);
+		if (errors.size) {
+			const mappedErrors = errors.keys();
+			const first = mappedErrors.next();
+			const [field] = first.value.split('_');
+			const element = document.getElementById(`${formName}_${field}`);
+			console.log(element);
+			if (element) {
+				element.focus();
+			}
+		}
 		return {
 			valid: !errors.size,
 			errors

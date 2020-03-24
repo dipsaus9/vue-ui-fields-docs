@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<input
-			:id="`${form}__${name}`"
+			:id="`${form}_${name}`"
 			v-model="value"
 			:name="fieldData.name"
 			:type="fieldData.type"
@@ -9,7 +9,7 @@
 			:class="`ui-fields__input ${fieldData.type}__input`"
 			@blur="setValue"
 		/>
-		<label :class="`ui-fields__element ${fieldData.type}__element`" :for="`${form}__${name}`">
+		<label :class="`ui-fields__element ${fieldData.type}__element`" :for="`${form}_${name}`">
 			<span
 				:class="[
 					fieldData.htmlSettings.required

@@ -1,6 +1,8 @@
 <template>
 	<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
-		<uiFields name="checkout" />
+		<client-only>
+			<uiFields name="checkout" />
+		</client-only>
 		<button type="submit">
 			Submit
 		</button>
@@ -10,30 +12,21 @@
 export default {
 	mounted() {
 		const test = this.$uiFields.new('checkout');
-		test.setFields([
-			{
-				label: 'Enter your first name',
-				name: 'password',
-				autocomplete: 'given-name',
-				type: 'email',
-				required: true,
-				classes: 'hoi',
-				placeholder: 'What is your first name',
-				validation: ['email']
-			},
-			{
-				label: 'Enter your last name',
-				name: 'passwordRepeat',
-				autocomplete: 'additional-name',
-				type: 'text',
-				placeholder: 'test 2',
-				classes: ['asdfasdf']
-			}
-		]);
+		for (let i = 0; i < 100; i++) {
+			test.setField(
+				{
+					label: 'Test',
+					name: `field-${i}`,
+					type: 'email',
+					placeholder: 'Test',
+					validation: ['required']
+				}
+			);
+		}
 	},
 	methods: {
 		async submit() {
-			console.log(this.$uiFields.validate('checkout'));
+			this.$uiFields.validate('checkout');
 		}
 	}
 };
