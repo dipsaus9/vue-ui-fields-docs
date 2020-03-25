@@ -3,6 +3,14 @@ import uiFieldsInstance  from './instance.js';
 export default function(options) {
 	return {
 		/**
+		* Current form instance
+		*/
+		forms: new Map(),
+		formListeners: new Map(),
+		fieldListeners: new Map(),
+		errorListeners: new Map(),
+
+		/**
 		* Create a new form
 		* @param {String} name
 		*/
@@ -244,14 +252,6 @@ export default function(options) {
 				this.fieldListeners.delete(`${formName}_${fieldName}`);
 			}
 		},
-
-		/**
-		* Current form instance
-		*/
-		forms: new Map(),
-		formListeners: new Map(),
-		fieldListeners: new Map(),
-		errorListeners: new Map(),
 
 		/**
 		* Listen to event

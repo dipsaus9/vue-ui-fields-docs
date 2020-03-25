@@ -14,9 +14,11 @@ export default class {
 	constructor(options, name) {
 		this.options = options;
 		this.name = name;
+
 		this.fields = new Map();
 		this.values = new Map();
 		this.errors = new Map();
+
 	}
 
 	/**

@@ -2,6 +2,7 @@ import prototype from './prototype.js';
 
 const uiFields = {
 	install(Vue, options) {
+
 		if (!options) {
 			options = {
 				projectName: 'VueUiFields',
@@ -15,6 +16,7 @@ const uiFields = {
 				options.persistentTime = 1000 * 60 * 60 * 12;
 			}
 		}
+
 		//global mixin functions
 		Vue.component('uiErrors', () => import('./template/ui-errors.vue'));
 		Vue.component('uiError', () => import('./template/ui-error.vue'));

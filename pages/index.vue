@@ -1,14 +1,8 @@
 <template>
 	<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
+		{{ counter }}
 		<client-only>
-			<fieldset>
-				<legend>Checkout 1</legend>
-				<uiFields name="checkout" />
-			</fieldset>
-			<fieldset>
-				<legend>Checkout 2</legend>
-				<uiFields name="checkout2" />
-			</fieldset>
+			<uiFields name="checkout" class="hallo" component="fieldset" />
 		</client-only>
 		<button type="submit">
 			Submit
@@ -17,52 +11,54 @@
 </template>
 <script>
 export default {
+	data() {
+		return {
+			counter: 0
+		};
+	},
 	mounted() {
-		const test = this.$uiFields.new('checkout');
-		const test2 = this.$uiFields.new('checkout2');
-		for (let i = 0; i < 2; i++) {
-			test.setField(
-				{
-					label: 'Test',
-					name: `field-${i}`,
-					type: 'text',
-					placeholder: 'Test',
-					// persistent: false,
-					options: [
-						{
-							label: 'hoi',
-							value: 'hoi'
-						},
-						{
-							label: 'hoi2',
-							value: 'hoi2'
-						}
-					]
-				}
-			);
-			test2.setField(
-				{
-					label: 'Test',
-					name: `field-${i}`,
-					type: 'checkbox',
-					placeholder: 'Test',
-					options: [
-						{
-							label: 'hoi',
-							value: 'hoi'
-						},
-						{
-							label: 'hoi2',
-							value: 'hoi2'
-						}
-					]
-				}
-			);
-		}
+		this.$uiFields.new('checkout'); //only needs name
+
+
+		this.$uiFields.setFields('checkout', [
+			{
+				type: 'text',
+				name: 'first_field',
+				classes: 'noem maar wat leuke classes',
+				label: 'Label van het eerste veld',
+				value: '',
+				required: true,
+				persistent: false,
+				validation: [
+					{
+						name: 'required',
+						message: () => 'Je moet wel iets invullen'
+					}
+				]
+			},
+			{
+				type: 'text',
+				name: 'sadfasfd',
+				classes: 'noem maar wat leuke classes',
+				label: 'Label van het eerste veld',
+				value: '',
+				persistent: false,
+				required: true
+			}
+		]);
+
+		this.$uiFields.subscribeField('checkout', 'first_field', this.filterMyProducts);
+	},
+	destroy() {
+		this.$uiFields.unsubscribeField('checkout', 'first_field');
 	},
 	methods: {
+		filterMyProducts() {
+			this.counter++;
+		},
 		async submit() {
-			this.$uiFields.validate('checkout');
+			const results = this.$uiFields.validate('checkout');
+			console.log(results);
 		}
 	}
 };
