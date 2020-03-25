@@ -25,8 +25,9 @@ export default {
 				{
 					label: 'Test',
 					name: `field-${i}`,
-					type: 'radio',
+					type: 'text',
 					placeholder: 'Test',
+					// persistent: false,
 					options: [
 						{
 							label: 'hoi',

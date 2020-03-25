@@ -1,16 +1,18 @@
 import Vue from 'vue';
-import formatProperties from './formatProperties.js';
-import messagesNL from '../messages/nl.json';
+import formatProperties from './helpers/formatProperties.js';
+import messagesNL from './messages/nl.json';
 import SimpleCrypto from 'simple-crypto-js';
 
-const simpleCrypto = new SimpleCrypto('uiFields');
+const time = new Date();
+const simpleCrypto = new SimpleCrypto('VueUIFields');
 
-export class uiFieldsInstance {
+export default class {
 	/**
 		*
 		* @param {String} name
 	*/
-	constructor(name) {
+	constructor(options, name) {
+		this.options = options;
 		this.name = name;
 		this.fields = new Map();
 		this.values = new Map();
@@ -94,9 +96,7 @@ export class uiFieldsInstance {
 
 		const defaultDependentSettings = [
 			{ key: 'validation', type: 'any', default: [] },
-			{ key: 'persistent', type: 'boolean', default: true },
-			{ key: 'errors', type: 'object' },
-			{ key: 'hooks', type: 'function' }
+			{ key: 'persistent', type: 'boolean', default: true }
 		];
 
 		let {
@@ -129,9 +129,11 @@ export class uiFieldsInstance {
 			value = '';
 		}
 
-		const oldValue = this.getOldValue(name);
-		if (oldValue) {
-			value = oldValue;
+		if (dependentSettings.persistent) {
+			const oldValue = this.getOldValue(name);
+			if (oldValue) {
+				value = oldValue;
+			}
 		}
 
 		if (Object.prototype.hasOwnProperty.call(remaining, 'options')) {
@@ -189,8 +191,9 @@ export class uiFieldsInstance {
 	 * @param {*} value
 	 */
 	setValue(fieldName, value, addToStorage = true) {
+		const field = this.getField(fieldName);
 		this.values.set(fieldName, value);
-		if (addToStorage) {
+		if (field.type !== 'checkbox' && field.dependentSettings.persistent && addToStorage) {
 			this.addToLocalStorage(fieldName, value);
 		}
 	}
@@ -321,49 +324,49 @@ export class uiFieldsInstance {
 		let rules;
 		switch (type) {
 			case 'required':
-				rules = await import('../rules/required.js');
+				rules = await import('./rules/required.js');
 				break;
 			case 'email':
-				rules = await import('../rules/email.js');
+				rules = await import('./rules/email.js');
 				break;
 			case 'postalcode':
-				rules = await import('../rules/postalcode.js');
+				rules = await import('./rules/postalcode.js');
 				break;
 			case 'number':
-				rules = await import('../rules/number.js');
+				rules = await import('./rules/number.js');
 				break;
 			case 'minlength':
-				rules = await import('../rules/minlength.js');
+				rules = await import('./rules/minlength.js');
 				break;
 			case 'maxlength':
-				rules = await import('../rules/maxlength.js');
+				rules = await import('./rules/maxlength.js');
 				break;
 			case 'min':
-				rules = await import('../rules/min.js');
+				rules = await import('./rules/min.js');
 				break;
 			case 'max':
-				rules = await import('../rules/max.js');
+				rules = await import('./rules/max.js');
 				break;
 			case 'creditcard':
-				rules = await import('../rules/creditcard.js');
+				rules = await import('./rules/creditcard.js');
 				break;
 			case 'date':
-				rules = await import('../rules/date.js');
+				rules = await import('./rules/date.js');
 				break;
 			case 'url':
-				rules = await import('../rules/url.js');
+				rules = await import('./rules/url.js');
 				break;
 			case 'equalTo':
-				rules = await import('../rules/equalTo.js');
+				rules = await import('./rules/equalTo.js');
 				break;
 			case 'notEqualTo':
-				rules = await import('../rules/notEqualTo.js');
+				rules = await import('./rules/notEqualTo.js');
 				break;
 			case 'vat':
-				rules = await import('../rules/vat.js');
+				rules = await import('./rules/vat.js');
 				break;
 			case 'phone':
-				rules = await import('../rules/phone.js');
+				rules = await import('./rules/phone.js');
 				break;
 		}
 		if (rules) {
@@ -429,27 +432,32 @@ export class uiFieldsInstance {
 
 	addToLocalStorage(name, value) {
 		if (typeof window !== 'undefined' && window.localStorage) {
-			const oldData = localStorage.getItem('VueUiFields');
+			const oldData = localStorage.getItem(this.options.projectName);
 			let data = null;
 			if (oldData) {
-				data = new Map(JSON.parse(oldData));
+				data = new Map(JSON.parse(oldData).data);
 			} else {
 				data = new Map();
 			}
 			data.set(`${this.getFormName()}_${name}`, simpleCrypto.encrypt(value));
 			localStorage.setItem(
-				'VueUiFields',
-				JSON.stringify(Array.from(data.entries()))
+				this.options.projectName, JSON.stringify({ time: time.getTime(), data: Array.from(data.entries()) })
 			);
 		}
 	}
 
 	getOldValue(name) {
 		if (typeof window !== 'undefined' && window.localStorage) {
-			const oldData = localStorage.getItem('VueUiFields');
+			const oldData = localStorage.getItem(this.options.projectName);
 			let data = null;
 			if (oldData) {
-				data = new Map(JSON.parse(oldData));
+				const allData = JSON.parse(oldData);
+				data = new Map(allData.data);
+				const uiFieldsTime = allData.time;
+				if ((time.getTime() - uiFieldsTime) > this.options.persistentTime) {
+					localStorage.removeItem(this.options.projectName);
+					return false;
+				}
 			}
 			if (data && data.has(`${this.getFormName()}_${name}`)) {
 				const value = data.get(`${this.getFormName()}_${name}`);

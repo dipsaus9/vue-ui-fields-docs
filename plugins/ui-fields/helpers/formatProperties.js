@@ -34,4 +34,5 @@ const formatProperties = (object, ...args) => {
 	object[options.key] = properties;
 	return formatProperties(object, ...args);
 };
+
 export default formatProperties;
