@@ -1,7 +1,14 @@
 <template>
 	<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
 		<client-only>
-			<uiFields name="checkout" />
+			<fieldset>
+				<legend>Checkout 1</legend>
+				<uiFields name="checkout" />
+			</fieldset>
+			<fieldset>
+				<legend>Checkout 2</legend>
+				<uiFields name="checkout2" />
+			</fieldset>
 		</client-only>
 		<button type="submit">
 			Submit
@@ -12,12 +19,31 @@
 export default {
 	mounted() {
 		const test = this.$uiFields.new('checkout');
-		for (let i = 0; i < 1; i++) {
+		const test2 = this.$uiFields.new('checkout2');
+		for (let i = 0; i < 2; i++) {
 			test.setField(
 				{
 					label: 'Test',
 					name: `field-${i}`,
 					type: 'radio',
+					placeholder: 'Test',
+					options: [
+						{
+							label: 'hoi',
+							value: 'hoi'
+						},
+						{
+							label: 'hoi2',
+							value: 'hoi2'
+						}
+					]
+				}
+			);
+			test2.setField(
+				{
+					label: 'Test',
+					name: `field-${i}`,
+					type: 'checkbox',
 					placeholder: 'Test',
 					options: [
 						{

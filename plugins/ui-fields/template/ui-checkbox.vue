@@ -1,5 +1,8 @@
 <template>
 	<div :id="`${form}_${name}`">
+		<p v-if="fieldData.label" :class="`ui-fields__element ${fieldData.type}__element`">
+			{{ fieldData.label }}
+		</p>
 		<template v-for="(option, key) in fieldData.options">
 			<input
 				:id="`${form}_${name}_${key}`"
@@ -24,12 +27,6 @@
 				</span>
 			</label>
 		</template>
-		<span
-			v-if="fieldData.htmlSettings.required && fieldData.requiredText"
-			:class="`ui-fields__label--required ui-fields__label ${fieldData.type}__label ${fieldData.type}__label--required`"
-		>
-			{{ fieldData.requiredText }}
-		</span>
 		<uiErrors :form="form" :name="name" />
 	</div>
 </template>
