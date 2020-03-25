@@ -6,7 +6,7 @@ if (config.env === 'development') {
 }
 
 export default {
-	mode: 'spa',
+	mode: 'universal',
 	env: {
 		environment: config.env || 'production'
 	},
@@ -35,7 +35,9 @@ export default {
 	/*
 	 ** Plugins to load before mounting the App
 	 */
-	plugins: ['./plugins/ui-fields.js'],
+	plugins: [
+		'~plugins/ui-fields.client.js'
+	],
 
 	/*
 	 ** Nuxt.js modules
@@ -44,11 +46,14 @@ export default {
 		'nuxt-rfg-icon',
 		// '@nuxtjs/google-analytics',
 		'@nuxtjs/axios',
-		['@matise/ui-fields', {
-			veeValidate: {
-				preload: true
-			}
-		}]
+		// [
+		// 	'~modules/ui-fields/index.js',
+		// 	{
+		// 		validation: {
+		// 			i18n: 'nl'
+		// 		}
+		// 	}
+		// ]
 	],
 
 	/*
@@ -96,8 +101,7 @@ export default {
 				config.module.rules.push({
 					enforce: 'pre',
 					test: /\.(js|vue)$/,
-					loader: 'eslint-loader',
-					exclude: /(node_modules)/
+					loader: 'eslint-loader'
 				});
 			}
 		}

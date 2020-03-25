@@ -1,101 +1,84 @@
 <template>
-	<form data-vv-scope="uiFields">
-		<ui-fields field-name="checkout" />
+	<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
+		<client-only>
+			<fieldset>
+				<legend>Checkout 1</legend>
+				<uiFields name="checkout" />
+			</fieldset>
+			<fieldset>
+				<legend>Checkout 2</legend>
+				<uiFields name="checkout2" />
+			</fieldset>
+		</client-only>
+		<button type="submit">
+			Submit
+		</button>
 	</form>
 </template>
 <script>
 export default {
-	data() {
-		return {
-			uiFields: null
-		};
-	},
-	created() {
-		this.uiFields = this.createNewUiFieldsInstance({
-			key: 'checkout',
-			container: {
-				classes: 'checkout'
-			}
-		});
-
-		this.uiFields.setFieldSet({
-			key: 'personalInfo',
-			container: {
-				classes: ['personal', 'extra-large']
-			}
-		});
-
-		this.uiFields.setField([
-			{
-				depth: 'personalInfo',
-				name: 'first_name',
-				placeholder: 'Enter your first name',
-				reequired: true,
-				errors: {
-					validation: 'required',
-					message: 'This field is required',
-					veeValidateScope: 'uiFields'
-				},
-				hooks: (val) => {
-					if (!val) {
-						this.$store.dispatch('uiFields/updateFieldValue', {
-							name: 'checkout',
-							depth: 'personalInfo',
-							index: 'last_name',
-							value: ''
-						});
-					}
-				}
-			},
-			{
-				depth: 'personalInfo',
-				name: 'last_name',
-				placeholder: 'Enter your last name',
-				required: true,
-				errors: {
-					validation: 'required',
-					message: 'This field is required',
-					veeValidateScope: 'uiFields'
-				}
-			},
-			{
-				depth: 'personalInfo',
-				type: 'radio',
-				name: 'list',
-				placeholder: 'Enter your last name',
-				options: [
-					{
-						label: 'optie 1',
-						value: 1,
-						component: {
-							name: 'h1',
-							props: {
-								class: 'hoallo'
-							},
-							content: 'hoij'
-						}
-					},
-					{
-						label: 'optie 2',
-						value: 2
-					}
-				]
-			}
-		]);
-
-		this.uiFields.setNewCondition({
-			key: 'last_name',
-			depth: 'personalInfo',
-			condition: {
-				key: 'first_name',
-				value(val) {
-					return val.length;
-				}
-			}
-		});
-	},
 	mounted() {
-		this.$store.dispatch('uiFields/setNewForm', this.uiFields.getFieldSettings());
+		const test = this.$uiFields.new('checkout');
+		const test2 = this.$uiFields.new('checkout2');
+		for (let i = 0; i < 2; i++) {
+			test.setField(
+				{
+					label: 'Test',
+					name: `field-${i}`,
+					type: 'text',
+					placeholder: 'Test',
+					// persistent: false,
+					options: [
+						{
+							label: 'hoi',
+							value: 'hoi'
+						},
+						{
+							label: 'hoi2',
+							value: 'hoi2'
+						}
+					]
+				}
+			);
+			test2.setField(
+				{
+					label: 'Test',
+					name: `field-${i}`,
+					type: 'checkbox',
+					placeholder: 'Test',
+					options: [
+						{
+							label: 'hoi',
+							value: 'hoi'
+						},
+						{
+							label: 'hoi2',
+							value: 'hoi2'
+						}
+					]
+				}
+			);
+		}
+	},
+	methods: {
+		async submit() {
+			this.$uiFields.validate('checkout');
+		}
 	}
 };
 </script>
+<style lang="scss">
+@import '~tools';
+form {
+	display: flex;
+	margin: rem(100) auto;
+	flex-direction: column;
+	width: grid(14);
+}
+h1 {
+	font-size: grid(1);
+}
+.uiFields__fieldset {
+	margin: 50px 0;
+}
+</style>
