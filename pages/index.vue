@@ -23,7 +23,7 @@ export default {
 		this.$uiFields.setFields('checkout', [
 			{
 				type: 'text',
-				name: 'first_field',
+				name: 'firstField',
 				classes: 'noem maar wat leuke classes',
 				label: 'Label van het eerste veld',
 				value: '',
@@ -38,7 +38,7 @@ export default {
 			},
 			{
 				type: 'text',
-				name: 'sadfasfd',
+				name: 'secondField',
 				classes: 'noem maar wat leuke classes',
 				label: 'Label van het eerste veld',
 				value: '',
