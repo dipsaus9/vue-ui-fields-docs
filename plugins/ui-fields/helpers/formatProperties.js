@@ -15,9 +15,20 @@ const formatProperties = (object, ...args) => {
 		if (defaultProp.default) {
 			properties[defaultProp.key] = defaultProp.default;
 		}
-		if (prop !== 'undefined' && prop !== null && (typeof prop === defaultProp.type || defaultProp.type === 'any')) {
-			properties[defaultProp.key] = prop;
-			delete object[defaultProp.key];
+		if (defaultProp.type === 'array') {
+			if (
+				prop !== 'undefined' &&
+        prop !== null &&
+        (Array.isArray(prop))
+			) {
+				properties[defaultProp.key] = prop;
+				delete object[defaultProp.key];
+			}
+		} else {
+			if (prop !== 'undefined' && prop !== null && (typeof prop === defaultProp.type || defaultProp.type === 'any')) {
+				properties[defaultProp.key] = prop;
+				delete object[defaultProp.key];
+			}
 		}
 	});
 	object[options.key] = properties;

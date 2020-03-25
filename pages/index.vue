@@ -12,14 +12,23 @@
 export default {
 	mounted() {
 		const test = this.$uiFields.new('checkout');
-		for (let i = 0; i < 100; i++) {
+		for (let i = 0; i < 1; i++) {
 			test.setField(
 				{
 					label: 'Test',
 					name: `field-${i}`,
-					type: 'email',
+					type: 'radio',
 					placeholder: 'Test',
-					validation: ['required']
+					options: [
+						{
+							label: 'hoi',
+							value: 'hoi'
+						},
+						{
+							label: 'hoi2',
+							value: 'hoi2'
+						}
+					]
 				}
 			);
 		}

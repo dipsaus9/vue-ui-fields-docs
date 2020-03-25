@@ -30,39 +30,13 @@
 	</div>
 </template>
 <script>
+import mixinSettings from '../helpers/mixin.js';
 export default {
-	props: {
-		name: {
-			type: String,
-			default: ''
-		},
-		form: {
-			type: String,
-			default: ''
-		}
-	},
-	data: () => {
+	mixins: [mixinSettings],
+	data() {
 		return {
 			component: 'ui-text'
 		};
-	},
-	computed: {
-		fieldData() {
-			return this.$uiFields.getField(this.form, this.name);
-		},
-		value: {
-			get() {
-				return this.$uiFields.getValue(this.form, this.name);
-			},
-			set(value) {
-				this.$uiFields.setValue(this.form, this.name, value, false);
-			}
-		}
-	},
-	methods: {
-		setValue($event) {
-			this.$uiFields.setValue(this.form, this.name, $event.target.value);
-		}
 	}
 };
 </script>

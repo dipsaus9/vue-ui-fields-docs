@@ -68,7 +68,7 @@ export class uiFieldsInstance {
 			{ key: 'type', type: 'string' },
 			{ key: 'label', type: 'string', default: '' },
 			{ key: 'requiredText', type: 'string', default: '*' },
-			{ key: 'classes', type: 'any', default: [] }
+			{ key: 'classes', type: 'array', default: [] }
 		];
 
 		const defaultHTMLSettings = [
@@ -88,6 +88,7 @@ export class uiFieldsInstance {
 		const defaultOptionsSettings = [
 			{ key: 'selected', type: 'boolean', default: false },
 			{ key: 'disabled', type: 'boolean' },
+			{ key: 'label', type: 'string', default: '' },
 			{ key: 'value', type: 'string', default: '' }
 		];
 
@@ -124,18 +125,6 @@ export class uiFieldsInstance {
 			requiredText
 		};
 
-		if (Object.prototype.hasOwnProperty.call(remaining, 'options')) {
-			const {
-				options,
-				...rest
-			} = formatProperties(
-				field,
-				{ key: 'options', values: defaultOptionsSettings }
-			);
-			remaining = rest;
-			formattedField.options = options;
-		}
-
 		if (!value) {
 			value = '';
 		}
@@ -143,6 +132,47 @@ export class uiFieldsInstance {
 		const oldValue = this.getOldValue(name);
 		if (oldValue) {
 			value = oldValue;
+		}
+
+		if (Object.prototype.hasOwnProperty.call(remaining, 'options')) {
+			const formattedOptions = [];
+			if (Array.isArray(remaining.options)) {
+				remaining.options.forEach((opt) => {
+					const { option, ...rest } = formatProperties(opt, {
+						key: 'option',
+						values: defaultOptionsSettings
+					});
+					option.customData = rest;
+					formattedOptions.push(option);
+				});
+				delete remaining.options;
+			}
+
+			if (type === 'checkbox') {
+				if (!value) {
+					const selectedIndex = formattedOptions.findIndex(
+						option => option.selected
+					);
+					if (selectedIndex > -1) {
+						value = [formattedOptions[selectedIndex].value];
+					} else {
+						value = [];
+					}
+				}
+			} else if (type === 'select') {
+				if (!value) {
+					const selectedIndex = formattedOptions.findIndex((option) => option.selected);
+					if (selectedIndex > -1) {
+						value = formattedOptions[selectedIndex].value;
+					} else {
+						value = formattedOptions[0].value;
+						formattedOptions[0].selected = true;
+					}
+				}
+			}
+			formattedField.options = formattedOptions;
+		} else if (type === 'checkbox' || type === 'select' || type === 'radio') {
+			formattedField.options = [];
 		}
 		this.fields.set(name, formattedField);
 		this.setValue(name, value, false);
@@ -421,7 +451,7 @@ export class uiFieldsInstance {
 			if (oldData) {
 				data = new Map(JSON.parse(oldData));
 			}
-			if (data.has(`${this.getFormName()}_${name}`)) {
+			if (data && data.has(`${this.getFormName()}_${name}`)) {
 				const value = data.get(`${this.getFormName()}_${name}`);
 				return simpleCrypto.decrypt(value);
 			}

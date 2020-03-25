@@ -6,7 +6,7 @@
 			{ 'ui-fields__field--pristine' : pristine },
 			{ 'ui-fields__field--valid' : error },
 			{ 'ui-fields__field--invalid' : !pristine && !error }
-		]" :name="name" :form="form"
+		]" :name="name" :form="form" :field-value="field.value"
 	/>
 </template>
 

@@ -138,6 +138,7 @@ export default {
 	* @param {Boolean} checkError
 	*/
 	setValue(formName, name, value, checkError = true) {
+		// console.log(value);
 		if (!formName || !name) {
 			return;
 		}
@@ -418,7 +419,6 @@ export default {
 			const first = mappedErrors.next();
 			const [field] = first.value.split('_');
 			const element = document.getElementById(`${formName}_${field}`);
-			console.log(element);
 			if (element) {
 				element.focus();
 			}
