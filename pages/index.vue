@@ -1,8 +1,12 @@
 <template>
 	<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
+		{{ counter }}
 		<client-only>
 			<uiFields name="checkout" class="hallo" component="fieldset" />
 		</client-only>
+		<button type="submit">
+			Submit
+		</button>
 	</form>
 </template>
 <script>
@@ -21,6 +25,7 @@ export default {
 				type: 'text',
 				name: 'firstField',
 				classes: 'noem maar wat leuke classes',
+				label: 'Label van het eerste veld',
 				value: '',
 				required: true,
 				persistent: false,
@@ -32,9 +37,10 @@ export default {
 				]
 			},
 			{
-				type: 'submit',
-				name: 'submitButton',
+				type: 'text',
+				name: 'secondField',
 				classes: 'noem maar wat leuke classes',
+				label: 'Label van het eerste veld',
 				value: '',
 				persistent: false,
 				required: true
