@@ -234,6 +234,8 @@ export default class {
 				return 'uiText';
 			case 'range':
 				return 'uiText';
+			case 'submit':
+				return 'uiText';
 			default:
 				return type;
 		}
