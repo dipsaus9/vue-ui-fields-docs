@@ -1,6 +1,5 @@
 <template>
 	<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
-		{{ counter }}
 		<client-only>
 			<uiFields name="checkout" class="hallo" component="fieldset" />
 		</client-only>
