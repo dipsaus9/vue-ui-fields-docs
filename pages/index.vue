@@ -140,7 +140,6 @@ export default {
 			{
 				name: 'sort',
 				type: 'select',
-				placeholder: 'placholder',
 				options: [
 					{
 						name: 'lowtohigh',
