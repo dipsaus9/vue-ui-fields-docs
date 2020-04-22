@@ -1,14 +1,15 @@
 <template>
 	<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
 		<client-only>
-			<uiFields name="checkout" class="checkout" component="fieldset" />
+			<uiFields name="filter" class="filter" component="fieldset" />
 		</client-only>
-		<button type="submit">
-			Submit
-		</button>
-		<!-- <div v-for="(obj, i) in allData" :key="i" class="data">
-			{{ allData[i] }}
-		</div> -->
+
+		<div class="images">
+			<div v-for="(product, index) in filterData" :key="index">
+				<img class="image" :src="product.img" alt="" srcset="">
+				<span>{{ product.price }}</span>
+			</div>
+		</div>
 	</form>
 </template>
 <script>
@@ -16,154 +17,135 @@ export default {
 	data() {
 		return {
 			diffAddress: false,
-			allData: Array
+			allData: [
+				{
+					type: 'chair',
+					color: 'yellow',
+					price: 25,
+					img: '/images/yellow.jpg'
+				},
+				{
+					type: 'chair',
+					color: 'blue',
+					price: 10,
+					img: '/images/blue.jpeg'
+				},
+				{
+					type: 'chair',
+					color: 'red',
+					price: 20,
+					img: 'images/red.jpg'
+				},
+				{
+					type: 'chair',
+					color: 'green',
+					price: 50,
+					img: 'images/green.jpg'
+				},
+				{
+					type: 'chair',
+					color: 'yellow',
+					price: 5,
+					img: '/images/yellow.jpg'
+				},
+				{
+					type: 'chair',
+					color: 'blue',
+					price: 30,
+					img: '/images/blue.jpeg'
+				},
+				{
+					type: 'chair',
+					color: 'red',
+					price: 85,
+					img: 'images/red.jpg'
+				},
+				{
+					type: 'chair',
+					color: 'green',
+					price: 64,
+					img: 'images/green.jpg'
+				},
+				{
+					type: 'chair',
+					color: 'yellow',
+					price: 10,
+					img: '/images/yellow.jpg'
+				},
+				{
+					type: 'chair',
+					color: 'blue',
+					price: 98,
+					img: '/images/blue.jpeg'
+				},
+				{
+					type: 'chair',
+					color: 'red',
+					price: 100,
+					img: 'images/red.jpg'
+				},
+				{
+					type: 'chair',
+					color: 'green',
+					price: 68,
+					img: 'images/green.jpg'
+				}
+			],
+			filterData: this.allData
 		};
 	},
 	mounted() {
-		this.$uiFields.new('checkout'); //only needs name
+		this.$uiFields.new('filter'); //only needs name
 
-		this.$uiFields.setFields('checkout', [
+		this.$uiFields.setFields('filter', [
 			{
-				name: 'firstname',
-				type: 'text',
-				label: 'Voornaam',
-				classes: ['form-fields'],
-				required: true
-			},
-			{
-				name: 'surname',
-				type: 'text',
-				label: 'Achternaam',
-				classes: ['form-fields'],
-				required: true
-			},
-			{
-				name: 'email',
-				type: 'email',
-				label: 'E-mail',
-				classes: ['form-fields'],
-				required: true,
-				validation: [
-					'email'
-				]
-			},
-			{
-				name: 'phonenumber',
-				type: 'tel',
-				label: 'Telefoonnummer',
-				classes: ['form-fields'],
-				required: true,
-				validation: [
-					{
-						name: 'phone',
-						options: 'nl-NL'
-					},
-					{
-						name: 'phone',
-						options: 'nl-BE'
-					},
-					{
-						name: 'phone',
-						options: 'de-DE'
-					}
-				]
-			},
-			{
-				name: 'postalcode',
-				type: 'text',
-				label: 'Postcode',
-				classes: ['form-fields'],
-				required: true,
-				validation: [
-					{
-						name: 'postalcode',
-						options: 'NL'
-					}
-				]
-
-			},
-			{
-				name: 'address',
-				type: 'text',
-				label: 'Straat + huisnummer',
-				classes: ['form-fields'],
-				required: true
-			},
-			{
-				name: 'city',
-				type: 'text',
-				label: 'Woonplaats',
-				classes: ['form-fields'],
-				required: true
-			},
-			{
-				name: 'country',
-				type: 'select',
-				label: 'Land',
-				options: [
-					{
-						label: 'Nederland',
-						value: 'NL'
-					},
-					{
-						label: 'Belgie',
-						value: 'BE'
-					},
-					{
-						label: 'Duitsland',
-						value: 'DE'
-					},
-					{
-						label: 'Luxemburg',
-						value: 'L'
-					}
-				],
-				classes: ['form-fields'],
-				required: true
-			},
-			{
-				name: 'diff-address',
+				name: 'color',
 				type: 'checkbox',
 				options: [
 					{
-						label: 'Op een ander adres bezorgen',
-						value: 'diff-address'
-					}
-				],
-				classes: ['form-fields'],
-			},
-			{
-				name: 'shipping',
-				type: 'radio',
-				options: [
-					{
-						label: 'Verzending Nederland: Gratis',
-						value: 'send'
+						name: 'green',
+						label: 'Groen',
+						value: 'green'
 					},
 					{
-						label: 'Afhalen: Gratis',
-						value: 'deduct'
+						name: 'red',
+						label: 'Rood',
+						value: 'red'
+					},
+					{
+						name: 'yellow',
+						label: 'Geel',
+						value: 'yellow'
+					},
+					{
+						name: 'blue',
+						label: 'Blauw',
+						value: 'blue'
 					}
-				],
-				classes: ['form-fields'],
+				]
+			},
+			{
+				name: 'price',
+				type: 'range',
+				minlength: 0,
+				maxlength: 100
 			}
 		]);
-		this.$uiFields.subscribeField('checkout', 'diff-address', this.differentAddressToggle);
+		this.$uiFields.subscribeField('filter', 'color', this.newFilterData);
+		this.$uiFields.subscribeField('filter', 'price', this.newFilterData);
 	},
 	destroy() {
-		this.$uiFields.unsubscribeField('checkout', 'first_field');
 	},
 	methods: {
-		differentAddressToggle() {
-			if(this.diffAddress == false ) {
-				this.diffAddress = true;
-			} else {
-				this.diffAddress = false;
-			}
-		},
-		async submit() {
-			this.allData = this.$uiFields.getValues('checkout');
-			console.log(this.allData);
+		newFilterData() {
+			const colorArr = this.$uiFields.getValue('filter','color');
+			const price = this.$uiFields.getValue('filter','price');
+			const newData = this.allData.filter(res => {
+				if(colorArr.includes(res.color) && res.price <= price) {
+					return res;
+				}
+			});
+			this.filterData = newData;
 		}
 	}
 };
@@ -185,34 +167,20 @@ body {
 	&__field {
 		position: relative;
 		margin-top: 2.5rem;
-		border: 2px solid black;
-		&--text {
-
-		}
-		&--email {
-
-		}
-		&--tel {
-
-		}
-		&--select {
-
-		}
-
-	}
-
-	&__input{
-		width: 100%;
-		padding: 1rem 0 1rem 50%;
 	}
 	&__element {
-		position: absolute;
-		top: 1rem;
-		left: 1rem;
+		// position: absolute;
+		// top: 1rem;
+		// left: 1rem;
+	}
+
+	&__input {
+		width: 100%;
+		padding: 1rem 0 1rem 40%;
+		border: 2px solid black;
 	}
 
 	&__error-message {
-		position: absolute;
 		right: 0;
 		bottom: -2rem;
 		color: #f05123;
@@ -220,16 +188,6 @@ body {
 		width: 100%;
 	}
 
-}
-.uiFields {
-	&__error {
-		position: absolute;
-		right: 0;
-		bottom: -3rem;
-		color: #f05123;
-		font-size: .875rem;
-		width: 100%;
-	}
 }
 .text {
 	&__label {
@@ -239,9 +197,28 @@ body {
 	}
 }
 
-.data {
-	width: 70%;
-	margin: 0 auto;
-	margin-top: .5rem;
+.select {
+	&__input {
+		width: 100%;
+		padding: 1rem;
+		padding: 1rem 0 1rem 40%;
+		border: 2px solid black;
+	}
+}
+.radio {
+	&__element {
+		position: relative;
+		// top: 0;
+		// left: 0;
+	}
+}
+
+.images {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%
+}
+.image {
+	max-width: 200px;
 }
 </style>
