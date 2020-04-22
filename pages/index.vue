@@ -5,8 +5,14 @@
 			<uiFields name="sort" class="sort" component="fieldset" />
 		</client-only>
 
-		<div class="images">
+		<div v-if="filterData.length > 0" class="images">
 			<div v-for="(product, index) in filterData" :key="index">
+				<img class="image" :src="product.img" alt="" srcset="">
+				<span>{{ product.price }}</span>
+			</div>
+		</div>
+		<div v-else class="images">
+			<div v-for="(product, index) in allData" :key="index">
 				<img class="image" :src="product.img" alt="" srcset="">
 				<span>{{ product.price }}</span>
 			</div>
@@ -17,7 +23,6 @@
 export default {
 	data() {
 		return {
-			diffAddress: false,
 			allData: [
 				{
 					type: 'chair',
@@ -132,7 +137,7 @@ export default {
 				type: 'range',
 				min: 0,
 				max: 100,
-				value: this.maxPrice
+				value: 50
 			}
 		]);
 
@@ -140,6 +145,7 @@ export default {
 			{
 				name: 'sort',
 				type: 'select',
+				label: 'Sorteren op prijs',
 				options: [
 					{
 						name: 'lowtohigh',
@@ -155,32 +161,50 @@ export default {
 			},
 		]);
 
-		this.$uiFields.subscribeField('filter', 'color', this.newFilterData);
-		this.$uiFields.subscribeField('filter', 'price', this.newFilterData);
+		this.$uiFields.subscribeField('filter', 'color', this.colorFilter);
+		this.$uiFields.subscribeField('filter', 'price', this.priceFilter);
+
 		this.$uiFields.subscribeField('sort', 'sort', this.sortData);
 	},
 	destroy() {
+		this.$uiFields.unsubscribeField('filter', 'color');
+		this.$uiFields.unsubscribeField('filter', 'price');
+
+		this.$uiFields.unsubscribeField('sort', 'sort');
 	},
 	methods: {
-		newFilterData() {
+		colorFilter() {
 			const colorArr = this.$uiFields.getValue('filter','color');
-			const price = this.$uiFields.getValue('filter','price');
+			const data = this.filterData.length > 0 ? this.filterData : this.allData;
+
 			const newData = this.allData.filter(res => {
-				if(colorArr.includes(res.color) && res.price <= price) {
+				if(colorArr.includes(res.color)) {
 					return res;
 				}
 			});
 			this.filterData = newData;
 		},
+		priceFilter() {
+			const price = this.$uiFields.getValue('filter','price') ? this.$uiFields.getValue('filter','price') : this.maxPrice;
+
+			const newData = this.filterData.filter(res => {
+				if(res.price < price) {
+					return res;
+				}
+			});
+			this.maxPrice = price;
+			this.filterData = newData;
+		},
 		async sortData() {
 			const selectedValue = this.$uiFields.getValue('sort','sort');
+			const data = this.filterData.length > 0 ? this.filterData : this.allData;
 
 			if(selectedValue == 'lowtohigh') {
-				await this.filterData.sort(function (a, b) {
+				await data.sort(function (a, b) {
 					return a.price - b.price;
 				});
 			} else {
-				await this.filterData.sort(function (a, b) {
+				await data.sort(function (a, b) {
 					return b.price - a.price;
 				});
 			}
