@@ -2,6 +2,7 @@
 	<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
 		<client-only>
 			<uiFields name="filter" class="filter" component="fieldset" />
+			<uiFields name="sort" class="sort" component="fieldset" />
 		</client-only>
 
 		<div class="images">
@@ -91,11 +92,13 @@ export default {
 					img: 'images/green.jpg'
 				}
 			],
-			filterData: this.allData
+			filterData: [],
+			maxPrice: 50
 		};
 	},
 	mounted() {
 		this.$uiFields.new('filter'); //only needs name
+		this.$uiFields.new('sort'); //only needs name
 
 		this.$uiFields.setFields('filter', [
 			{
@@ -127,12 +130,35 @@ export default {
 			{
 				name: 'price',
 				type: 'range',
-				minlength: 0,
-				maxlength: 100
+				min: 0,
+				max: 100,
+				value: this.maxPrice
 			}
 		]);
+
+		this.$uiFields.setFields('sort', [
+			{
+				name: 'sort',
+				type: 'select',
+				placeholder: 'placholder',
+				options: [
+					{
+						name: 'lowtohigh',
+						label: 'Laag naar hoog',
+						value: 'lowtohigh'
+					},
+					{
+						name: 'hightolow',
+						label: 'Hoog naar laag',
+						value: 'hightolow'
+					},
+				]
+			},
+		]);
+
 		this.$uiFields.subscribeField('filter', 'color', this.newFilterData);
 		this.$uiFields.subscribeField('filter', 'price', this.newFilterData);
+		this.$uiFields.subscribeField('sort', 'sort', this.sortData);
 	},
 	destroy() {
 	},
@@ -146,6 +172,20 @@ export default {
 				}
 			});
 			this.filterData = newData;
+		},
+		async sortData() {
+			const selectedValue = this.$uiFields.getValue('sort','sort');
+
+			if(selectedValue == 'lowtohigh') {
+				await this.filterData.sort(function (a, b) {
+					return a.price - b.price;
+				});
+			} else {
+				await this.filterData.sort(function (a, b) {
+					return b.price - a.price;
+				});
+			}
+
 		}
 	}
 };
