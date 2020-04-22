@@ -6,9 +6,10 @@
 		<button type="submit">
 			Submit
 		</button>
-		<!-- <div v-for="(obj, i) in allData" :key="i" class="data">
+		<div v-for="(obj, i) in allData" :key="i" class="data">
 			{{ allData[i] }}
-		</div> -->
+		</div>
+		<p>{{ radioVal }}</p>
 	</form>
 </template>
 <script>
@@ -16,7 +17,8 @@ export default {
 	data() {
 		return {
 			diffAddress: false,
-			allData: Array
+			allData: Array,
+			radioVal: ''
 		};
 	},
 	mounted() {
@@ -27,44 +29,59 @@ export default {
 				name: 'firstname',
 				type: 'text',
 				label: 'Voornaam',
+				placeholder: 'bv. Hugo',
+				autofocus: true,
 				classes: ['form-fields'],
-				required: true
+				required: true,
+				validation: [
+					{
+						name: 'required'
+					}
+				]
 			},
 			{
 				name: 'surname',
 				type: 'text',
 				label: 'Achternaam',
+				placeholder: 'bv. Scholtens',
 				classes: ['form-fields'],
-				required: true
+				required: true,
+				validation: [
+					{
+						name: 'required'
+					}
+				]
 			},
 			{
 				name: 'email',
 				type: 'email',
 				label: 'E-mail',
+				placeholder: 'bv. info@scholtenswerkplek.nl',
 				classes: ['form-fields'],
 				required: true,
 				validation: [
-					'email'
+					{
+						name: 'email'
+					},
+					{
+						name: 'required'
+					}
 				]
 			},
 			{
 				name: 'phonenumber',
 				type: 'tel',
 				label: 'Telefoonnummer',
+				placeholder: 'bv. 06 12 34 56 78',
 				classes: ['form-fields'],
 				required: true,
 				validation: [
 					{
 						name: 'phone',
-						options: 'nl-NL'
+						options: ['nl-NL', 'nl-BE', 'de-DE']
 					},
 					{
-						name: 'phone',
-						options: 'nl-BE'
-					},
-					{
-						name: 'phone',
-						options: 'de-DE'
+						name: 'required'
 					}
 				]
 			},
@@ -72,12 +89,16 @@ export default {
 				name: 'postalcode',
 				type: 'text',
 				label: 'Postcode',
+				placeholder: 'bv. 1234 AB',
 				classes: ['form-fields'],
 				required: true,
 				validation: [
 					{
 						name: 'postalcode',
 						options: 'NL'
+					},
+					{
+						name: 'required'
 					}
 				]
 
@@ -86,15 +107,27 @@ export default {
 				name: 'address',
 				type: 'text',
 				label: 'Straat + huisnummer',
+				placeholder: 'bv. Scholtensweg 123',
 				classes: ['form-fields'],
-				required: true
+				required: true,
+				validation: [
+					{
+						name: 'required'
+					}
+				]
 			},
 			{
 				name: 'city',
 				type: 'text',
 				label: 'Woonplaats',
+				placeholder: 'bv. Amsterdam',
 				classes: ['form-fields'],
-				required: true
+				required: true,
+				validation: [
+					{
+						name: 'required'
+					}
+				]
 			},
 			{
 				name: 'country',
@@ -119,7 +152,12 @@ export default {
 					}
 				],
 				classes: ['form-fields'],
-				required: true
+				required: true,
+				validation: [
+					{
+						name: 'required'
+					}
+				]
 			},
 			{
 				name: 'diff-address',
@@ -127,10 +165,10 @@ export default {
 				options: [
 					{
 						label: 'Op een ander adres bezorgen',
-						value: 'diff-address'
+						value: 'asdf'
 					}
 				],
-				classes: ['form-fields'],
+				classes: ['form-fields']
 			},
 			{
 				name: 'shipping',
@@ -142,28 +180,30 @@ export default {
 					},
 					{
 						label: 'Afhalen: Gratis',
-						value: 'deduct'
+						value: 'deduct',
+						selected: true
 					}
 				],
 				classes: ['form-fields'],
+				validation: [
+					{
+						name: 'required'
+					}
+				]
 			}
 		]);
-		this.$uiFields.subscribeField('checkout', 'diff-address', this.differentAddressToggle);
+		this.$uiFields.subscribeField('checkout', 'shipping', this.shippingToggle);
 	},
 	destroy() {
-		this.$uiFields.unsubscribeField('checkout', 'first_field');
+		this.$uiFields.unsubscribeField('checkout', 'shipping');
 	},
 	methods: {
-		differentAddressToggle() {
-			if(this.diffAddress == false ) {
-				this.diffAddress = true;
-			} else {
-				this.diffAddress = false;
-			}
+		shippingToggle() {
+			this.radioVal = this.$uiFields.getValue('checkout','shipping');
+
 		},
 		async submit() {
 			this.allData = this.$uiFields.getValues('checkout');
-			console.log(this.allData);
 		}
 	}
 };
@@ -185,25 +225,6 @@ body {
 	&__field {
 		position: relative;
 		margin-top: 2.5rem;
-		border: 2px solid black;
-		&--text {
-
-		}
-		&--email {
-
-		}
-		&--tel {
-
-		}
-		&--select {
-
-		}
-
-	}
-
-	&__input{
-		width: 100%;
-		padding: 1rem 0 1rem 50%;
 	}
 	&__element {
 		position: absolute;
@@ -211,8 +232,13 @@ body {
 		left: 1rem;
 	}
 
+	&__input {
+		width: 100%;
+		padding: 1rem 0 1rem 40%;
+		border: 2px solid black;
+	}
+
 	&__error-message {
-		position: absolute;
 		right: 0;
 		bottom: -2rem;
 		color: #f05123;
@@ -220,16 +246,6 @@ body {
 		width: 100%;
 	}
 
-}
-.uiFields {
-	&__error {
-		position: absolute;
-		right: 0;
-		bottom: -3rem;
-		color: #f05123;
-		font-size: .875rem;
-		width: 100%;
-	}
 }
 .text {
 	&__label {
@@ -239,9 +255,20 @@ body {
 	}
 }
 
-.data {
-	width: 70%;
-	margin: 0 auto;
-	margin-top: .5rem;
+.select {
+	&__input {
+		width: 100%;
+		padding: 1rem;
+		padding: 1rem 0 1rem 40%;
+		border: 2px solid black;
+	}
 }
+.radio {
+	&__element {
+		position: relative;
+		top: 0;
+		left: 0;
+	}
+}
+
 </style>
