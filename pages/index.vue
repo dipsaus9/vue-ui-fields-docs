@@ -2,6 +2,7 @@
 	<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
 		<client-only>
 			<uiFields name="checkout" class="checkout" component="fieldset" />
+			<uiFields name="billing" class="billing" component="fieldset" />
 		</client-only>
 		<button type="submit">
 			Submit
@@ -23,6 +24,7 @@ export default {
 	},
 	mounted() {
 		this.$uiFields.new('checkout'); //only needs name
+		this.$uiFields.new('billing');
 
 		this.$uiFields.setFields('checkout', [
 			{
@@ -192,6 +194,43 @@ export default {
 				]
 			}
 		]);
+
+		this.$uiFields.setFields('billing', [
+			{
+				name: 'billing',
+				type: 'select',
+				label: 'Betaaldmethode',
+				options: [
+					{
+						label: 'iDEAL',
+						value: 'ideal'
+					},
+					{
+						label: 'PayPal',
+						value: 'paypal'
+					},
+					{
+						label: 'Bancontact',
+						value: 'bancontact'
+					},
+					{
+						label: 'KBC/CBC Payment Button',
+						value: 'paymentbutton'
+					}
+				],
+				classes: ['form-fields'],
+				required: true,
+				validation: [
+					{
+						name: 'required'
+					}
+				]
+			},
+		]);
+
+
+
+
 		this.$uiFields.subscribeField('checkout', 'shipping', this.shippingToggle);
 	},
 	destroy() {
