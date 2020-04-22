@@ -6,9 +6,9 @@
 		<button type="submit">
 			Submit
 		</button>
-		<div v-for="(obj, i) in allData" :key="i" class="data">
+		<!-- <div v-for="(obj, i) in allData" :key="i" class="data">
 			{{ allData[i] }}
-		</div>
+		</div> -->
 	</form>
 </template>
 <script>
@@ -171,68 +171,77 @@ export default {
 <style lang="scss">
 @import '~tools';
 
-//  {
-// 	box-sizing: border-box;
-// }
-// body {
-// 	font-family: sans-serif;
-// }
-// .checkout {
-// 	border: none;
-// }
+* {
+	box-sizing: border-box;
+}
+body {
+	font-family: sans-serif;
+}
+.checkout {
+	border: none;
+}
 
-// .ui-fields {
-// 	&__field {
-// 		position: relative;
-// 		margin-top: 2.5rem;
-// 		border: 2px solid black;
-// 		&--text {
+.ui-fields {
+	&__field {
+		position: relative;
+		margin-top: 2.5rem;
+		border: 2px solid black;
+		&--text {
 
-// 		}
-// 		&--email {
+		}
+		&--email {
 
-// 		}
-// 		&--tel {
+		}
+		&--tel {
 
-// 		}
-// 		&--select {
+		}
+		&--select {
 
-// 		}
+		}
 
-// 	}
+	}
 
-// 	&__input{
-// 		width: 100%;
-// 		padding: 1rem 0 1rem 50%;
-// 	}
-// 	&__element {
-// 		position: absolute;
-// 		top: 1rem;
-// 		left: 1rem;
-// 	}
+	&__input{
+		width: 100%;
+		padding: 1rem 0 1rem 50%;
+	}
+	&__element {
+		position: absolute;
+		top: 1rem;
+		left: 1rem;
+	}
 
-// }
-// .uiFields {
-// 	&__error {
-// 		position: absolute;
-// 		right: 0;
-// 		bottom: -3rem;
-// 		color: #f05123;
-// 		font-size: .875rem;
-// 		width: 100%;
-// 	}
-// }
-// .text {
-// 	&__label {
-// 		&--required {
-// 			color: orange;
-// 		}
-// 	}
-// }
+	&__error-message {
+		position: absolute;
+		right: 0;
+		bottom: -2rem;
+		color: #f05123;
+		font-size: .875rem;
+		width: 100%;
+	}
 
-// .data {
-// 	width: 70%;
-// 	margin: 0 auto;
-// 	margin-top: .5rem;
-// }
+}
+.uiFields {
+	&__error {
+		position: absolute;
+		right: 0;
+		bottom: -3rem;
+		color: #f05123;
+		font-size: .875rem;
+		width: 100%;
+	}
+}
+.text {
+	&__label {
+		&--required {
+			color: orange;
+		}
+	}
+}
+
+.data {
+	width: 70%;
+	margin: 0 auto;
+	margin-top: .5rem;
+}
 </style>
