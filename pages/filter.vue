@@ -283,6 +283,7 @@ fieldset {
 		width: 2rem;
 		height: 2rem;
 		background: #4CAF50;
+		border: 1px solid black;
 		cursor: pointer;
 	}
 }
