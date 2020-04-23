@@ -184,7 +184,18 @@ export default {
 					{
 						label: 'Afhalen: Gratis',
 						value: 'deduct',
+					}
+					,
+					{
+						label: 'Afhalen: Gratis',
+						value: 'dedwertwetuct',
 						selected: true
+					}
+					,
+					{
+						label: 'Afhalen: Gratis',
+						value: 'asdf',
+						// selected: true
 					}
 				],
 				classes: ['form-fields'],
