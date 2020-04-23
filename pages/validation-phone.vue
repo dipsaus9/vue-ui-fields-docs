@@ -21,7 +21,7 @@ export default {
 				validation: [
 					{
 						name: 'phone',
-						options: ['nl-NL', 'nl-BE', 'de-DE']
+						options: 'nl-NL'
 					}
 				]
 			}

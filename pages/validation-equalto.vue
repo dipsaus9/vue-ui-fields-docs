@@ -18,15 +18,16 @@ export default {
 			{
 				name: 'equalto',
 				type: 'email',
-				label: 'Equal to',
+				label: 'Email 1',
 			},
 			{
 				name: 'equalto2',
 				type: 'email',
-				label: 'Equal to',
+				label: 'Email 2',
 				validation: [
 					{
-						name: 'equalto'
+						name: 'equalTo',
+						option: 'equalto'
 					}
 				]
 			}

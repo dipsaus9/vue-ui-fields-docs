@@ -20,8 +20,7 @@ export default {
 				type: 'text',
 				validation: [
 					{
-						name: 'url',
-						options: []
+						name: 'url'
 					}
 				]
 			}
