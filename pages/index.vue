@@ -138,7 +138,8 @@ export default {
 				options: [
 					{
 						label: 'Nederland',
-						value: 'NL'
+						value: 'NL',
+						selected: true
 					},
 					{
 						label: 'Belgie',
@@ -203,7 +204,8 @@ export default {
 				options: [
 					{
 						label: 'iDEAL',
-						value: 'ideal'
+						value: 'ideal',
+						selected: true
 					},
 					{
 						label: 'PayPal',
