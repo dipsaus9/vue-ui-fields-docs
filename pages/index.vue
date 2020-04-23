@@ -5,14 +5,8 @@
 			<uiFields name="sort" class="sort" component="fieldset" />
 		</client-only>
 
-		<div v-if="filterData.length > 0" class="images">
+		<div class="images">
 			<div v-for="(product, index) in filterData" :key="index">
-				<img class="image" :src="product.img" alt="" srcset="">
-				<span>{{ product.price }}</span>
-			</div>
-		</div>
-		<div v-else class="images">
-			<div v-for="(product, index) in allData" :key="index">
 				<img class="image" :src="product.img" alt="" srcset="">
 				<span>{{ product.price }}</span>
 			</div>
@@ -136,8 +130,7 @@ export default {
 				name: 'price',
 				type: 'range',
 				min: 0,
-				max: 100,
-				value: 50
+				max: 100
 			}
 		]);
 
@@ -161,10 +154,12 @@ export default {
 			},
 		]);
 
-		this.$uiFields.subscribeField('filter', 'color', this.colorFilter);
-		this.$uiFields.subscribeField('filter', 'price', this.priceFilter);
+		this.$uiFields.subscribeField('filter', 'color', this.filter);
+		this.$uiFields.subscribeField('filter', 'price', this.filter);
 
 		this.$uiFields.subscribeField('sort', 'sort', this.sortData);
+
+		this.filterData = this.allData;
 	},
 	destroy() {
 		this.$uiFields.unsubscribeField('filter', 'color');
@@ -173,27 +168,31 @@ export default {
 		this.$uiFields.unsubscribeField('sort', 'sort');
 	},
 	methods: {
-		colorFilter() {
+		filter() {
 			const colorArr = this.$uiFields.getValue('filter','color');
-			const data = this.filterData.length > 0 ? this.filterData : this.allData;
-
-			const newData = this.allData.filter(res => {
-				if(colorArr.includes(res.color)) {
-					return res;
-				}
-			});
-			this.filterData = newData;
-		},
-		priceFilter() {
 			const price = this.$uiFields.getValue('filter','price') ? this.$uiFields.getValue('filter','price') : this.maxPrice;
 
-			const newData = this.filterData.filter(res => {
-				if(res.price < price) {
-					return res;
-				}
-			});
-			this.maxPrice = price;
-			this.filterData = newData;
+			if(colorArr.length > 0) {
+				const colorData = this.allData.filter(res => {
+					if(colorArr.includes(res.color)) {
+						return res;
+					}
+				});
+				const newData = colorData.filter(res => {
+					if(res.price < price) {
+						return res;
+					}
+				});
+				this.filterData = newData;
+
+			} else {
+				const newData = this.allData.filter(res => {
+					if(res.price < price) {
+						return res;
+					}
+				});
+				this.filterData = newData;
+			}
 		},
 		async sortData() {
 			const selectedValue = this.$uiFields.getValue('sort','sort');
