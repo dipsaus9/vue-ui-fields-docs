@@ -1,17 +1,21 @@
 <template>
-	<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
-		<client-only>
-			<uiFields name="filter" class="filter" component="fieldset" />
-			<uiFields name="sort" class="sort" component="fieldset" />
-		</client-only>
+	<div>
+		<h1>Filter page</h1>
 
-		<div class="images">
-			<div v-for="(product, index) in filterData" :key="index">
-				<img class="image" :src="product.img" alt="" srcset="">
-				<span>{{ product.price }}</span>
+		<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
+			<client-only>
+				<uiFields name="filter" class="filter" component="fieldset" />
+				<uiFields name="sort" class="sort" component="fieldset" />
+			</client-only>
+		</form>
+
+		<div class="products">
+			<div v-for="(product, index) in filterData" :key="index" class="products__product">
+				<img class="products__image" :src="product.img" alt="" srcset="">
+				<span class="products__price">{{ product.price }}</span>
 			</div>
 		</div>
-	</form>
+	</div>
 </template>
 <script>
 export default {
@@ -97,7 +101,7 @@ export default {
 	},
 	mounted() {
 		this.$uiFields.new('filter'); //only needs name
-		this.$uiFields.new('sort'); //only needs name
+		this.$uiFields.new('sort');
 
 		this.$uiFields.setFields('filter', [
 			{
@@ -129,6 +133,7 @@ export default {
 			{
 				name: 'price',
 				type: 'range',
+				label: 'Prijs',
 				min: 0,
 				max: 100,
 				value: 50
@@ -216,24 +221,29 @@ export default {
 	padding: 0;
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
 }
+
+h1 {
+	padding: 0 1rem;
+}
+
 fieldset {
-	padding: 1rem;
+	padding: 0 1rem;
 	width: 50%;
 	border: none;
 }
 .checkbox {
 	&__input {
 		appearance: none;
-		background-color: #white;
-		background-color: #DDDDDD;
-		padding: 1rem;
-		border-radius: 0;
+		position: relative;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		position: relative;
+		padding: 1rem;
 		margin: 0 0.5rem;
-
+		border-radius: 0;
+		background-color: #white;
+		background-color: #DDDDDD;
+		border: 1px solid black;
 	}
 	&__input:first-child {
 		margin-left: 0;
@@ -257,11 +267,6 @@ fieldset {
 		color: #99a1a7;
 		background-color: #4CAF50;
 	}
-	&__element {
-		font-size: 1.2rem;
-	}
-	&__label {
-	}
 }
 
 .range {
@@ -270,8 +275,7 @@ fieldset {
 		width: 100%;
 		height: 2rem;
 		background: #DDDDDD;
-		outline: none;
-		transition: opacity .2s;
+		border: 1px solid black;
 	}
 	&__input::-webkit-slider-thumb {
 		-webkit-appearance: none;
@@ -281,6 +285,21 @@ fieldset {
 		background: #4CAF50;
 		cursor: pointer;
 	}
+}
+.select {
+	&__input {
+		appearance: none;
+		height: 2rem;
+		width: 100%;
+		padding: 0 1rem;
+		border-radius: 0;
+		background: #DDDDDD;
+		border: none;
+		border: 1px solid black;
+	}
+	& option {
+
+	}
 	&__element {
 	}
 	&__label {
@@ -289,14 +308,54 @@ fieldset {
 .ui-fields {
 	&__field {
 		margin: 1rem 0;
+		display: flex;
 		&--checkbox {
-			display: flex;
 			flex-wrap: wrap;
 			align-items: center;
-
 		}
 		&--range {
+			flex-direction: column-reverse;
 		}
+		&--select {
+			flex-direction: column-reverse;
+		}
+	}
+	&__label {
+		text-transform: uppercase;
+		font-weight: 600;
+	}
+}
+
+.products {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	padding: 1rem;
+	&__product {
+		position: relative;
+		width: 20rem;
+		height: 20rem;
+		margin: 2rem 0;
+		overflow: hidden;
+		border: 1px solid black;
+	}
+	&__image {
+		display: block;
+		height: 100%;
+		margin: 0 auto;
+	}
+	&__price {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		padding: 1rem;
+		text-align: center;
+		font-size: 1.5rem;
+		background-color: #4CAF50;
+		color: white;
+	}
+	&__price::before {
+		content: '€'
 	}
 }
 
