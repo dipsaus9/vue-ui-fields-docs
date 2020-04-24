@@ -1,6 +1,6 @@
 <template>
 	<section>
-		<h1> Validation - Email</h1>
+		<h1> Validation - Postalcode</h1>
 		<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
 			<client-only>
 				<uiFields name="validation" class="validation" component="fieldset" />
@@ -16,20 +16,27 @@ export default {
 
 		this.$uiFields.setFields('validation', [
 			{
-				name: 'email',
-				type: 'email',
+				name: 'postalcode1',
+				type: 'text',
+				label: 'Validation as object in array',
 				validation: [
 					{
-						name: 'email'
+						name: 'postalcode',
+						options: 'NL'
 					}
 				]
 			},
 			{
-				name: 'email2',
+				name: 'postalcode2',
 				type: 'text',
+				label: 'More than one validation',
 				validation: [
 					{
-						name: 'email'
+						name: 'postalcode',
+						options: 'NL'
+					},
+					{
+						name: 'required'
 					}
 				]
 			}
