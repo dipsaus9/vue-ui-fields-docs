@@ -1,6 +1,6 @@
 <template>
 	<section>
-		<h1> Example - Password </h1>
+		<h1> Example - Signup email </h1>
 		<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
 			<client-only>
 				<uiFields name="login-details" class="login-details" component="fieldset" />
@@ -25,7 +25,7 @@ export default {
 					},
 					{
 						name: 'required'
-					},
+					}
 				]
 			},
 			{
