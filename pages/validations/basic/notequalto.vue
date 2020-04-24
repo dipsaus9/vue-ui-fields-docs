@@ -1,9 +1,9 @@
 <template>
 	<section>
-		<h1> Validation - Notequalto</h1>
-		<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
+		<h1>Validation - Notequalto</h1>
+		<form novalidate @submit.prevent="submit">
 			<client-only>
-				<uiFields name="validation" class="validation" component="fieldset" />
+				<uiFields name="notequalto" class="notequalto" component="fieldset" />
 			</client-only>
 		</form>
 	</section>
@@ -12,9 +12,9 @@
 <script>
 export default {
 	mounted() {
-		this.$uiFields.new('validation');
+		this.$uiFields.new('notequalto');
 
-		this.$uiFields.setFields('validation', [
+		this.$uiFields.setFields('notequalto', [
 			{
 				name: 'value1',
 				type: 'text',
@@ -37,15 +37,18 @@ export default {
 				label: 'More than one validation',
 				validation: [
 					{
-						name: 'notEqualTo',
-						options: () => this.$uiFields.getValue('validation', 'value1')
+						name: 'required'
 					},
 					{
-						name: 'required'
+						name: 'notEqualTo',
+						options: () => this.$uiFields.getValue('validation', 'value1')
 					}
 				]
 			}
 		]);
+	},
+	destroy() {
+		this.$uiFields.new('notequalto');
 	}
 };
 </script>

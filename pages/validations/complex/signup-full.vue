@@ -1,10 +1,10 @@
 <template>
 	<section>
-		<h1> Example - Signup full </h1>
-		<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
+		<h1>Example - Signup full </h1>
+		<form novalidate @submit.prevent="submit">
 			<client-only>
-				<uiFields name="login-details" class="login-details" component="fieldset" />
-				<uiFields name="user-details" class="user-details" component="fieldset" />
+				<uiFields name="login-details-full" class="login-details-full" component="fieldset" />
+				<uiFields name="user-details-full" class="user-details-full" component="fieldset" />
 			</client-only>
 		</form>
 	</section>
@@ -13,21 +13,21 @@
 <script>
 export default {
 	mounted() {
-		this.$uiFields.new('login-details');
-		this.$uiFields.new('user-details');
+		this.$uiFields.new('login-details-full');
+		this.$uiFields.new('user-details-full');
 
-		this.$uiFields.setFields('login-details', [
+		this.$uiFields.setFields('login-details-full', [
 			{
 				name: 'username',
 				type: 'text',
 				label: 'Email',
 				validation: [
 					{
-						name: 'email'
-					},
-					{
 						name: 'required'
 					},
+					{
+						name: 'email'
+					}
 				]
 			},
 			{
@@ -42,7 +42,7 @@ export default {
 					{
 						name: 'maxlength',
 						options: 20
-					},
+					}
 				]
 			},
 			{
@@ -51,22 +51,25 @@ export default {
 				label: 'Password 2',
 				validation: [
 					{
-						name: 'equalTo',
-						options: () => this.$uiFields.getValue('validation', 'password1')
+						name: 'required'
 					},
 					{
-						name: 'required'
+						name: 'equalTo',
+						options: () => this.$uiFields.getValue('validation', 'password1')
 					}
 				]
 			}
 		]);
 
-		this.$uiFields.setFields('user-details', [
+		this.$uiFields.setFields('user-details-full', [
 			{
 				name: 'firstname',
 				type: 'text',
 				label: 'Firstname',
 				validation: [
+					{
+						name: 'required'
+					},
 					{
 						name: 'maxlength',
 						options: 30
@@ -74,9 +77,6 @@ export default {
 					{
 						name: 'minlength',
 						options: 2
-					},
-					{
-						name: 'required'
 					},
 					{
 						name: 'text'
@@ -89,6 +89,9 @@ export default {
 				label: 'Surname',
 				validation: [
 					{
+						name: 'required'
+					},
+					{
 						name: 'maxlength',
 						options: 50
 					},
@@ -97,7 +100,7 @@ export default {
 						options: 2
 					},
 					{
-						name: 'required'
+						name: 'text'
 					}
 				]
 			},
@@ -107,10 +110,10 @@ export default {
 				label: 'E-mail',
 				validation: [
 					{
-						name: 'email'
+						name: 'required'
 					},
 					{
-						name: 'required'
+						name: 'email'
 					}
 				]
 			},
@@ -120,11 +123,11 @@ export default {
 				label: 'Phonenumber',
 				validation: [
 					{
-						name: 'phone',
-						options: ['nl-NL']
+						name: 'required'
 					},
 					{
-						name: 'required'
+						name: 'phone',
+						options: ['nl-NL']
 					}
 				]
 			},
@@ -134,11 +137,11 @@ export default {
 				label: 'Postalcode',
 				validation: [
 					{
-						name: 'postalcode',
-						options: ['NL']
+						name: 'required'
 					},
 					{
-						name: 'required'
+						name: 'postalcode',
+						options: ['NL']
 					}
 				]
 			},
@@ -155,6 +158,10 @@ export default {
 				validation: ['required']
 			}
 		]);
+	},
+	destroy() {
+		this.$uiFields.new('login-details-full');
+		this.$uiFields.new('user-details-full');
 	}
 };
 </script>

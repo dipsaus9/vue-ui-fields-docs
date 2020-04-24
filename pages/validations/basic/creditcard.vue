@@ -1,9 +1,9 @@
 <template>
 	<section>
-		<h1> Validation - Creditcard</h1>
-		<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
+		<h1>Validation - Creditcard</h1>
+		<form novalidate @submit.prevent="submit">
 			<client-only>
-				<uiFields name="validation" class="validation" component="fieldset" />
+				<uiFields name="creditcard" class="creditcard" component="fieldset" />
 			</client-only>
 		</form>
 	</section>
@@ -12,9 +12,9 @@
 <script>
 export default {
 	mounted() {
-		this.$uiFields.new('validation');
+		this.$uiFields.new('creditcard');
 
-		this.$uiFields.setFields('validation', [
+		this.$uiFields.setFields('creditcard', [
 			{
 				name: 'creditcard1',
 				type: 'text',
@@ -37,14 +37,17 @@ export default {
 				label: 'More than one validation',
 				validation: [
 					{
-						name: 'creditcard'
+						name: 'required'
 					},
 					{
-						name: 'required'
+						name: 'creditcard'
 					}
 				]
 			}
 		]);
+	},
+	destroy() {
+		this.$uiFields.new('creditcard');
 	}
 };
 </script>

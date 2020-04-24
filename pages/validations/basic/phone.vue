@@ -1,9 +1,9 @@
 <template>
 	<section>
-		<h1> Validation - Phone</h1>
-		<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
+		<h1>Validation - Phone</h1>
+		<form novalidate @submit.prevent="submit">
 			<client-only>
-				<uiFields name="validation" class="validation" component="fieldset" />
+				<uiFields name="phone" class="phone" component="fieldset" />
 			</client-only>
 		</form>
 	</section>
@@ -12,9 +12,9 @@
 <script>
 export default {
 	mounted() {
-		this.$uiFields.new('validation');
+		this.$uiFields.new('phone');
 
-		this.$uiFields.setFields('validation', [
+		this.$uiFields.setFields('phone', [
 			{
 				name: 'phone1',
 				type: 'text',
@@ -32,15 +32,18 @@ export default {
 				label: 'More than one validation',
 				validation: [
 					{
-						name: 'phone',
-						options: 'nl-NL'
+						name: 'required'
 					},
 					{
-						name: 'required'
+						name: 'phone',
+						options: 'nl-NL'
 					}
 				]
 			}
 		]);
+	},
+	destroy() {
+		this.$uiFields.new('phone');
 	}
 };
 </script>

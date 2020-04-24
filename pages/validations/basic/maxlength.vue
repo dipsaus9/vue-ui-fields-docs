@@ -1,9 +1,9 @@
 <template>
 	<section>
-		<h1> Validation - Maxlength</h1>
-		<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
+		<h1>Validation - Maxlength</h1>
+		<form novalidate @submit.prevent="submit">
 			<client-only>
-				<uiFields name="validation" class="validation" component="fieldset" />
+				<uiFields name="maxlength" class="maxlength" component="fieldset" />
 			</client-only>
 		</form>
 	</section>
@@ -12,9 +12,9 @@
 <script>
 export default {
 	mounted() {
-		this.$uiFields.new('validation');
+		this.$uiFields.new('maxlength');
 
-		this.$uiFields.setFields('validation', [
+		this.$uiFields.setFields('maxlength', [
 			{
 				name: 'maxlength1',
 				type: 'text',
@@ -32,15 +32,18 @@ export default {
 				label: 'More than one validation',
 				validation: [
 					{
-						name: 'maxlength',
-						options: 4
+						name: 'required'
 					},
 					{
-						name: 'required'
+						name: 'maxlength',
+						options: 4
 					}
 				]
 			}
 		]);
+	},
+	destroy() {
+		this.$uiFields.new('maxlength');
 	}
 };
 </script>

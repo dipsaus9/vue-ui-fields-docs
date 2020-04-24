@@ -1,9 +1,9 @@
 <template>
 	<section>
-		<h1> Validation - Required</h1>
-		<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
+		<h1>Validation - Required</h1>
+		<form novalidate @submit.prevent="submit">
 			<client-only>
-				<uiFields name="validation" class="validation" component="fieldset" />
+				<uiFields name="required" class="required" component="fieldset" />
 			</client-only>
 		</form>
 	</section>
@@ -12,9 +12,9 @@
 <script>
 export default {
 	mounted() {
-		this.$uiFields.new('validation');
+		this.$uiFields.new('required');
 
-		this.$uiFields.setFields('validation', [
+		this.$uiFields.setFields('required', [
 			{
 				name: 'required1',
 				type: 'text',
@@ -46,6 +46,9 @@ export default {
 				]
 			}
 		]);
+	},
+	destroy() {
+		this.$uiFields.new('required');
 	}
 };
 </script>

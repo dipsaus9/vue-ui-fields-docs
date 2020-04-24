@@ -1,9 +1,9 @@
 <template>
 	<section>
-		<h1> Validation - Min</h1>
-		<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
+		<h1>Validation - Min</h1>
+		<form novalidate @submit.prevent="submit">
 			<client-only>
-				<uiFields name="validation" class="validation" component="fieldset" />
+				<uiFields name="min" class="min" component="fieldset" />
 			</client-only>
 		</form>
 	</section>
@@ -12,9 +12,9 @@
 <script>
 export default {
 	mounted() {
-		this.$uiFields.new('validation');
+		this.$uiFields.new('min');
 
-		this.$uiFields.setFields('validation', [
+		this.$uiFields.setFields('min', [
 			{
 				name: 'min1',
 				type: 'text',
@@ -32,15 +32,18 @@ export default {
 				label: 'More than one validation',
 				validation: [
 					{
-						name: 'min',
-						options: 5
+						name: 'required'
 					},
 					{
-						name: 'required'
+						name: 'min',
+						options: 5
 					}
 				]
 			}
 		]);
+	},
+	destroy() {
+		this.$uiFields.new('min');
 	}
 };
 </script>

@@ -3,7 +3,7 @@
 		<h1> Example - Signup username </h1>
 		<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
 			<client-only>
-				<uiFields name="login-details" class="login-details" component="fieldset" />
+				<uiFields name="login-details-username" class="login-details-username" component="fieldset" />
 			</client-only>
 		</form>
 	</section>
@@ -12,14 +12,17 @@
 <script>
 export default {
 	mounted() {
-		this.$uiFields.new('login-details');
+		this.$uiFields.new('login-details-username');
 
-		this.$uiFields.setFields('login-details', [
+		this.$uiFields.setFields('login-details-username', [
 			{
 				name: 'username',
 				type: 'text',
 				label: 'Username',
 				validation: [
+					{
+						name: 'required'
+					},
 					{
 						name: 'minlength',
 						options: 8
@@ -27,10 +30,7 @@ export default {
 					{
 						name: 'maxlength',
 						options: 30
-					},
-					{
-						name: 'required'
-					},
+					}
 				]
 			},
 			{
@@ -45,7 +45,7 @@ export default {
 					{
 						name: 'maxlength',
 						options: 20
-					},
+					}
 				]
 			},
 			{
@@ -54,15 +54,18 @@ export default {
 				label: 'Password 2',
 				validation: [
 					{
-						name: 'equalTo',
-						options: () => this.$uiFields.getValue('validation', 'password1')
+						name: 'required'
 					},
 					{
-						name: 'required'
+						name: 'equalTo',
+						options: () => this.$uiFields.getValue('validation', 'password1')
 					}
 				]
 			}
 		]);
+	},
+	destroy() {
+		this.$uiFields.new('login-details-username');
 	}
 };
 </script>
