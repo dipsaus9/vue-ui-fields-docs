@@ -11,7 +11,4 @@ cp ./config/netlify_headers ./static/_headers
 # node env
 export NODE_ENV=production
 
-# check if the node version matches the one in the package.json
-check-node-version --package
-
-nuxt generate --quiet --fail-on-error
+nuxt generate
