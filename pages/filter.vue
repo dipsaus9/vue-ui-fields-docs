@@ -116,7 +116,7 @@ export default {
 					{
 						name: 'red',
 						label: 'Rood',
-						value: 'red'
+						value: 'red',
 					},
 					{
 						name: 'yellow',

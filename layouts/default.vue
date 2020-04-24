@@ -1,38 +1,64 @@
 <template>
 	<div class="layout layout-default">
-		<div class="header">
-			<nav class="nav">
-				<nuxt-link class="nav__item" to="/">
-					Home
-				</nuxt-link>
-				<nuxt-link class="nav__item" to="/filter">
-					Filter
-				</nuxt-link>
-			</nav>
+		<div class="sidebar">
+			<div>
+				<h2>Basics</h2>
+				<ul class="sidebar__links">
+					<li v-for="(page, index) in basicPages" :key="index" class="sidebar__item">
+						<nuxt-link class="sidebar__link" :to="`/validations/basic/${page}`">
+							{{ page }}
+						</nuxt-link>
+					</li>
+				</ul>
+			</div>
+			<div>
+				<h2>Complex</h2>
+				<ul class="sidebar__links">
+					<li v-for="(page, index) in complexPages" :key="index" class="sidebar__item">
+						<nuxt-link class="sidebar__link" :to="`/validations/complex/${page}`">
+							{{ page }}
+						</nuxt-link>
+					</li>
+				</ul>
+			</div>
 		</div>
-		<nuxt />
+		<div class="page">
+			<nuxt />
+		</div>
 	</div>
 </template>
 
-<style lang="scss">
+<script>
+export default {
+	data() {
+		return {
+			basicPages: [
+				'creditcard',
+				'date',
+				'email',
+				'equalto',
+				'max',
+				'maxlength',
+				'min',
+				'minlength',
+				'notequalto',
+				'number',
+				'phone',
+				'postalcode',
+				'required',
+				'text',
+				'url',
+				'vat',
+			],
+			complexPages: [
+				'signup-email',
+				'signup-username',
+				'signup-full'
+			],
+		};
+	}
+};
+</script>
 
-.header {
-	background-color: #DDDDDD;
-	width: 100;
-	margin-bottom: 2rem;
-}
-.nav {
-	display: flex;
-	width: auto;
-	&__item {
-		padding: 1rem;
-		text-decoration: none;
-		color: black;
-		font-weight: 600;
-		text-transform: uppercase;
-	}
-	&__item:hover {
-		background-color: rgb(185, 185, 185)
-	}
-}
+<style lang="scss">
 </style>
