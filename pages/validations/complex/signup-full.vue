@@ -77,6 +77,9 @@ export default {
 					},
 					{
 						name: 'required'
+					},
+					{
+						name: 'text'
 					}
 				]
 			},
@@ -143,21 +146,13 @@ export default {
 				name: 'address',
 				type: 'text',
 				label: 'Address',
-				validation: [
-					{
-						name: 'required'
-					}
-				]
+				validation: ['required']
 			},
 			{
 				name: 'city',
 				type: 'text',
 				label: 'City',
-				validation: [
-					{
-						name: 'required'
-					}
-				]
+				validation: ['required']
 			}
 		]);
 	}

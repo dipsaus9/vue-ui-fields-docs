@@ -48,53 +48,13 @@ export default {
 				type: 'password',
 				label: 'Password 2',
 				validation: [
-					// {
-					// 	name: 'creditcard'
-					// },
-					// {
-					// 	name: 'date'
-					// },
-					// {
-					// 	name: 'email'
-					// },
 					{
 						name: 'equalTo',
 						options: () => this.$uiFields.getValue('validation', 'password1')
 					},
-					// {
-					// 	name: 'max',
-					// 	options: 9999999999
-					// },
-					// {
-					// 	name: 'maxlength',
-					// 	options: 10
-					// },
-					// {
-					// 	name: 'min',
-					// 	options: 999999999
-					// },
-					// {
-					// 	name: 'minlength',
-					// 	options: 10
-					// },
-					// {
-					// 	name: 'notEqualTo',
-					// 	options: () => this.$uiFields.getValue('validation', 'value1')
-					// }
-					// {
-					// 	name: 'postalcode',
-					// 	options: ['NL']
-					// },
 					{
 						name: 'required'
 					},
-					// {
-					// 	name: 'url'
-					// },
-					// {
-					// 	name: 'vat'
-					// }
-
 				]
 			}
 		]);
