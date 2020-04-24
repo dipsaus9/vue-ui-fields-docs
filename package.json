@@ -17,9 +17,10 @@
 		"stylelint:fix": "stylelint '**/*.vue' '**/*.scss' --fix"
 	},
 	"dependencies": {
+		"@matise/ui-fields": "^4.0.20",
 		"@nuxtjs/axios": "^5.9.5",
-		"nuxt": "^2.12.0",
-		"@nuxtjs/style-resources": "^1.0.0"
+		"@nuxtjs/style-resources": "^1.0.0",
+		"nuxt": "^2.12.0"
 	},
 	"devDependencies": {
 		"@nuxtjs/google-analytics": "^2.2.3",
