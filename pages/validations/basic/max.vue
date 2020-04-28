@@ -16,13 +16,18 @@ export default {
 
 		this.$uiFields.setFields('max', [
 			{
+				name: 'value1',
+				type: 'text',
+				label: 'Max value (Number)'
+			},
+			{
 				name: 'max1',
 				type: 'text',
 				label: 'Validation as object in array',
 				validation: [
 					{
 						name: 'max',
-						options: 8
+						options: () => this.$uiFields.getValue('max', 'value1')
 					}
 				]
 			},
@@ -36,7 +41,7 @@ export default {
 					},
 					{
 						name: 'max',
-						options: 8
+						options: 5
 					}
 				]
 			}
@@ -47,7 +52,3 @@ export default {
 	}
 };
 </script>
-
-<style lang="scss">
-
-</style>

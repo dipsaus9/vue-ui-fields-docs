@@ -16,13 +16,18 @@ export default {
 
 		this.$uiFields.setFields('minlength', [
 			{
+				name: 'value1',
+				type: 'text',
+				label: 'Min length of value (Number)'
+			},
+			{
 				name: 'minlength1',
 				type: 'text',
 				label: 'Validation as object in array',
 				validation: [
 					{
 						name: 'minlength',
-						options: 5
+						options: () => this.$uiFields.getValue('minlength', 'value1')
 					}
 				]
 			},
@@ -36,7 +41,7 @@ export default {
 					},
 					{
 						name: 'minlength',
-						options: 5
+						options: () => this.$uiFields.getValue('minlength', 'value1')
 					}
 				]
 			}
@@ -47,7 +52,3 @@ export default {
 	}
 };
 </script>
-
-<style lang="scss">
-
-</style>

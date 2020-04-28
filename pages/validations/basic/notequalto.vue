@@ -27,7 +27,7 @@ export default {
 				validation: [
 					{
 						name: 'notEqualTo',
-						options: () => this.$uiFields.getValue('validation', 'value1')
+						options: () => this.$uiFields.getValue('notequalto', 'value1')
 					}
 				]
 			},
@@ -41,7 +41,7 @@ export default {
 					},
 					{
 						name: 'notEqualTo',
-						options: () => this.$uiFields.getValue('validation', 'value1')
+						options: () => this.$uiFields.getValue('notequalto', 'value1')
 					}
 				]
 			}
@@ -52,7 +52,3 @@ export default {
 	}
 };
 </script>
-
-<style lang="scss">
-
-</style>

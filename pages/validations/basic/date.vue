@@ -19,12 +19,14 @@ export default {
 				name: 'date1',
 				type: 'text',
 				label: 'Validation in array',
+				placeholder: 'DD/MM/YYYY',
 				validation: ['date']
 			},
 			{
 				name: 'date2',
 				type: 'text',
 				label: 'Validation as object in array',
+				placeholder: 'DD/MM/YYYY',
 				validation: [
 					{
 						name: 'date'
@@ -35,6 +37,7 @@ export default {
 				name: 'date3',
 				type: 'text',
 				label: 'More than one validation',
+				placeholder: 'DD/MM/YYYY',
 				validation: [
 					{
 						name: 'required'
@@ -51,7 +54,3 @@ export default {
 	}
 };
 </script>
-
-<style lang="scss">
-
-</style>

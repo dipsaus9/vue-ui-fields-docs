@@ -27,7 +27,7 @@ export default {
 				validation: [
 					{
 						name: 'equalTo',
-						options: () => this.$uiFields.getValue('validation', 'value1')
+						options: () => this.$uiFields.getValue('equalto', 'value1')
 					}
 				]
 			},
@@ -37,18 +37,18 @@ export default {
 				label: 'More than one validation',
 				validation: [
 					{
-						name: 'required'
+						name: 'equalTo',
+						options: () => this.$uiFields.getValue('equalto', 'value1')
 					},
 					{
-						name: 'equalTo',
-						options: () => this.$uiFields.getValue('validation', 'value1')
+						name: 'number'
 					}
 				]
 			}
 		]);
 	},
 	destroy() {
-		this.$uiFields.new('equalto');
+		this.$uiFields.getValue('equalto');
 	}
 };
 </script>

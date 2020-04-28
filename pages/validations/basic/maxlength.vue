@@ -16,13 +16,18 @@ export default {
 
 		this.$uiFields.setFields('maxlength', [
 			{
+				name: 'value1',
+				type: 'text',
+				label: 'Max length of value (Number)'
+			},
+			{
 				name: 'maxlength1',
 				type: 'text',
 				label: 'Validation as object in array',
 				validation: [
 					{
 						name: 'maxlength',
-						options: 4
+						options: () => this.$uiFields.getValue('maxlength', 'value1')
 					}
 				]
 			},
@@ -36,7 +41,7 @@ export default {
 					},
 					{
 						name: 'maxlength',
-						options: 4
+						options: () => this.$uiFields.getValue('maxlength', 'value1')
 					}
 				]
 			}
@@ -47,7 +52,3 @@ export default {
 	}
 };
 </script>
-
-<style lang="scss">
-
-</style>
