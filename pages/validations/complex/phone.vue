@@ -1,7 +1,7 @@
 <template>
 	<section>
 		<h1> Example - Phone </h1>
-		<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
+		<form novalidate @submit.prevent="submit">
 			<client-only>
 				<uiFields name="validation" class="validation" component="fieldset" />
 			</client-only>

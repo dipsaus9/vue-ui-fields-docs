@@ -1,7 +1,7 @@
 <template>
 	<section>
 		<h1> Example - Signup username </h1>
-		<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
+		<form novalidate @submit.prevent="submit">
 			<client-only>
 				<uiFields name="login-details-username" class="login-details-username" component="fieldset" />
 			</client-only>
