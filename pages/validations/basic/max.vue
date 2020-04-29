@@ -59,10 +59,11 @@ export default {
 	},
 	methods: {
 		click() {
-			// this.$uiFields.unsubscribe('euqalto');
-			// this.$uiFields.unsubscribeField('euqalto', 'value2');
-			// this.$uiFields.unsubscribeFields('max');
+			this.$uiFields.unsubscribeFields('max');
 		}
+	},
+	destroy() {
+		this.$uiFields.unsubscribeFields('max');
 	}
 };
 </script>
