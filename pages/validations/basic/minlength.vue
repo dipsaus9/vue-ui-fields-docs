@@ -18,7 +18,9 @@ export default {
 			{
 				name: 'value1',
 				type: 'text',
-				label: 'Min length of value (Number)'
+				label: 'Min length of value (Number)',
+				placeholder: '5',
+				disabled: true
 			},
 			{
 				name: 'minlength1',
@@ -27,7 +29,7 @@ export default {
 				validation: [
 					{
 						name: 'minlength',
-						options: () => this.$uiFields.getValue('minlength', 'value1')
+						options: 5
 					}
 				]
 			},
@@ -41,7 +43,7 @@ export default {
 					},
 					{
 						name: 'minlength',
-						options: () => this.$uiFields.getValue('minlength', 'value1')
+						options: 5
 					}
 				]
 			}

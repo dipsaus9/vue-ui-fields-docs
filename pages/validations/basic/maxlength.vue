@@ -18,7 +18,9 @@ export default {
 			{
 				name: 'value1',
 				type: 'text',
-				label: 'Max length of value (Number)'
+				label: 'Max length of value (Number)',
+				placeholder: '5',
+				disabled: true
 			},
 			{
 				name: 'maxlength1',
@@ -27,7 +29,7 @@ export default {
 				validation: [
 					{
 						name: 'maxlength',
-						options: () => this.$uiFields.getValue('maxlength', 'value1')
+						options: 5
 					}
 				]
 			},
@@ -41,7 +43,7 @@ export default {
 					},
 					{
 						name: 'maxlength',
-						options: () => this.$uiFields.getValue('maxlength', 'value1')
+						options: 5
 					}
 				]
 			}

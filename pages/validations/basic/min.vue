@@ -18,7 +18,9 @@ export default {
 			{
 				name: 'value1',
 				type: 'text',
-				label: 'Min value (Number)'
+				label: 'Min value (Number)',
+				placeholder: '5',
+				disabled: true
 			},
 			{
 				name: 'min1',
@@ -27,7 +29,7 @@ export default {
 				validation: [
 					{
 						name: 'min',
-						options: () => this.$uiFields.getValue('min', 'value1')
+						options: 5
 					}
 				]
 			},
@@ -41,7 +43,7 @@ export default {
 					},
 					{
 						name: 'min',
-						options: () => this.$uiFields.getValue('min', 'value1')
+						options: 5
 					}
 				]
 			}

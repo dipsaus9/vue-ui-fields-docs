@@ -6,6 +6,9 @@
 				<uiFields name="equalto" class="equalto" component="fieldset" />
 			</client-only>
 		</form>
+		<button @click="click">
+			click
+		</button>
 	</section>
 </template>
 
@@ -18,7 +21,10 @@ export default {
 			{
 				name: 'value1',
 				type: 'text',
-				label: 'Value to compare with'
+				label: 'Value to compare with',
+				placeholder: 'Compare',
+				disabled: true,
+				value: 'Compare'
 			},
 			{
 				name: 'value2',
@@ -41,11 +47,23 @@ export default {
 						options: () => this.$uiFields.getValue('equalto', 'value1')
 					},
 					{
-						name: 'number'
+						name: 'text'
 					}
 				]
 			}
 		]);
+
+		this.$uiFields.subscribeField('equalto', 'value2', () => { console.log('equalto listener 1 aangemaakt');});
+		this.$uiFields.subscribeField('equalto', 'value3', () => { console.log('equalto listener 2 aangemaakt');});
+		this.$uiFields.subscribe('equalto', () => { console.log('form listener 3 aangemaakt');});
+	},
+	methods: {
+		click() {
+			this.$uiFields.unsubscribeFields('equalto');
+		}
+	},
+	destroy() {
+		this.$uiFields.unsubscribeFields('equalto');
 	}
 };
 </script>

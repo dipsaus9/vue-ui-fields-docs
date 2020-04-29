@@ -6,6 +6,9 @@
 				<uiFields name="max" class="max" component="fieldset" />
 			</client-only>
 		</form>
+		<button @click="click">
+			click
+		</button>
 	</section>
 </template>
 
@@ -18,7 +21,9 @@ export default {
 			{
 				name: 'value1',
 				type: 'text',
-				label: 'Max value (Number)'
+				label: 'Max value (Number)',
+				placeholder: '5',
+				disabled: true
 			},
 			{
 				name: 'max1',
@@ -27,7 +32,7 @@ export default {
 				validation: [
 					{
 						name: 'max',
-						options: () => this.$uiFields.getValue('max', 'value1')
+						options: 5
 					}
 				]
 			},
@@ -46,6 +51,18 @@ export default {
 				]
 			}
 		]);
+
+		this.$uiFields.subscribeField('max', 'max1', () => { console.log('max listener 1 aangemaakt');});
+		this.$uiFields.subscribeField('max', 'max2', () => { console.log('max listener 2 aangemaakt');});
+		this.$uiFields.subscribe('max', () => { console.log('form listener 3 aangemaakt');});
+
+	},
+	methods: {
+		click() {
+			// this.$uiFields.unsubscribe('euqalto');
+			// this.$uiFields.unsubscribeField('euqalto', 'value2');
+			// this.$uiFields.unsubscribeFields('max');
+		}
 	}
 };
 </script>
