@@ -46,9 +46,6 @@ export default {
 				]
 			}
 		]);
-	},
-	destroy() {
-		this.$uiFields.new('notequalto');
 	}
 };
 </script>

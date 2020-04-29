@@ -48,9 +48,6 @@ export default {
 				]
 			}
 		]);
-	},
-	destroy() {
-		this.$uiFields.new('date');
 	}
 };
 </script>

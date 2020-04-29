@@ -45,9 +45,6 @@ export default {
 				]
 			}
 		]);
-	},
-	destroy() {
-		this.$uiFields.new('email');
 	}
 };
 </script>

@@ -41,9 +41,6 @@ export default {
 				]
 			}
 		]);
-	},
-	destroy() {
-		this.$uiFields.new('vat');
 	}
 };
 </script>

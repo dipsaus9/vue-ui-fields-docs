@@ -158,10 +158,6 @@ export default {
 				validation: ['required']
 			}
 		]);
-	},
-	destroy() {
-		this.$uiFields.new('login-details-full');
-		this.$uiFields.new('user-details-full');
 	}
 };
 </script>

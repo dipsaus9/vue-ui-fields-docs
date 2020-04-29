@@ -63,9 +63,6 @@ export default {
 				]
 			}
 		]);
-	},
-	destroy() {
-		this.$uiFields.new('login-details-username');
 	}
 };
 </script>

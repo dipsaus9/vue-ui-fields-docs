@@ -46,9 +46,6 @@ export default {
 				]
 			}
 		]);
-	},
-	destroy() {
-		this.$uiFields.getValue('equalto');
 	}
 };
 </script>
