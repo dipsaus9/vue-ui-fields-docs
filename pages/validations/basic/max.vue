@@ -6,8 +6,8 @@
 				<uiFields name="max" class="max" component="fieldset" />
 			</client-only>
 		</form>
-		<button @click="click">
-			click
+		<button @click="unsubscribe">
+			unsubscribe
 		</button>
 	</section>
 </template>
@@ -51,19 +51,14 @@ export default {
 				]
 			}
 		]);
-
-		this.$uiFields.subscribeField('max', 'max1', () => { console.log('max listener 1 aangemaakt');});
-		this.$uiFields.subscribeField('max', 'max2', () => { console.log('max listener 2 aangemaakt');});
-		this.$uiFields.subscribe('max', () => { console.log('form listener 3 aangemaakt');});
-
+		this.$uiFields.subscribeField('max', 'max1', () => { return; });
+		this.$uiFields.subscribeField('max', 'max2', () => { return; });
+		this.$uiFields.subscribe('max', () => { return; });
 	},
 	methods: {
-		click() {
-			this.$uiFields.unsubscribeFields('max');
+		unsubscribe() {
+			this.$uiFields.delete('max');
 		}
-	},
-	destroy() {
-		this.$uiFields.unsubscribeFields('max');
 	}
 };
 </script>

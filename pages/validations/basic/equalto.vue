@@ -6,8 +6,8 @@
 				<uiFields name="equalto" class="equalto" component="fieldset" />
 			</client-only>
 		</form>
-		<button @click="click">
-			click
+		<button @click="unsubscribe">
+			unsubscribe
 		</button>
 	</section>
 </template>
@@ -52,18 +52,14 @@ export default {
 				]
 			}
 		]);
-
-		this.$uiFields.subscribeField('equalto', 'value2', () => { console.log('equalto listener 1 aangemaakt');});
-		this.$uiFields.subscribeField('equalto', 'value3', () => { console.log('equalto listener 2 aangemaakt');});
-		this.$uiFields.subscribe('equalto', () => { console.log('form listener 3 aangemaakt');});
+		this.$uiFields.subscribeField('equalto', 'value2', () => { return; });
+		this.$uiFields.subscribeField('equalto', 'value3', () => { return; });
+		this.$uiFields.subscribe('equalto', () => { return; });
 	},
 	methods: {
-		click() {
-			this.$uiFields.unsubscribeFields('equalto');
+		unsubscribe() {
+			this.$uiFields.delete('equalto');
 		}
-	},
-	destroy() {
-		this.$uiFields.unsubscribeFields('equalto');
 	}
 };
 </script>
