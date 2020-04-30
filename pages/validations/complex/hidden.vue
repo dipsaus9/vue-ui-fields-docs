@@ -7,9 +7,6 @@
 				<uiFields name="deliver-address" class="deliver-address" component="fieldset" />
 			</client-only>
 		</form>
-		<button @click="toggle">
-			Toggle
-		</button>
 	</div>
 </template>
 
@@ -24,22 +21,48 @@ export default {
 				name: 'username',
 				type: 'text',
 				label: 'Username',
+				persistent: false
 			}
 		]);
 		this.$uiFields.setFields('deliver-address', [
 			{
 				name: 'address',
 				type: 'text',
-				label: 'Adress'
+				label: 'Adress',
+				persistent: false
+			},
+			{
+				name: 'address2',
+				type: 'text',
+				label: 'Adress 2',
+				persistent: false
 			}
 		]);
 
-	},
-	methods: {
-		toggle() {
-			this.$uiFields.conditionToggle('checkout', 'username', () => this.$uiFields.getValue('checkout', 'username'), 'deliver-address', 'address');
-		}
-	}
 
+		this.$uiFields.setCondition(
+			'checkout',
+			'username',
+			'hallo',
+			'deliver-address',
+			'address'
+		);
+
+		this.$uiFields.setCondition(
+			'checkout',
+			'username',
+			'test',
+			'deliver-address',
+			'address2'
+		);
+
+		// this.$uiFields.setConditions(
+		// 	'checkout',
+		// 	'username',
+		// 	'test',
+		// 	['deliver-address'],
+		// 	['address2']
+		// );
+	}
 };
 </script>
