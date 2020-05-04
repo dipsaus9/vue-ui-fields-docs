@@ -1,6 +1,19 @@
 <template>
 	<section>
-		<h1>Validation - Url</h1>
+		<div class="intro">
+			<h1 class="intro__title">
+				Url
+			</h1>
+			<h2 class="intro__subtitle">
+				Validation
+			</h2>
+			<p class="intro__info">
+				This validation checks if the value is an valid url. If your input not contains (http(s)) or a dot (.) it gives an error.
+			</p>
+			<p class="intro__usage">
+				You can use this like this:
+			</p>
+		</div>
 		<form novalidate @submit.prevent="submit">
 			<client-only>
 				<uiFields name="url" class="url" component="fieldset" />

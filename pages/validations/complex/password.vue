@@ -1,6 +1,15 @@
 <template>
 	<section>
-		<h1>Example - Password </h1>
+		<div class="intro">
+			<h1 class="intro__title">
+				Password
+			</h1>
+			<h2 class="intro__subtitle">
+				Validation
+			</h2>
+			<p class="intro__info">
+			</p>
+		</div>
 		<form novalidate @submit.prevent="submit">
 			<client-only>
 				<uiFields name="password" class="password" component="fieldset" />

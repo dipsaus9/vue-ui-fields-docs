@@ -1,6 +1,20 @@
 <template>
 	<section>
-		<h1>Validation - Max</h1>
+		<div class="intro">
+			<h1 class="intro__title">
+				Max
+			</h1>
+			<h2 class="intro__subtitle">
+				Validation
+			</h2>
+			<p class="intro__info">
+				This validation checks if the in put is a number and if this number is bigger than the number you want to.
+				So if there's a number bigger than 5, 6 is not valid.
+			</p>
+			<p class="intro__usage">
+				You can use this like this:
+			</p>
+		</div>
 		<form novalidate @submit.prevent="submit">
 			<client-only>
 				<uiFields name="max" class="max" component="fieldset" />

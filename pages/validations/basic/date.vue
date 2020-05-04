@@ -1,6 +1,20 @@
 <template>
 	<section>
-		<h1>Validation - Date</h1>
+		<div class="intro">
+			<h1 class="intro__title">
+				Date (In progress)
+			</h1>
+			<h2 class="intro__subtitle">
+				Validation
+			</h2>
+			<p class="intro__info">
+				If you want to validate a date in an input field you can use the date validation.
+				The validation checks if the date has enough characters and if it is a number.
+			</p>
+			<p class="intro__usage">
+				You can use this like this:
+			</p>
+		</div>
 		<form novalidate @submit.prevent="submit">
 			<client-only>
 				<uiFields name="date" class="date" component="fieldset" />

@@ -83,14 +83,15 @@ export default {
 			'checkout',
 			'username',
 			'guus',
-			'deliver-address'
+			'deliver-address',
+			['address4','address5', 'address6']
 		);
 	},
 	methods: {
 		removeCondition() {
 			this.$uiFields.removeCondition(
 				'deliver-address',
-				['address4','address5', 'address6']
+				'address4'
 			);
 		},
 		removeConditions() {

@@ -1,6 +1,20 @@
 <template>
 	<section>
-		<h1>Validation - Min</h1>
+		<div class="intro">
+			<h1 class="intro__title">
+				Min
+			</h1>
+			<h2 class="intro__subtitle">
+				Validation
+			</h2>
+			<p class="intro__info">
+				This validation checks if the in put is a number and if this number is smaller than the number you want to.
+				So if there's a number smaller than 5, 4 is not valid.
+			</p>
+			<p class="intro__usage">
+				You can use this like this:
+			</p>
+		</div>
 		<form novalidate @submit.prevent="submit">
 			<client-only>
 				<uiFields name="min" class="min" component="fieldset" />

@@ -1,6 +1,19 @@
 <template>
 	<section>
-		<h1>Validation - Required</h1>
+		<div class="intro">
+			<h1 class="intro__title">
+				Required
+			</h1>
+			<h2 class="intro__subtitle">
+				Validation
+			</h2>
+			<p class="intro__info">
+				This validation checks if the input field is not empty.If it is empty and there's no valid value you see an error.
+			</p>
+			<p class="intro__usage">
+				You can use this like this:
+			</p>
+		</div>
 		<form novalidate @submit.prevent="submit">
 			<client-only>
 				<uiFields name="required" class="required" component="fieldset" />
