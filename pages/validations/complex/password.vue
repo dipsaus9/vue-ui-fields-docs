@@ -6,6 +6,9 @@
 				<uiFields name="password" class="password" component="fieldset" />
 			</client-only>
 		</form>
+		<button @click="getConditions">
+			Get conditions
+		</button>
 	</section>
 </template>
 
@@ -45,6 +48,11 @@ export default {
 				]
 			}
 		]);
+	},
+	methods: {
+		getConditions() {
+			this.$uiFields.getCondition();
+		}
 	}
 };
 </script>

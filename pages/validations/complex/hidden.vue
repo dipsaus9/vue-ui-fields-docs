@@ -7,6 +7,12 @@
 				<uiFields name="deliver-address" class="deliver-address" component="fieldset" />
 			</client-only>
 		</form>
+		<button @click="removeCondition">
+			remove condition
+		</button>
+		<button @click="removeConditions">
+			remove conditions
+		</button>
 	</div>
 </template>
 
@@ -20,22 +26,39 @@ export default {
 			{
 				name: 'username',
 				type: 'text',
-				label: 'Username',
-				persistent: false
+				label: 'Username'
 			}
 		]);
 		this.$uiFields.setFields('deliver-address', [
 			{
 				name: 'address',
 				type: 'text',
-				label: 'Adress',
-				persistent: false
+				label: 'Adress'
 			},
 			{
 				name: 'address2',
 				type: 'text',
-				label: 'Adress 2',
-				persistent: false
+				label: 'Adress 2'
+			},
+			{
+				name: 'address3',
+				type: 'text',
+				label: 'Adress 3'
+			},
+			{
+				name: 'address4',
+				type: 'text',
+				label: 'Adress 4'
+			},
+			{
+				name: 'address5',
+				type: 'text',
+				label: 'Adress 5'
+			},
+			{
+				name: 'address6',
+				type: 'text',
+				label: 'Adress 6'
 			}
 		]);
 
@@ -53,16 +76,28 @@ export default {
 			'username',
 			'test',
 			'deliver-address',
-			'address2'
+			['address2','address3']
 		);
 
-		// this.$uiFields.setConditions(
-		// 	'checkout',
-		// 	'username',
-		// 	'test',
-		// 	['deliver-address'],
-		// 	['address2']
-		// );
+		this.$uiFields.setCondition(
+			'checkout',
+			'username',
+			'guus',
+			'deliver-address'
+		);
+	},
+	methods: {
+		removeCondition() {
+			this.$uiFields.removeCondition(
+				'deliver-address',
+				['address4','address5', 'address6']
+			);
+		},
+		removeConditions() {
+			this.$uiFields.removeCondition(
+				'deliver-address'
+			);
+		}
 	}
 };
 </script>
