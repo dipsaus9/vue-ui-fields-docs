@@ -1,12 +1,3 @@
-<template>
-	<section>
-	</section>
+<template layout="default">
+	<nuxt />
 </template>
-
-<script>
-
-</script>
-
-<style lang="scss">
-
-</style>

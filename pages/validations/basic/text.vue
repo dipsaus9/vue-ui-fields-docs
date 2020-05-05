@@ -1,9 +1,22 @@
 <template>
 	<section>
-		<h1> Validation - Text</h1>
-		<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
+		<div class="intro">
+			<h1 class="intro__title">
+				Text
+			</h1>
+			<h2 class="intro__subtitle">
+				Validation
+			</h2>
+			<p class="intro__info">
+				This validation checks if your input value contains only alphabetical characters. So if there's a number in the value it gives an error.
+			</p>
+			<p class="intro__usage">
+				You can use this like this:
+			</p>
+		</div>
+		<form novalidate @submit.prevent="submit">
 			<client-only>
-				<uiFields name="validation" class="validation" component="fieldset" />
+				<uiFields name="text" class="text" component="fieldset" />
 			</client-only>
 		</form>
 	</section>
@@ -12,9 +25,9 @@
 <script>
 export default {
 	mounted() {
-		this.$uiFields.new('validation');
+		this.$uiFields.new('text');
 
-		this.$uiFields.setFields('validation', [
+		this.$uiFields.setFields('text', [
 			{
 				name: 'text1',
 				type: 'text',
@@ -37,10 +50,10 @@ export default {
 				label: 'More than one validation',
 				validation: [
 					{
-						name: 'text'
+						name: 'required'
 					},
 					{
-						name: 'required'
+						name: 'text'
 					}
 				]
 			}
@@ -48,7 +61,3 @@ export default {
 	}
 };
 </script>
-
-<style lang="scss">
-
-</style>

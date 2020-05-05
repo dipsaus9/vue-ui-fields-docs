@@ -2,7 +2,7 @@
 	<div>
 		<h1>Filter page</h1>
 
-		<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
+		<form novalidate @submit.prevent="submit">
 			<client-only>
 				<uiFields name="filter" class="filter" component="fieldset" />
 				<uiFields name="sort" class="sort" component="fieldset" />
@@ -212,7 +212,7 @@ export default {
 	}
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 @import '~tools';
 
 * {

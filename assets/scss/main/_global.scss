@@ -6,10 +6,12 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	font-size: 16px;
-	color: #2c3e50;
+	color: black;
 	margin: 0;
 	padding: 0;
 }
+
+
 
 a {
 	text-decoration: none;
@@ -18,9 +20,15 @@ li {
 	list-style: none;
 }
 
+form {
+	padding: 2rem;
+	border-bottom: 2px solid #eaecef;
+}
+
 fieldset {
 	border: none;
-	margin-bottom: 1.5rem;
+	// margin-bottom: 1.5rem;
+	padding: 0;
 }
 
 .layout {
@@ -53,7 +61,6 @@ fieldset {
 .page {
 	width: 80%;
 	margin: 0;
-	padding: 2rem;
 }
 
 .ui-fields {
@@ -79,5 +86,27 @@ fieldset {
 		line-height: 1.25rem;
 		color: tomato;
 		font-weight: 600;
+	}
+}
+
+.intro {
+	padding: 2rem;
+	width: 100%;
+	border-bottom: 2px solid #eaecef;
+	&__title {
+		margin: 0.5rem 0;
+		font-size: 2rem;
+		border-bottom: 1px solid black;
+		padding: 0 0 .5rem;
+	}
+	&__subtitle {
+		margin: 0.5rem 0;
+		font-size: 1.55rem;
+	}
+	&__info {
+
+	}
+	&__usage {
+		
 	}
 }

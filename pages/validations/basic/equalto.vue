@@ -1,24 +1,44 @@
 <template>
 	<section>
-		<h1> Validation - Equal to</h1>
-		<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
+		<div class="intro">
+			<h1 class="intro__title">
+				Equal to
+			</h1>
+			<h2 class="intro__subtitle">
+				Validation
+			</h2>
+			<p class="intro__info">
+				If you want to check if a value of another field is equal to some other field you can use this validation.
+				If field A has a value of 'hello' and field B has value of 'hey', this validation gives an error
+			</p>
+			<p class="intro__usage">
+				You can use this like this:
+			</p>
+		</div>
+		<form novalidate @submit.prevent="submit">
 			<client-only>
-				<uiFields name="validation" class="validation" component="fieldset" />
+				<uiFields name="equalto" class="equalto" component="fieldset" />
 			</client-only>
 		</form>
+		<button @click="unsubscribe">
+			unsubscribe
+		</button>
 	</section>
 </template>
 
 <script>
 export default {
 	mounted() {
-		this.$uiFields.new('validation');
+		this.$uiFields.new('equalto');
 
-		this.$uiFields.setFields('validation', [
+		this.$uiFields.setFields('equalto', [
 			{
 				name: 'value1',
 				type: 'text',
-				label: 'Value to compare with'
+				label: 'Value to compare with',
+				placeholder: 'Compare',
+				disabled: true,
+				value: 'Compare'
 			},
 			{
 				name: 'value2',
@@ -27,7 +47,7 @@ export default {
 				validation: [
 					{
 						name: 'equalTo',
-						options: () => this.$uiFields.getValue('validation', 'value1')
+						options: () => this.$uiFields.getValue('equalto', 'value1')
 					}
 				]
 			},
@@ -38,18 +58,22 @@ export default {
 				validation: [
 					{
 						name: 'equalTo',
-						options: () => this.$uiFields.getValue('validation', 'value1')
+						options: () => this.$uiFields.getValue('equalto', 'value1')
 					},
 					{
-						name: 'required'
+						name: 'text'
 					}
 				]
 			}
 		]);
+		this.$uiFields.subscribeField('equalto', 'value2', () => { return; });
+		this.$uiFields.subscribeField('equalto', 'value3', () => { return; });
+		this.$uiFields.subscribe('equalto', () => { return; });
+	},
+	methods: {
+		unsubscribe() {
+			this.$uiFields.delete('equalto');
+		}
 	}
 };
 </script>
-
-<style lang="scss">
-
-</style>

@@ -1,9 +1,22 @@
 <template>
 	<section>
-		<h1> Validation - Url</h1>
-		<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
+		<div class="intro">
+			<h1 class="intro__title">
+				Url
+			</h1>
+			<h2 class="intro__subtitle">
+				Validation
+			</h2>
+			<p class="intro__info">
+				This validation checks if the value is an valid url. If your input not contains (http(s)) or a dot (.) it gives an error.
+			</p>
+			<p class="intro__usage">
+				You can use this like this:
+			</p>
+		</div>
+		<form novalidate @submit.prevent="submit">
 			<client-only>
-				<uiFields name="validation" class="validation" component="fieldset" />
+				<uiFields name="url" class="url" component="fieldset" />
 			</client-only>
 		</form>
 	</section>
@@ -12,9 +25,9 @@
 <script>
 export default {
 	mounted() {
-		this.$uiFields.new('validation');
+		this.$uiFields.new('url');
 
-		this.$uiFields.setFields('validation', [
+		this.$uiFields.setFields('url', [
 			{
 				name: 'url1',
 				type: 'text',
@@ -37,10 +50,10 @@ export default {
 				label: 'More than one validation',
 				validation: [
 					{
-						name: 'url'
+						name: 'required'
 					},
 					{
-						name: 'required'
+						name: 'url'
 					}
 				]
 			}
@@ -48,7 +61,3 @@ export default {
 	}
 };
 </script>
-
-<style lang="scss">
-
-</style>

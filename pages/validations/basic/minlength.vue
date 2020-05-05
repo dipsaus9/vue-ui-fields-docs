@@ -1,9 +1,23 @@
 <template>
 	<section>
-		<h1> Validation - Minlength</h1>
-		<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
+		<div class="intro">
+			<h1 class="intro__title">
+				Min length
+			</h1>
+			<h2 class="intro__subtitle">
+				Validation
+			</h2>
+			<p class="intro__info">
+				This validation checks the input length. If you want the minimum input length
+				of 8 than this validation gives an error when your input value contains less than 8 characters.
+			</p>
+			<p class="intro__usage">
+				You can use this like this:
+			</p>
+		</div>
+		<form novalidate @submit.prevent="submit">
 			<client-only>
-				<uiFields name="validation" class="validation" component="fieldset" />
+				<uiFields name="minlength" class="minlength" component="fieldset" />
 			</client-only>
 		</form>
 	</section>
@@ -12,9 +26,16 @@
 <script>
 export default {
 	mounted() {
-		this.$uiFields.new('validation');
+		this.$uiFields.new('minlength');
 
-		this.$uiFields.setFields('validation', [
+		this.$uiFields.setFields('minlength', [
+			{
+				name: 'value1',
+				type: 'text',
+				label: 'Min length of value (Number)',
+				placeholder: '5',
+				disabled: true
+			},
 			{
 				name: 'minlength1',
 				type: 'text',
@@ -32,11 +53,11 @@ export default {
 				label: 'More than one validation',
 				validation: [
 					{
-						name: 'minlength',
-						options: 5
+						name: 'required'
 					},
 					{
-						name: 'required'
+						name: 'minlength',
+						options: 5
 					}
 				]
 			}
@@ -44,7 +65,3 @@ export default {
 	}
 };
 </script>
-
-<style lang="scss">
-
-</style>

@@ -1,5 +1,6 @@
-import Vue from 'vue';
 import uiFields from '@matise/ui-fields';
+
+import Vue from 'vue';
 
 if (process.client) {
 	Vue.use(uiFields, {

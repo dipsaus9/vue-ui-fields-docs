@@ -53,7 +53,8 @@ export default {
 			complexPages: [
 				'signup-email',
 				'signup-username',
-				'signup-full'
+				'signup-full',
+				'hidden'
 			],
 		};
 	}

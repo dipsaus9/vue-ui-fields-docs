@@ -1,9 +1,23 @@
 <template>
 	<section>
-		<h1> Validation - Email</h1>
-		<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
+		<div class="intro">
+			<h1 class="intro__title">
+				E-mail
+			</h1>
+			<h2 class="intro__subtitle">
+				Validation
+			</h2>
+			<p class="intro__info">
+				If you want to validate a email in an input field you can use the email validation.
+				This validation checks if the input value contains a monkeytail (@) and a dot (.).
+			</p>
+			<p class="intro__usage">
+				You can use this like this:
+			</p>
+		</div>
+		<form novalidate @submit.prevent="submit">
 			<client-only>
-				<uiFields name="validation" class="validation" component="fieldset" />
+				<uiFields name="email" class="email" component="fieldset" />
 			</client-only>
 		</form>
 	</section>
@@ -12,9 +26,9 @@
 <script>
 export default {
 	mounted() {
-		this.$uiFields.new('validation');
+		this.$uiFields.new('email');
 
-		this.$uiFields.setFields('validation', [
+		this.$uiFields.setFields('email', [
 			{
 				name: 'email1',
 				type: 'text',
@@ -37,10 +51,10 @@ export default {
 				label: 'More than one validation',
 				validation: [
 					{
-						name: 'email'
+						name: 'required'
 					},
 					{
-						name: 'required'
+						name: 'email'
 					}
 				]
 			}
@@ -48,7 +62,3 @@ export default {
 	}
 };
 </script>
-
-<style lang="scss">
-
-</style>

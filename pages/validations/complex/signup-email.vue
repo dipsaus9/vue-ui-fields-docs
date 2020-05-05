@@ -1,9 +1,9 @@
 <template>
 	<section>
-		<h1> Example - Signup email </h1>
-		<form data-vv-scope="uiFields" novalidate @submit.prevent="submit">
+		<h1>Example - Signup email </h1>
+		<form novalidate @submit.prevent="submit">
 			<client-only>
-				<uiFields name="login-details" class="login-details" component="fieldset" />
+				<uiFields name="login-details-email" class="login-details-email" component="fieldset" />
 			</client-only>
 		</form>
 	</section>
@@ -12,19 +12,19 @@
 <script>
 export default {
 	mounted() {
-		this.$uiFields.new('login-details');
+		this.$uiFields.new('login-details-email');
 
-		this.$uiFields.setFields('login-details', [
+		this.$uiFields.setFields('login-details-email', [
 			{
 				name: 'username',
 				type: 'text',
 				label: 'Email',
 				validation: [
 					{
-						name: 'email'
+						name: 'required'
 					},
 					{
-						name: 'required'
+						name: 'email'
 					}
 				]
 			},
@@ -49,19 +49,15 @@ export default {
 				label: 'Password 2',
 				validation: [
 					{
-						name: 'equalTo',
-						options: () => this.$uiFields.getValue('validation', 'password1')
-					},
-					{
 						name: 'required'
 					},
+					{
+						name: 'equalTo',
+						options: () => this.$uiFields.getValue('validation', 'password1')
+					}
 				]
 			}
 		]);
 	}
 };
 </script>
-
-<style lang="scss">
-
-</style>
