@@ -29,7 +29,6 @@ export default {
 	 */
 	loading: {
 		color: '#000000' //,
-		// failedColor: '#000000'
 	},
 
 	/*
@@ -44,25 +43,9 @@ export default {
 	 */
 	modules: [
 		'nuxt-rfg-icon',
-		// '@nuxtjs/google-analytics',
 		'@nuxtjs/axios',
-		// [
-		// 	'~modules/ui-fields/index.js',
-		// 	{
-		// 		validation: {
-		// 			i18n: 'nl'
-		// 		}
-		// 	}
-		// ]
 	],
 
-	/*
-	 ** GoogleAnalytics module configuration
-	 */
-	// 'google-analytics': {
-	// 	id: 'UA-xxxxxxxx-xx',
-	// 	disabled: false
-	// },
 
 	/*
 	 ** Axios module configuration
@@ -73,7 +56,9 @@ export default {
 		},
 		baseURL: config.api
 	},
-
+	generate: {
+		fallback: true
+	},
 	/*
 	 ** Build configuration
 	 */
