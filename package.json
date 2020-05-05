@@ -14,7 +14,7 @@
 		"precommit": "lint"
 	},
 	"dependencies": {
-		"@matise/ui-fields": "^4.0.21",
+		"@matise/ui-fields": "^4.0.22",
 		"@nuxtjs/axios": "^5.9.5",
 		"nuxt": "^2.12.0"
 	},
