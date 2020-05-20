@@ -1,3 +1,4 @@
+/* eslint-disable vue/html-indent */
 <template>
 	<section>
 		<div class="intro">
@@ -10,12 +11,29 @@
 			<p class="intro__info">
 				This validation checks if the value of the input fiels is a number.
 			</p>
-			<p class="intro__usage">
-				You can use this like this:
-			</p>
+			<button class="intro__toggle" @click="toggle()">
+				{{ isCode ? 'Syntax' : 'Test form' }}
+			</button>
 		</div>
-		<form novalidate @submit.prevent="submit">
+
+		<div class="usage" :class="isCode ? 'hide' : ''">
+			<h2>Syntax</h2>
+			<prism language="javascript">
+				{
+					name: 'number',
+					type: 'text',
+					validation: [
+						{
+							name: 'number'
+						}
+					]
+				}
+			</prism>
+		</div>
+
+		<form novalidate :class="!isCode ? 'hide' : ''" @submit.prevent="submit">
 			<client-only>
+				<h2>Example</h2>
 				<uiFields name="number" class="number" component="fieldset" />
 			</client-only>
 		</form>
@@ -23,41 +41,39 @@
 </template>
 
 <script>
+import 'prismjs/prism';
+import 'prismjs/themes/prism-okaidia.css';
+
+import Prism from 'vue-prism-component';
+
 export default {
+	components: {
+		Prism
+	},
+	data() {
+		return {
+			isCode: false
+		};
+	},
 	mounted() {
 		this.$uiFields.new('number');
 
 		this.$uiFields.setFields('number', [
 			{
-				name: 'number1',
+				name: 'number',
 				type: 'text',
-				label: 'Validation in array',
-				validation: ['number']
-			},
-			{
-				name: 'number2',
-				type: 'text',
-				label: 'Validation as object in array',
 				validation: [
-					{
-						name: 'number'
-					}
-				]
-			},
-			{
-				name: 'number3',
-				type: 'text',
-				label: 'More than one validation',
-				validation: [
-					{
-						name: 'required'
-					},
 					{
 						name: 'number'
 					}
 				]
 			}
 		]);
+	},
+	methods: {
+		toggle() {
+			this.isCode = !this.isCode;
+		}
 	}
 };
 </script>

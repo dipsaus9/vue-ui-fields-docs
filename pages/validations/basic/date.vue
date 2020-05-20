@@ -1,3 +1,4 @@
+/* eslint-disable vue/html-indent */
 <template>
 	<section>
 		<div class="intro">
@@ -11,12 +12,29 @@
 				If you want to validate a date in an input field you can use the date validation.
 				The validation checks if the date has enough characters and if it is a number.
 			</p>
-			<p class="intro__usage">
-				You can use this like this:
-			</p>
+			<button class="intro__toggle" @click="toggle()">
+				{{ isCode ? 'Syntax' : 'Test form' }}
+			</button>
 		</div>
-		<form novalidate @submit.prevent="submit">
+
+		<div class="usage" :class="isCode ? 'hide' : ''">
+			<h2>Syntax</h2>
+			<prism language="javascript">
+				{
+					name: 'date',
+					type: 'text',
+					validation: [
+						{
+							name: 'date'
+						}
+					]
+				}
+			</prism>
+		</div>
+
+		<form novalidate :class="!isCode ? 'hide' : ''" @submit.prevent="submit">
 			<client-only>
+				<h2>Example</h2>
 				<uiFields name="date" class="date" component="fieldset" />
 			</client-only>
 		</form>
@@ -24,44 +42,39 @@
 </template>
 
 <script>
+import 'prismjs/prism';
+import 'prismjs/themes/prism-okaidia.css';
+
+import Prism from 'vue-prism-component';
+
 export default {
+	components: {
+		Prism
+	},
+	data() {
+		return {
+			isCode: false
+		};
+	},
 	mounted() {
 		this.$uiFields.new('date');
 
 		this.$uiFields.setFields('date', [
 			{
-				name: 'date1',
+				name: 'date',
 				type: 'text',
-				label: 'Validation in array',
-				placeholder: 'DD/MM/YYYY',
-				validation: ['date']
-			},
-			{
-				name: 'date2',
-				type: 'text',
-				label: 'Validation as object in array',
-				placeholder: 'DD/MM/YYYY',
 				validation: [
-					{
-						name: 'date'
-					}
-				]
-			},
-			{
-				name: 'date3',
-				type: 'text',
-				label: 'More than one validation',
-				placeholder: 'DD/MM/YYYY',
-				validation: [
-					{
-						name: 'required'
-					},
 					{
 						name: 'date'
 					}
 				]
 			}
 		]);
+	},
+	methods: {
+		toggle() {
+			this.isCode = !this.isCode;
+		}
 	}
 };
 </script>

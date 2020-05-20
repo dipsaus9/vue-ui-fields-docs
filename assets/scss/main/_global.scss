@@ -21,18 +21,13 @@ li {
 }
 
 form {
-	padding: 2rem;
+	padding: 0 2rem;
 	border-bottom: 2px solid #eaecef;
 }
 
 fieldset {
 	border: none;
-	// margin-bottom: 1.5rem;
 	padding: 0;
-}
-
-.layout {
-	display: flex;
 }
 
 .sidebar {
@@ -56,11 +51,17 @@ fieldset {
 	&__link {
 		color: #2c3e50;
 	}
+	> .sidebar__link {
+		display: block;
+	}
 }
 
-.page {
+.content {
+	display: flex;
+}
+
+.page-details {
 	width: 80%;
-	margin: 0;
 }
 
 .ui-fields {
@@ -81,7 +82,7 @@ fieldset {
 	}
 	&__error-message {
 		position: absolute;
-		top: 0.75rem;
+		top: -0.5rem;
 		right: 0.75rem;
 		line-height: 1.25rem;
 		color: tomato;
@@ -103,10 +104,21 @@ fieldset {
 		margin: 0.5rem 0;
 		font-size: 1.55rem;
 	}
-	&__info {
+	&__toggle {
+		min-width: 7rem;
+		padding: .5rem 1rem;
+		border: none;
+		box-shadow: none;
+		background-color: #2c3e50;
+		color: white;
+		font-size: 1rem;
+		font-weight: bold;
+	}
+}
+.usage {
+	padding: 0 2rem;
+}
 
-	}
-	&__usage {
-		
-	}
+.hide {
+	display: none;
 }

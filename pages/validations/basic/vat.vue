@@ -1,3 +1,4 @@
+/* eslint-disable vue/html-indent */
 <template>
 	<section>
 		<div class="intro">
@@ -10,12 +11,30 @@
 			<p class="intro__info">
 				This validation checks if the input value is a valid VAT-number. There are a lot of different numbers in different countries so if you put only a number with the Dutch settings it gives an error.
 			</p>
-			<p class="intro__usage">
-				You can use this like this:
-			</p>
+			<button class="intro__toggle" @click="toggle()">
+				{{ isCode ? 'Syntax' : 'Test form' }}
+			</button>
 		</div>
-		<form novalidate @submit.prevent="submit">
+
+		<div class="usage" :class="isCode ? 'hide' : ''">
+			<h2>Syntax</h2>
+			<prism language="javascript">
+				{
+					name: 'vat',
+					type: 'text',
+					validation: [
+						{
+							name: 'vat',
+							options: ['NL', 'BE']
+						}
+					]
+				}
+			</prism>
+		</div>
+
+		<form novalidate :class="!isCode ? 'hide' : ''" @submit.prevent="submit">
 			<client-only>
+				<h2>Example</h2>
 				<uiFields name="vat" class="vat" component="fieldset" />
 			</client-only>
 		</form>
@@ -23,37 +42,40 @@
 </template>
 
 <script>
+import 'prismjs/prism';
+import 'prismjs/themes/prism-okaidia.css';
+
+import Prism from 'vue-prism-component';
+
 export default {
+	components: {
+		Prism
+	},
+	data() {
+		return {
+			isCode: false
+		};
+	},
 	mounted() {
 		this.$uiFields.new('vat');
 
 		this.$uiFields.setFields('vat', [
 			{
-				name: 'vat1',
+				name: 'vat',
 				type: 'text',
-				label: 'Validation as object in array',
 				validation: [
 					{
 						name: 'vat',
-						options: 'NL'
-					}
-				]
-			},
-			{
-				name: 'vat2',
-				type: 'text',
-				label: 'More than one validation',
-				validation: [
-					{
-						name: 'required'
-					},
-					{
-						name: 'vat',
-						options: 'NL'
+						options: ['NL', 'BE']
 					}
 				]
 			}
 		]);
+	},
+	methods: {
+		toggle() {
+			this.isCode = !this.isCode;
+		}
 	}
 };
 </script>

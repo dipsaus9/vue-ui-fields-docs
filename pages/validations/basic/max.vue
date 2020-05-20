@@ -1,3 +1,4 @@
+/* eslint-disable vue/html-indent */
 <template>
 	<section>
 		<div class="intro">
@@ -11,53 +12,59 @@
 				This validation checks if the in put is a number and if this number is bigger than the number you want to.
 				So if there's a number bigger than 5, 6 is not valid.
 			</p>
-			<p class="intro__usage">
-				You can use this like this:
-			</p>
+			<button class="intro__toggle" @click="toggle()">
+				{{ isCode ? 'Syntax' : 'Test form' }}
+			</button>
 		</div>
-		<form novalidate @submit.prevent="submit">
+
+		<div class="usage" :class="isCode ? 'hide' : ''">
+			<h2>Syntax</h2>
+			<prism language="javascript">
+				{
+					name: 'maximum',
+					type: 'number',
+					validation: [
+						{
+							name: 'max',
+							options: 5
+						}
+					]
+				}
+			</prism>
+		</div>
+
+		<form novalidate :class="!isCode ? 'hide' : ''" @submit.prevent="submit">
 			<client-only>
+				<h2>Example (max is 5)</h2>
 				<uiFields name="max" class="max" component="fieldset" />
 			</client-only>
 		</form>
-		<button @click="unsubscribe">
-			unsubscribe
-		</button>
 	</section>
 </template>
 
 <script>
+import 'prismjs/prism';
+import 'prismjs/themes/prism-okaidia.css';
+
+import Prism from 'vue-prism-component';
+
 export default {
+	components: {
+		Prism
+	},
+	data() {
+		return {
+			isCode: false
+		};
+	},
 	mounted() {
 		this.$uiFields.new('max');
 
 		this.$uiFields.setFields('max', [
 			{
-				name: 'value1',
-				type: 'text',
-				label: 'Max value (Number)',
-				placeholder: '5',
-				disabled: true
-			},
-			{
-				name: 'max1',
-				type: 'text',
-				label: 'Validation as object in array',
+				name: 'max',
+				type: 'number',
 				validation: [
-					{
-						name: 'max',
-						options: 5
-					}
-				]
-			},
-			{
-				name: 'max2',
-				type: 'text',
-				label: 'More than one validation',
-				validation: [
-					{
-						name: 'required'
-					},
 					{
 						name: 'max',
 						options: 5
@@ -65,13 +72,10 @@ export default {
 				]
 			}
 		]);
-		this.$uiFields.subscribeField('max', 'max1', () => { return; });
-		this.$uiFields.subscribeField('max', 'max2', () => { return; });
-		this.$uiFields.subscribe('max', () => { return; });
 	},
 	methods: {
-		unsubscribe() {
-			this.$uiFields.delete('max');
+		toggle() {
+			this.isCode = !this.isCode;
 		}
 	}
 };

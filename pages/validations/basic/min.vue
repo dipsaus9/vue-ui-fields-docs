@@ -1,3 +1,4 @@
+/* eslint-disable vue/html-indent */
 <template>
 	<section>
 		<div class="intro">
@@ -11,12 +12,30 @@
 				This validation checks if the in put is a number and if this number is smaller than the number you want to.
 				So if there's a number smaller than 5, 4 is not valid.
 			</p>
-			<p class="intro__usage">
-				You can use this like this:
-			</p>
+			<button class="intro__toggle" @click="toggle()">
+				{{ isCode ? 'Syntax' : 'Test form' }}
+			</button>
 		</div>
-		<form novalidate @submit.prevent="submit">
+
+		<div class="usage" :class="isCode ? 'hide' : ''">
+			<h2>Syntax</h2>
+			<prism language="javascript">
+				{
+					name: 'minimum',
+					type: 'number',
+					validation: [
+						{
+							name: 'min',
+							options: 5
+						}
+					]
+				}
+			</prism>
+		</div>
+
+		<form novalidate :class="!isCode ? 'hide' : ''" @submit.prevent="submit">
 			<client-only>
+				<h2>Example (max is 5)</h2>
 				<uiFields name="min" class="min" component="fieldset" />
 			</client-only>
 		</form>
@@ -24,37 +43,28 @@
 </template>
 
 <script>
+import 'prismjs/prism';
+import 'prismjs/themes/prism-okaidia.css';
+
+import Prism from 'vue-prism-component';
+
 export default {
+	components: {
+		Prism
+	},
+	data() {
+		return {
+			isCode: false
+		};
+	},
 	mounted() {
 		this.$uiFields.new('min');
 
 		this.$uiFields.setFields('min', [
 			{
-				name: 'value1',
-				type: 'text',
-				label: 'Min value (Number)',
-				placeholder: '5',
-				disabled: true
-			},
-			{
-				name: 'min1',
-				type: 'text',
-				label: 'Validation as object in array',
+				name: 'min',
+				type: 'number',
 				validation: [
-					{
-						name: 'min',
-						options: 5
-					}
-				]
-			},
-			{
-				name: 'min2',
-				type: 'text',
-				label: 'More than one validation',
-				validation: [
-					{
-						name: 'required'
-					},
 					{
 						name: 'min',
 						options: 5
@@ -62,6 +72,11 @@ export default {
 				]
 			}
 		]);
+	},
+	methods: {
+		toggle() {
+			this.isCode = !this.isCode;
+		}
 	}
 };
 </script>

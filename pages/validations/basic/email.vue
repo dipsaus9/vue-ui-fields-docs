@@ -1,3 +1,4 @@
+/* eslint-disable vue/html-indent */
 <template>
 	<section>
 		<div class="intro">
@@ -11,12 +12,29 @@
 				If you want to validate a email in an input field you can use the email validation.
 				This validation checks if the input value contains a monkeytail (@) and a dot (.).
 			</p>
-			<p class="intro__usage">
-				You can use this like this:
-			</p>
+			<button class="intro__toggle" @click="toggle()">
+				{{ isCode ? 'Syntax' : 'Test form' }}
+			</button>
 		</div>
-		<form novalidate @submit.prevent="submit">
+
+		<div class="usage" :class="isCode ? 'hide' : ''">
+			<h2>Syntax</h2>
+			<prism language="javascript">
+				{
+					name: 'email',
+					type: 'text',
+					validation: [
+						{
+							name: 'email'
+						}
+					]
+				}
+			</prism>
+		</div>
+
+		<form novalidate :class="!isCode ? 'hide' : ''" @submit.prevent="submit">
 			<client-only>
+				<h2>Example</h2>
 				<uiFields name="email" class="email" component="fieldset" />
 			</client-only>
 		</form>
@@ -24,41 +42,39 @@
 </template>
 
 <script>
+import 'prismjs/prism';
+import 'prismjs/themes/prism-okaidia.css';
+
+import Prism from 'vue-prism-component';
+
 export default {
+	components: {
+		Prism
+	},
+	data() {
+		return {
+			isCode: false
+		};
+	},
 	mounted() {
 		this.$uiFields.new('email');
 
 		this.$uiFields.setFields('email', [
 			{
-				name: 'email1',
+				name: 'email',
 				type: 'text',
-				label: 'Validation in array',
-				validation: ['email']
-			},
-			{
-				name: 'email2',
-				type: 'text',
-				label: 'Validation as object in array',
 				validation: [
-					{
-						name: 'email'
-					}
-				]
-			},
-			{
-				name: 'email3',
-				type: 'text',
-				label: 'More than one validation',
-				validation: [
-					{
-						name: 'required'
-					},
 					{
 						name: 'email'
 					}
 				]
 			}
 		]);
+	},
+	methods: {
+		toggle() {
+			this.isCode = !this.isCode;
+		}
 	}
 };
 </script>

@@ -1,8 +1,9 @@
+/* eslint-disable vue/html-indent */
 <template>
 	<section>
 		<div class="intro">
 			<h1 class="intro__title">
-				Min length
+				Minlength
 			</h1>
 			<h2 class="intro__subtitle">
 				Validation
@@ -11,12 +12,30 @@
 				This validation checks the input length. If you want the minimum input length
 				of 8 than this validation gives an error when your input value contains less than 8 characters.
 			</p>
-			<p class="intro__usage">
-				You can use this like this:
-			</p>
+			<button class="intro__toggle" @click="toggle()">
+				{{ isCode ? 'Syntax' : 'Test form' }}
+			</button>
 		</div>
-		<form novalidate @submit.prevent="submit">
+
+		<div class="usage" :class="isCode ? 'hide' : ''">
+			<h2>Syntax</h2>
+			<prism language="javascript">
+				{
+					name: 'minlength',
+					type: 'text',
+					validation: [
+						{
+							name: 'minlength',
+							options: 5
+						}
+					]
+				}
+			</prism>
+		</div>
+
+		<form novalidate :class="!isCode ? 'hide' : ''" @submit.prevent="submit">
 			<client-only>
+				<h2>Example (minlength is 5)</h2>
 				<uiFields name="minlength" class="minlength" component="fieldset" />
 			</client-only>
 		</form>
@@ -24,37 +43,28 @@
 </template>
 
 <script>
+import 'prismjs/prism';
+import 'prismjs/themes/prism-okaidia.css';
+
+import Prism from 'vue-prism-component';
+
 export default {
+	components: {
+		Prism
+	},
+	data() {
+		return {
+			isCode: false
+		};
+	},
 	mounted() {
 		this.$uiFields.new('minlength');
 
 		this.$uiFields.setFields('minlength', [
 			{
-				name: 'value1',
+				name: 'minlength',
 				type: 'text',
-				label: 'Min length of value (Number)',
-				placeholder: '5',
-				disabled: true
-			},
-			{
-				name: 'minlength1',
-				type: 'text',
-				label: 'Validation as object in array',
 				validation: [
-					{
-						name: 'minlength',
-						options: 5
-					}
-				]
-			},
-			{
-				name: 'minlength2',
-				type: 'text',
-				label: 'More than one validation',
-				validation: [
-					{
-						name: 'required'
-					},
 					{
 						name: 'minlength',
 						options: 5
@@ -62,6 +72,11 @@ export default {
 				]
 			}
 		]);
+	},
+	methods: {
+		toggle() {
+			this.isCode = !this.isCode;
+		}
 	}
 };
 </script>

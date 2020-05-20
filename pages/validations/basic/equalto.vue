@@ -1,3 +1,4 @@
+/* eslint-disable vue/html-indent */
 <template>
 	<section>
 		<div class="intro">
@@ -11,23 +12,55 @@
 				If you want to check if a value of another field is equal to some other field you can use this validation.
 				If field A has a value of 'hello' and field B has value of 'hey', this validation gives an error
 			</p>
-			<p class="intro__usage">
-				You can use this like this:
-			</p>
+			<button class="intro__toggle" @click="toggle()">
+				{{ isCode ? 'Syntax' : 'Test form' }}
+			</button>
 		</div>
-		<form novalidate @submit.prevent="submit">
+
+		<div class="usage" :class="isCode ? 'hide' : ''">
+			<h2>Syntax</h2>
+			<prism language="javascript">
+				{
+					name: 'value1',
+					type: 'text'
+				},
+				{
+					name: 'value2',
+					type: 'text',
+					validation: [
+						{
+							name: 'equalTo',
+							options: () => this.$uiFields.getValue('equalto', 'value1')
+						}
+					]
+				}
+			</prism>
+		</div>
+
+		<form novalidate :class="!isCode ? 'hide' : ''" @submit.prevent="submit">
 			<client-only>
+				<h2>Example</h2>
 				<uiFields name="equalto" class="equalto" component="fieldset" />
 			</client-only>
 		</form>
-		<button @click="unsubscribe">
-			unsubscribe
-		</button>
 	</section>
 </template>
 
 <script>
+import 'prismjs/prism';
+import 'prismjs/themes/prism-okaidia.css';
+
+import Prism from 'vue-prism-component';
+
 export default {
+	components: {
+		Prism
+	},
+	data() {
+		return {
+			isCode: false
+		};
+	},
 	mounted() {
 		this.$uiFields.new('equalto');
 
@@ -35,44 +68,24 @@ export default {
 			{
 				name: 'value1',
 				type: 'text',
-				label: 'Value to compare with',
-				placeholder: 'Compare',
-				disabled: true,
-				value: 'Compare'
+				label: 'Value 1',
 			},
 			{
-				name: 'value2',
+				name: 'equalto',
 				type: 'text',
-				label: 'Validation as object in array',
+				label: 'Value 2',
 				validation: [
 					{
 						name: 'equalTo',
 						options: () => this.$uiFields.getValue('equalto', 'value1')
-					}
-				]
-			},
-			{
-				name: 'value3',
-				type: 'text',
-				label: 'More than one validation',
-				validation: [
-					{
-						name: 'equalTo',
-						options: () => this.$uiFields.getValue('equalto', 'value1')
-					},
-					{
-						name: 'text'
 					}
 				]
 			}
 		]);
-		this.$uiFields.subscribeField('equalto', 'value2', () => { return; });
-		this.$uiFields.subscribeField('equalto', 'value3', () => { return; });
-		this.$uiFields.subscribe('equalto', () => { return; });
 	},
 	methods: {
-		unsubscribe() {
-			this.$uiFields.delete('equalto');
+		toggle() {
+			this.isCode = !this.isCode;
 		}
 	}
 };
