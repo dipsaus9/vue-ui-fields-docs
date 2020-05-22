@@ -12,11 +12,11 @@
 				This validation checks if the value is an valid url. If your input not contains (http(s)) or a dot (.) it gives an error.
 			</p>
 			<button class="intro__toggle" @click="toggle()">
-				{{ isCode ? 'Syntax' : 'Test form' }}
+				{{ !isCode ? 'Syntax' : 'Test form' }}
 			</button>
 		</div>
 
-		<div class="usage" :class="isCode ? 'hide' : ''">
+		<div class="usage" :class="!isCode ? 'hide' : ''">
 			<h2>Syntax</h2>
 			<prism language="javascript">
 				{
@@ -31,9 +31,8 @@
 			</prism>
 		</div>
 
-		<form novalidate :class="!isCode ? 'hide' : ''" @submit.prevent="submit">
+		<form novalidate :class="isCode ? 'hide' : ''" @submit.prevent="submit">
 			<client-only>
-				<h2>Example</h2>
 				<uiFields name="url" class="url" component="fieldset" />
 			</client-only>
 		</form>
@@ -62,6 +61,7 @@ export default {
 			{
 				name: 'url',
 				type: 'text',
+				label: 'Example',
 				validation: [
 					{
 						name: 'url'

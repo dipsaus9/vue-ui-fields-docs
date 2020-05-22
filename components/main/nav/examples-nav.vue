@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<h3 @click="dropdown">
-			Form Examples
+			Full forms
 		</h3>
 		<ul v-if="isOpen" class="sidebar__links">
 			<li v-for="(page, index) in examplePages" :key="index" class="sidebar__item">
@@ -19,9 +19,12 @@ export default {
 	data() {
 		return {
 			examplePages: [
-				'signup-email',
-				'signup-username',
-				'signup-full'
+				'login-email',
+				'login-username',
+				'signup-full',
+				'checkout',
+				'checkout-different-address',
+				'checkout-different-address-condition'
 			],
 			isOpen: false
 		};

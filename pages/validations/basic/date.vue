@@ -13,11 +13,11 @@
 				The validation checks if the date has enough characters and if it is a number.
 			</p>
 			<button class="intro__toggle" @click="toggle()">
-				{{ isCode ? 'Syntax' : 'Test form' }}
+				{{ !isCode ? 'Syntax' : 'Test form' }}
 			</button>
 		</div>
 
-		<div class="usage" :class="isCode ? 'hide' : ''">
+		<div class="usage" :class="!isCode ? 'hide' : ''">
 			<h2>Syntax</h2>
 			<prism language="javascript">
 				{
@@ -32,9 +32,8 @@
 			</prism>
 		</div>
 
-		<form novalidate :class="!isCode ? 'hide' : ''" @submit.prevent="submit">
+		<form novalidate :class="isCode ? 'hide' : ''" @submit.prevent="submit">
 			<client-only>
-				<h2>Example</h2>
 				<uiFields name="date" class="date" component="fieldset" />
 			</client-only>
 		</form>
@@ -63,6 +62,7 @@ export default {
 			{
 				name: 'date',
 				type: 'text',
+				label: 'Example',
 				validation: [
 					{
 						name: 'date'

@@ -1,0 +1,42 @@
+form {
+	padding: 0 2rem;
+	border-bottom: 2px solid #eaecef;
+}
+
+fieldset {
+	border: none;
+	padding: 1rem 0;
+}
+
+.ui-fields {
+	&__field {
+		position: relative;
+		display: flex;
+		flex-direction: column-reverse;
+		margin-bottom: 0.75rem;
+	}
+	&__input {
+		border: 2px solid #eaecef;
+		display: block;
+		padding: 0.5rem;
+		line-height: 1.25rem;
+	}
+	&__element {
+		font-weight: 600;
+	}
+	&__error-message {
+		position: absolute;
+		top: 0.75rem;
+		right: 0.75rem;
+		line-height: 1.25rem;
+		color: tomato;
+		font-weight: 600;
+	}
+}
+
+.select {
+	&__input {
+		appearance: none;
+		border-radius: 0;
+	}
+}

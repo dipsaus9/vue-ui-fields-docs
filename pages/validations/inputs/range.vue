@@ -3,14 +3,8 @@
 	<section>
 		<div class="intro">
 			<h1 class="intro__title">
-				Phone
+				Range
 			</h1>
-			<h2 class="intro__subtitle">
-				Validation
-			</h2>
-			<p class="intro__info">
-				This validation checks the input field if it is a valid phonenumber. if you put text instead of a number it is not valid.
-			</p>
 			<button class="intro__toggle" @click="toggle()">
 				{{ !isCode ? 'Syntax' : 'Test form' }}
 			</button>
@@ -20,21 +14,18 @@
 			<h2>Syntax</h2>
 			<prism language="javascript">
 				{
-					name: 'phone',
-					type: 'text',
-					validation: [
-						{
-							name: 'phone',
-							options: 'nl-NL'
-						}
-					]
+					name: 'price',
+					type: 'range',
+					label: 'Price',
+					min: 0,
+					max: 100
 				}
 			</prism>
 		</div>
 
 		<form novalidate :class="isCode ? 'hide' : ''" @submit.prevent="submit">
 			<client-only>
-				<uiFields name="phone" class="phone" component="fieldset" />
+				<uiFields name="form" class="form" component="fieldset" />
 			</client-only>
 		</form>
 	</section>
@@ -56,19 +47,15 @@ export default {
 		};
 	},
 	mounted() {
-		this.$uiFields.new('phone');
+		this.$uiFields.new('form');
 
-		this.$uiFields.setFields('phone', [
+		this.$uiFields.setFields('form', [
 			{
-				name: 'phone',
-				type: 'text',
-				label: 'Example',
-				validation: [
-					{
-						name: 'phone',
-						options: 'nl-NL'
-					}
-				]
+				name: 'price',
+				type: 'range',
+				label: 'Price',
+				min: 0,
+				max: 100
 			}
 		]);
 	},

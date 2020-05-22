@@ -13,11 +13,11 @@
 				So if there's a number bigger than 5, 6 is not valid.
 			</p>
 			<button class="intro__toggle" @click="toggle()">
-				{{ isCode ? 'Syntax' : 'Test form' }}
+				{{ !isCode ? 'Syntax' : 'Test form' }}
 			</button>
 		</div>
 
-		<div class="usage" :class="isCode ? 'hide' : ''">
+		<div class="usage" :class="!isCode ? 'hide' : ''">
 			<h2>Syntax</h2>
 			<prism language="javascript">
 				{
@@ -33,9 +33,8 @@
 			</prism>
 		</div>
 
-		<form novalidate :class="!isCode ? 'hide' : ''" @submit.prevent="submit">
+		<form novalidate :class="isCode ? 'hide' : ''" @submit.prevent="submit">
 			<client-only>
-				<h2>Example (max is 5)</h2>
 				<uiFields name="max" class="max" component="fieldset" />
 			</client-only>
 		</form>
@@ -64,6 +63,7 @@ export default {
 			{
 				name: 'max',
 				type: 'number',
+				label: 'Example (max is 5)',
 				validation: [
 					{
 						name: 'max',

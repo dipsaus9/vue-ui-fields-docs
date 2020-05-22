@@ -13,11 +13,11 @@
 				of 8 than this validation gives an error when your input value contains less than 8 characters.
 			</p>
 			<button class="intro__toggle" @click="toggle()">
-				{{ isCode ? 'Syntax' : 'Test form' }}
+				{{ !isCode ? 'Syntax' : 'Test form' }}
 			</button>
 		</div>
 
-		<div class="usage" :class="isCode ? 'hide' : ''">
+		<div class="usage" :class="!isCode ? 'hide' : ''">
 			<h2>Syntax</h2>
 			<prism language="javascript">
 				{
@@ -33,9 +33,8 @@
 			</prism>
 		</div>
 
-		<form novalidate :class="!isCode ? 'hide' : ''" @submit.prevent="submit">
+		<form novalidate :class="isCode ? 'hide' : ''" @submit.prevent="submit">
 			<client-only>
-				<h2>Example (minlength is 5)</h2>
 				<uiFields name="minlength" class="minlength" component="fieldset" />
 			</client-only>
 		</form>
@@ -64,6 +63,7 @@ export default {
 			{
 				name: 'minlength',
 				type: 'text',
+				label: 'Example (minlength is 5)',
 				validation: [
 					{
 						name: 'minlength',
