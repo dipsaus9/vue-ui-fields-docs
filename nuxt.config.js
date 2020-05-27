@@ -34,7 +34,7 @@ export default {
 	/*
    ** Plugins to load before mounting the App
    */
-	plugins: ['~plugins/ui-fields.client.js'],
+	plugins: ['~plugins/ui-fields.client.js', '~plugins/globals.js'],
 
 	/*
    ** Nuxt.js modules

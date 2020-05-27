@@ -8,5 +8,4 @@ if (process.client) {
 		persistentTime: 1000 * 60
 	});
 }
-
-Vue.component(VueCodeHighlight);
+Vue.component('VueCodeHighlight', VueCodeHighlight);

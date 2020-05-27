@@ -11,7 +11,7 @@
 
 		<div class="usage" :class="!isCode ? 'hide' : ''">
 			<h2>Syntax</h2>
-			< VueCodeHighlight language="javascript">
+			<VueCodeHighlight language="javascript">
 				this.$uiFields.new('login-email');
 
 				this.$uiFields.setFields('login-email', [
@@ -58,8 +58,10 @@
 						]
 					}
 				]);
-			< /VueCodeHighlight>
-		</div>
+			</VueCodeHighlight>
+		</VueCodeHighlight>
+>
+</div>
 
 		<form novalidate :class="isCode ? 'hide' : ''" @submit.prevent="submit">
 			<client-only>

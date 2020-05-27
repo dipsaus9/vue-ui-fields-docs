@@ -10,7 +10,7 @@
 			</p>
 		</div>
 		<div class="usage">
-			< VueCodeHighlight language="javascript">
+			<VueCodeHighlight language="javascript">
 				mounted() {
 					this.$uiFields.new([form-name]);
 
@@ -27,8 +27,10 @@
 						}
 					]);
 				}
-			< /VueCodeHighlight>
-		</div>
+			</VueCodeHighlight>
+		</VueCodeHighlight>
+>
+</div>
 	</section>
 </template>
 

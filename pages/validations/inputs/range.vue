@@ -12,7 +12,7 @@
 
 		<div class="usage" :class="!isCode ? 'hide' : ''">
 			<h2>Syntax</h2>
-			< VueCodeHighlight language="javascript">
+			<VueCodeHighlight language="javascript">
 				{
 					name: 'price',
 					type: 'range',
@@ -20,8 +20,10 @@
 					min: 0,
 					max: 100
 				}
-			< /VueCodeHighlight>
-		</div>
+			</VueCodeHighlight>
+		</VueCodeHighlight>
+>
+</div>
 
 		<form novalidate :class="isCode ? 'hide' : ''" @submit.prevent="submit">
 			<client-only>

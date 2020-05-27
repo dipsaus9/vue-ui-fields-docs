@@ -51,7 +51,7 @@ this.$uiFields.setFields('creditcard', [
 		]
 	}
 ]);
-			</VueCodeHighlight>
+			</VueCodeHighlight>>
 		</ClientOnly>
 	</section>
 </template>

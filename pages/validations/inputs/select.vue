@@ -12,7 +12,7 @@
 
 		<div class="usage" :class="!isCode ? 'hide' : ''">
 			<h2>Syntax</h2>
-			< VueCodeHighlight language="javascript">
+			<VueCodeHighlight language="javascript">
 				{
 					name: 'country',
 					type: 'select',
@@ -24,8 +24,10 @@
 						}
 					]
 				}
-			< /VueCodeHighlight>
-		</div>
+			</VueCodeHighlight>
+		</VueCodeHighlight>
+>
+</div>
 
 		<form novalidate :class="isCode ? 'hide' : ''" @submit.prevent="submit">
 			<client-only>
