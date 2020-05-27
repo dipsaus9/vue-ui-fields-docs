@@ -8,64 +8,65 @@ if (config.env === 'development') {
 export default {
 	mode: 'universal',
 	env: {
-		environment: config.env || 'production'
+		environment: config.env || 'production',
 	},
 
 	/*
-	 ** Headers of the page
-	 */
+   ** Headers of the page
+   */
 	head: {
 		title: pkg.name,
 		meta: [
 			{ charset: 'utf-8' },
 			{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
-			{ hid: 'description', name: 'description', content: pkg.description }
+			{ hid: 'description', name: 'description', content: pkg.description },
 		],
-		link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+		link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
 	},
 
 	/*
-	 ** Customize the progress bar color
-	 */
+   ** Customize the progress bar color
+   */
 	loading: {
-		color: '#000000' //,
+		color: '#000000', //,
 	},
 
 	/*
-	 ** Plugins to load before mounting the App
-	 */
-	plugins: [
-		'~plugins/ui-fields.client.js'
-	],
+   ** Plugins to load before mounting the App
+   */
+	plugins: ['~plugins/ui-fields.client.js'],
 
 	/*
-	 ** Nuxt.js modules
-	 */
-	modules: [
-		'nuxt-rfg-icon',
-		'@nuxtjs/axios',
-	],
-
+   ** Nuxt.js modules
+   */
+	modules: ['nuxt-rfg-icon', '@nuxtjs/axios', '@nuxtjs/style-resources'],
 
 	/*
-	 ** Axios module configuration
-	 */
+   ** Axios module configuration
+   */
 	axios: {
 		retry: {
-			retries: 3
+			retries: 3,
 		},
-		baseURL: config.api
+		baseURL: config.api,
+	},
+	styleResources: {
+		scss: [
+			'~/assets/scss/color/_index.scss',
+			'~/assets/scss/variables/_index.scss',
+			'@node_modules/matise-gryd/gryd-index.scss',
+		],
 	},
 	generate: {
-		fallback: true
+		fallback: true,
 	},
 	/*
-	 ** Build configuration
-	 */
+   ** Build configuration
+   */
 	build: {
 		/*
-		 ** Build plugins
-		 */
+     ** Build plugins
+     */
 		plugins: [],
 
 		// babel: {
@@ -76,8 +77,8 @@ export default {
 		transpile: [], // Name of NPM packages to be transpiled
 
 		/*
-		 ** You can extend webpack config here
-		 */
+     ** You can extend webpack config here
+     */
 		extend(config, ctx) {
 			// Define toolset shortcut
 			config.resolve.alias['~tools'] = 'assets/scss/tools.scss';
@@ -86,19 +87,23 @@ export default {
 				config.module.rules.push({
 					enforce: 'pre',
 					test: /\.(js|vue)$/,
-					loader: 'eslint-loader'
+					loader: 'eslint-loader',
 				});
 			}
-		}
+		},
 	},
 
 	/*
-	 ** Global CSS
-	 */
+   ** Global CSS
+   */
 	css: [
 		{
 			src: '~assets/scss/app.scss',
-			lang: 'scss'
-		}
-	]
+			lang: 'scss',
+		},
+		{
+			src: 'vue-code-highlight/themes/prism-okaidia.css',
+			lang: 'css',
+		},
+	],
 };

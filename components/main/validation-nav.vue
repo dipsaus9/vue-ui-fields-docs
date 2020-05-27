@@ -1,13 +1,13 @@
 <template>
 	<div>
 		<h3 @click="dropdown">
-			Validations
+			Validation examples
 		</h3>
 		<ul v-if="isOpen" class="sidebar__links">
 			<li v-for="(page, index) in validationPages" :key="index" class="sidebar__item">
-				<nuxt-link class="sidebar__link" :to="`/validations/basic/${page}`">
+				<NuxtLink class="sidebar__link" :to="`/validations/basic/${page}`">
 					{{ page }}
-				</nuxt-link>
+				</NuxtLink>
 			</li>
 		</ul>
 	</div>

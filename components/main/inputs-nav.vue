@@ -1,13 +1,13 @@
 <template>
 	<div>
 		<h3 @click="dropdown">
-			Inputs
+			Input options
 		</h3>
 		<ul v-if="isOpen" class="sidebar__links">
 			<li v-for="(page, index) in inputFields" :key="index" class="sidebar__item">
-				<nuxt-link class="sidebar__link" :to="`/validations/inputs/${page}`">
+				<NuxtLink class="sidebar__link" :to="`/validations/inputs/${page}`">
 					{{ page }}
-				</nuxt-link>
+				</NuxtLink>
 			</li>
 		</ul>
 	</div>

@@ -1,7 +1,14 @@
 .intro {
 	padding: 2rem;
 	width: 100%;
-	border-bottom: 2px solid #eaecef;
+	border-bottom: 1px solid #eaecef;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	div {
+		max-width: rem(740);
+		width: 100%;
+	}
 	&__title {
 		margin: 0.5rem 0;
 		font-size: 2rem;
@@ -23,18 +30,19 @@
 		font-weight: bold;
 	}
 }
-
-.content {
+div.content {
 	display: flex;
 }
-
-.page-details {
-	width: 80%;
-}
-
-
-.usage {
-	padding: 0 2rem;
+section .content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 2rem;
+	width: 100%;
+	div {
+		max-width: rem(740);
+		width: 100%;
+	}
 }
 
 .hide {

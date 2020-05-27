@@ -1,33 +1,50 @@
 <template>
-	<div class="sidebar">
-		<nuxt-link class="sidebar__link h3" :to="`/what-is-ui-fields`">
-			Intro
-		</nuxt-link>
-		<nuxt-link class="sidebar__link h3" :to="`/how-to-start`">
-			How to start
-		</nuxt-link>
-		<nuxt-link class="sidebar__link h3" :to="`/ui-field-instance`">
-			Ui-field instance
-		</nuxt-link>
-		<validationNav />
-		<formInputsNav />
-		<formExamplesNav />
-	</div>
+	<nav class="sidebar">
+		<SubNav title="Installation" :list="intro" :open="true" />
+		<SubNav title="Documentation" :list="docs" :open="true" />
+		<SubNav title="Input options" :list="inputFields" />
+	</nav>
 </template>
 
 <script>
-import validationNav from '~/components/main/nav/validation-nav.vue';
-import formExamplesNav from '~/components/main/nav/examples-nav.vue';
-import formInputsNav from '~/components/main/nav/inputs-nav.vue';
+import SubNav from '~/components/main/sub-nav.vue';
 
 export default {
 	components: {
-		validationNav,
-		formExamplesNav,
-		formInputsNav
+		SubNav
+	},
+	data() {
+		return {
+			intro: [
+				'Install',
+				'Philosophy'
+			],
+			docs: [
+				'Plugin install',
+				'New form',
+				'SetField',
+				'Validation',
+				'Conditions',
+				'Helper functions',
+				'Best practices',
+			],
+			inputFields: [
+				'text',
+				'phone',
+				'date',
+				'number',
+				'email',
+				'tel',
+				'password',
+				'range',
+				'hidden',
+				'file',
+				'select',
+				'checkbox',
+				'radio',
+				'textarea'
+			],
+		};
 	}
 };
 </script>
-
-<style lang="scss">
-</style>

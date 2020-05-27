@@ -13,7 +13,7 @@
 
 		<div class="usage" :class="!isCode ? 'hide' : ''">
 			<h2>Syntax</h2>
-			<prism language="javascript">
+			< VueCodeHighlight language="javascript">
 				this.$uiFields.new('checkout');
 				this.$uiFields.new('different-address');
 
@@ -253,7 +253,7 @@
 						]
 					}
 				]);
-			</prism>
+			< /VueCodeHighlight>
 		</div>
 
 		<form novalidate :class="isCode ? 'hide' : ''" @submit.prevent="submit">
@@ -267,15 +267,12 @@
 </template>
 
 <script>
-import 'prismjs/prism';
-import 'prismjs/themes/prism-okaidia.css';
 
-import Prism from 'vue-prism-component';
+
+
 
 export default {
-	components: {
-		Prism
-	},
+
 	data() {
 		return {
 			isCode: false

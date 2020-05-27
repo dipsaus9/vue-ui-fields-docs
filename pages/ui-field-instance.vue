@@ -10,7 +10,7 @@
 			</p>
 		</div>
 		<div class="usage">
-			<prism language="javascript">
+			< VueCodeHighlight language="javascript">
 				mounted() {
 					this.$uiFields.new([form-name]);
 
@@ -27,21 +27,8 @@
 						}
 					]);
 				}
-			</prism>
+			< /VueCodeHighlight>
 		</div>
 	</section>
 </template>
-
-<script>
-import 'prismjs/prism';
-import 'prismjs/themes/prism-okaidia.css';
-
-import Prism from 'vue-prism-component';
-
-export default {
-	components: {
-		Prism
-	}
-};
-</script>
 

@@ -19,7 +19,7 @@
 
 		<div class="usage" :class="!isCode ? 'hide' : ''">
 			<h2>Syntax</h2>
-			<prism language="javascript">
+			< VueCodeHighlight language="javascript">
 				{
 					name: 'value1',
 					type: 'text'
@@ -34,7 +34,7 @@
 						}
 					]
 				}
-			</prism>
+			< /VueCodeHighlight>
 		</div>
 
 		<form novalidate :class="isCode ? 'hide' : ''" @submit.prevent="submit">
@@ -46,15 +46,12 @@
 </template>
 
 <script>
-import 'prismjs/prism';
-import 'prismjs/themes/prism-okaidia.css';
 
-import Prism from 'vue-prism-component';
+
+
 
 export default {
-	components: {
-		Prism
-	},
+
 	data() {
 		return {
 			isCode: false

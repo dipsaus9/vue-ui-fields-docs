@@ -1,3 +1,24 @@
 @import 'main/index';
 @import 'components/index';
 @import 'typography/typography';
+
+header {
+	position: relative;
+	left: 0;
+	top: 0;
+	width: 100vw;
+	height: 3.6rem;
+	padding: 0 1.5rem;
+	display: flex;
+	align-items: center;
+	border-bottom: 1px solid #eaecef;
+	a {
+		font-size: 1.3rem;
+		color: #2c3e50;
+		font-weight: 600;
+	}
+}
+
+section {
+	width: 100%;
+}
