@@ -3,7 +3,7 @@
 		<div class="intro">
 			<div>
 				<h1>
-					Intall
+					Documentation - Install
 				</h1>
 				<p>
 					Install UI fields in any project u want
