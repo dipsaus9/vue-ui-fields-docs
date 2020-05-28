@@ -1,7 +1,6 @@
 <template>
 	<div>
 		<h1>Filter page</h1>
-
 		<form novalidate @submit.prevent="submit">
 			<client-only>
 				<uiFields name="filter" class="filter" component="fieldset" />

@@ -98,16 +98,7 @@ module.exports = {
 			}
 		],
 		'vue/html-end-tags': 'warn',
-		'vue/html-indent': [
-			'warn',
-			'tab',
-			{
-				attribute: 1,
-				closeBracket: 0,
-				alignAttributesVertically: true,
-				ignores: []
-			}
-		],
+		'vue/html-indent': 'off',
 		'vue/html-self-closing': 0,
 		'vue/html-closing-bracket-spacing': [
 			'warn',
