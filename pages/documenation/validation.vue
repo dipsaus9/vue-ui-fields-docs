@@ -3,7 +3,7 @@
 		<div class="intro">
 			<div>
 				<h1>
-					Documentation - Best practices
+					Documentation - Validation
 				</h1>
 				<p>
 					The idea of UI Fields started a long time ago.

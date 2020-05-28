@@ -49,7 +49,7 @@
 								</NuxtLink>
 							</li>
 							<li>
-								<NuxtLink to="/documenation/new-form">
+								<NuxtLink to="/documenation/new">
 									New form
 								</NuxtLink>
 							</li>
@@ -88,6 +88,16 @@
 					<li>
 						<NuxtLink to="/inputs/">
 							Input options
+						</NuxtLink>
+					</li>
+					<li>
+						<NuxtLink to="/validations/">
+							Validation options
+						</NuxtLink>
+					</li>
+					<li>
+						<NuxtLink to="/examples/">
+							Examples
 						</NuxtLink>
 					</li>
 				</ul>

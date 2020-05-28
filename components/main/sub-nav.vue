@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h3 @click="dropdown">
+		<h3 :class="{ active : isOpen }" @click="dropdown">
 			{{ title }}
 		</h3>
 		<ul v-if="isOpen" class="sidebar__links">

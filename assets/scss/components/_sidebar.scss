@@ -31,7 +31,8 @@
 	}
   li {
     margin: 0;
-    padding: rem(5) 0;
+		padding: rem(5) 0;
+		position: relative;
     a {
       font-size: rem(15);
       font-weight: 400;
@@ -39,6 +40,53 @@
 			&:hover, &:focus, &.nuxt-link-active {
 				color: #3eaf7c;
 			}
+			&.nuxt-link-active {
+				&:before {
+					content: '';
+					display: block;
+					position: absolute;
+					left: -2.25rem;
+					top: 0;
+					width: 4px;
+					height: 100%;
+					background: #3eaf7c;
+				}
+			}
     }
-  }
+	}
+	h3 {
+		position: relative;
+		cursor: pointer;
+		&:before {
+			content: '';
+			display: block;
+			position: absolute;
+			right: 0;
+			top: 50%;
+			transform: translateY(-50%) rotate(45deg);
+			width: rem(10);
+			height: rem(10);
+			background: #2c3e50;
+		}
+		&:after {
+			content: '';
+			display: block;
+			position: absolute;
+			right: -2px;
+			top: 0;
+			width: rem(20);
+			height: rem(13);
+			background: white;
+			// transition: .2s;
+		}
+		&.active {
+			&:before {
+				transform: translateY(0) rotate(45deg);
+				background: #999
+			}
+			&:after {
+				top: rem(19);
+			}
+		}
+	}
 }

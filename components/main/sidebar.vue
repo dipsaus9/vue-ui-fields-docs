@@ -23,14 +23,13 @@ export default {
 			docs: [
 				{ name: 'Install', url: 'Install', children: [] },
 				{ name: 'New form', url: 'new', children: [] },
-				{ name: 'SetField', url: 'SetField', children: [] },
+				{ name: 'SetField', url: 'set-field', children: [] },
 				{ name: 'Validation', url: 'Validation', children: [] },
 				{ name: 'Conditions', url: 'Conditions', children: [] },
-				{ name: 'Helper functions', url: 'Helper', children: [] },
-				{ name: 'Best practices', url: 'Best', children: [] },
+				{ name: 'Helper functions', url: 'Helpers', children: [] },
+				{ name: 'Best practices', url: 'best-practices', children: [] },
 			],
 			inputFields: [
-				{ name: 'Start', url: '', children: [] },
 				{ name: 'Text', url: 'text', children: [] },
 				{ name: 'Phone', url: 'phone', children: [] },
 				{ name: 'Date', url: 'date', children: [] },
@@ -47,7 +46,6 @@ export default {
 				{ name: 'Textarea', url: 'textarea', children: [] },
 			],
 			validationPages: [
-				{ name: 'Start', url: '', children: [] },
 				{ name: 'Creditcard', url: 'creditcard', children: [] },
 				{ name: 'Date', url: 'date', children: [] },
 				{ name: 'Email', url: 'email', children: [] },
