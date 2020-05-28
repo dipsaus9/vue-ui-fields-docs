@@ -5,8 +5,8 @@
 		</h3>
 		<ul v-if="isOpen" class="sidebar__links">
 			<li v-for="(page, index) in list" :key="index" class="sidebar__item">
-				<NuxtLink class="sidebar__link" :to="`${base}/${page.split(' ').join('-').toLowerCase()}`">
-					{{ page }}
+				<NuxtLink class="sidebar__link" :to="`${base}/${page.url.split(' ').join('-').toLowerCase()}`">
+					{{ page.name }}
 				</NuxtLink>
 			</li>
 		</ul>

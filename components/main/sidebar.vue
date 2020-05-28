@@ -1,8 +1,10 @@
 <template>
 	<nav class="sidebar">
-		<SubNav title="Installation" :list="intro" :open="true" />
-		<SubNav title="Documentation" :list="docs" :open="true" />
-		<SubNav title="Input options" :list="inputFields" :open="true" />
+		<SubNav title="Start" :list="intro" :open="true" />
+		<SubNav title="Documentation" :list="docs" :open="true" base="/documenation" />
+		<SubNav title="Input options" :list="inputFields" base="/inputs" :open="false" />
+		<SubNav title="Validation options" :list="validationPages" base="/validations" :open="false" />
+		<SubNav title="Examples" :list="examples" base="/examples" :open="false" />
 	</nav>
 </template>
 
@@ -16,33 +18,59 @@ export default {
 	data() {
 		return {
 			intro: [
-				'Install',
-				'Philosophy'
+				{ name: 'Philosophy', url: 'Philosophy' }
 			],
 			docs: [
-				'Plugin install',
-				'New form',
-				'SetField',
-				'Validation',
-				'Conditions',
-				'Helper functions',
-				'Best practices'
+				{ name: 'Install', url: 'Install', children: [] },
+				{ name: 'New form', url: 'new', children: [] },
+				{ name: 'SetField', url: 'SetField', children: [] },
+				{ name: 'Validation', url: 'Validation', children: [] },
+				{ name: 'Conditions', url: 'Conditions', children: [] },
+				{ name: 'Helper functions', url: 'Helper', children: [] },
+				{ name: 'Best practices', url: 'Best', children: [] },
 			],
 			inputFields: [
-				'text',
-				'phone',
-				'date',
-				'number',
-				'email',
-				'tel',
-				'password',
-				'range',
-				'hidden',
-				'file',
-				'select',
-				'checkbox',
-				'radio',
-				'textarea'
+				{ name: 'Start', url: '', children: [] },
+				{ name: 'Text', url: 'text', children: [] },
+				{ name: 'Phone', url: 'phone', children: [] },
+				{ name: 'Date', url: 'date', children: [] },
+				{ name: 'Number', url: 'number', children: [] },
+				{ name: 'Email', url: 'email', children: [] },
+				{ name: 'Tel', url: 'tel', children: [] },
+				{ name: 'Password', url: 'password', children: [] },
+				{ name: 'Range', url: 'range', children: [] },
+				{ name: 'Hidden', url: 'hidden', children: [] },
+				{ name: 'File', url: 'file', children: [] },
+				{ name: 'Select', url: 'select', children: [] },
+				{ name: 'Checkbox', url: 'checkbox', children: [] },
+				{ name: 'Radio', url: 'radio', children: [] },
+				{ name: 'Textarea', url: 'textarea', children: [] },
+			],
+			validationPages: [
+				{ name: 'Start', url: '', children: [] },
+				{ name: 'Creditcard', url: 'creditcard', children: [] },
+				{ name: 'Date', url: 'date', children: [] },
+				{ name: 'Email', url: 'email', children: [] },
+				{ name: 'Equalto', url: 'equalto', children: [] },
+				{ name: 'Max', url: 'max', children: [] },
+				{ name: 'Maxlength', url: 'maxlength', children: [] },
+				{ name: 'Min', url: 'min', children: [] },
+				{ name: 'Minlength', url: 'minlength', children: [] },
+				{ name: 'Notequalto', url: 'notequalto', children: [] },
+				{ name: 'Number', url: 'number', children: [] },
+				{ name: 'Phone', url: 'phone', children: [] },
+				{ name: 'Postalcode', url: 'postalcode', children: [] },
+				{ name: 'Required', url: 'required', children: [] },
+				{ name: 'Text', url: 'text', children: [] },
+				{ name: 'Url', url: 'url', children: [] },
+				{ name: 'Vat', url: 'vat', children: [] },
+			],
+			examples: [
+				{ name: 'Checkout shop', url: 'checkout', children: [] },
+				{ name: 'Checkout shop 2', url: 'checkout-2', children: [] },
+				{ name: 'Login email', url: 'login-email', children: [] },
+				{ name: 'Login Username', url: 'login-username', children: [] },
+				{ name: 'Signup', url: 'signup', children: [] }
 			],
 		};
 	}
