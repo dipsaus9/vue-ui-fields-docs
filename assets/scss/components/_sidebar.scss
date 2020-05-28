@@ -36,7 +36,7 @@
       font-size: rem(15);
       font-weight: 400;
 			line-height: rem(21);
-			&:hover, &:focus {
+			&:hover, &:focus, &.nuxt-link-active {
 				color: #3eaf7c;
 			}
     }

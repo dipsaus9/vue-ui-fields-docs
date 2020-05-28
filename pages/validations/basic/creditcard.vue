@@ -11,13 +11,14 @@
 				You can use this like this:
 			</p>
 		</div>
-		<form novalidate @submit.prevent="submit">
-			<client-only>
-				<uiFields name="creditcard" class="creditcard" component="fieldset" />
-			</client-only>
-		</form>
-		<ClientOnly>
-			<VueCodeHighlight class="code">
+		<div class="content">
+			<form novalidate @submit.prevent="submit">
+				<ClientOnly>
+					<uiFields name="creditcard" class="creditcard" component="fieldset" />
+				</ClientOnly>
+			</form>
+			<ClientOnly>
+				<VueCodeHighlight class="code">
 this.$uiFields.new('creditcard');
 
 this.$uiFields.setFields('creditcard', [
@@ -51,13 +52,13 @@ this.$uiFields.setFields('creditcard', [
 		]
 	}
 ]);
-			</VueCodeHighlight>>
-		</ClientOnly>
+				</VueCodeHighlight>
+			</ClientOnly>
+		</div>
 	</section>
 </template>
 
 <script>
-
 export default {
 	mounted() {
 		this.$uiFields.new('creditcard');

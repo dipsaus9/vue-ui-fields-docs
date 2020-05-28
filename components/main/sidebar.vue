@@ -2,7 +2,7 @@
 	<nav class="sidebar">
 		<SubNav title="Installation" :list="intro" :open="true" />
 		<SubNav title="Documentation" :list="docs" :open="true" />
-		<SubNav title="Input options" :list="inputFields" />
+		<SubNav title="Input options" :list="inputFields" :open="true" />
 	</nav>
 </template>
 
@@ -26,7 +26,7 @@ export default {
 				'Validation',
 				'Conditions',
 				'Helper functions',
-				'Best practices',
+				'Best practices'
 			],
 			inputFields: [
 				'text',

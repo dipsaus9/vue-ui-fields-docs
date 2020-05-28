@@ -4,7 +4,7 @@ Vue.mixin({
 		copyToKeyboard(e) {
 			const codeEl = e.target.nextElementSibling;
 			const copyTextarea = codeEl.querySelector('code');
-			const text = copyTextarea.innerHTML;
+			const text = copyTextarea.textContent;
 
 			const textArea = document.createElement('textarea');
 			textArea.value = text;

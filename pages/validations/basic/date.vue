@@ -16,29 +16,34 @@
 				{{ !isCode ? 'Syntax' : 'Test form' }}
 			</button>
 		</div>
+		<div class="content usage">
+			<ClientOnly>
+				<div class="code" :class="!isCode ? 'hide' : ''">
+					<button @click="copyToKeyboard">
+						Copy
+					</button>
+					<VueCodeHighlight language="javascript">
+this.$uiFields.new('date');
 
-		<div class="usage" :class="!isCode ? 'hide' : ''">
-			<h2>Syntax</h2>
-			<VueCodeHighlight language="javascript">
-				{
-					name: 'date',
-					type: 'text',
-					validation: [
-						{
-							name: 'date'
-						}
-					]
-				}
-			</VueCodeHighlight>
-		</VueCodeHighlight>
->
-</div>
-
-		<form novalidate :class="isCode ? 'hide' : ''" @submit.prevent="submit">
-			<client-only>
-				<uiFields name="date" class="date" component="fieldset" />
-			</client-only>
-		</form>
+this.$uiFields.setField('date',
+	{
+		name: 'date',
+		type: 'text',
+		label: 'Example',
+		validation: [
+			{
+				name: 'date'
+			}
+		]
+	}
+);
+						</VueCodeHighlight>
+				</div>
+				<form novalidate :class="isCode ? 'hide' : ''" @submit.prevent="submit">
+					<uiFields name="date" class="date" component="fieldset" />
+				</form>
+			</ClientOnly>
+		</div>
 	</section>
 </template>
 
@@ -56,7 +61,7 @@ export default {
 	mounted() {
 		this.$uiFields.new('date');
 
-		this.$uiFields.setFields('date', [
+		this.$uiFields.setField('date',
 			{
 				name: 'date',
 				type: 'text',
@@ -67,7 +72,7 @@ export default {
 					}
 				]
 			}
-		]);
+		);
 	},
 	methods: {
 		toggle() {
