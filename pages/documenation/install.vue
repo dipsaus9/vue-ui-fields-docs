@@ -98,6 +98,25 @@ Vue.use(uiFields);
 				<p>
 					You can change the base url to send out forms. This feature only works when using helper functions.
 				</p>
+			<h4>Example</h4>
+			<ClientOnly>
+					<div class="code">
+						<button @click="copyToKeyboard">
+							Copy
+						</button>
+						<VueCodeHighlight>import Vue from 'vue';
+import uiFields from 'vue-ui-fields';
+
+Vue.use(uiFields, {
+		persistentTime: 1000 * 60,
+		baseURL: 'https://youreserver.com;,
+		lang: 'nl',
+		projectName: 'Test',
+		className: 'test'
+});
+	</VueCodeHighlight>
+				</div>
+				</ClientOnly>
 			</div>
 		</div>
 	</section>

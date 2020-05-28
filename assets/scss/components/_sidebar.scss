@@ -4,7 +4,9 @@
 	height: calc(100vh - 3.6rem);
 	padding: 1.5rem;
 	overflow-y: auto;
-  border-right: 1px solid #eaecef;
+	border-right: 1px solid #eaecef;
+	position: fixed;
+	top: 3.6rem;
 	&__links {
 		padding: 0 rem(12);
 		margin: 0;

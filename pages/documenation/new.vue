@@ -38,6 +38,17 @@
 						<VueCodeHighlight>{{ weirdHTML }}</VueCodeHighlight>
 					</div>
 				</ClientOnly>
+				<p>
+					The component contains some options you can change. You can always change the class name by simply adding the class element to it. You can also change the first html element wrapping all fields. You can do this by adding a component tag.
+				</p>
+				<ClientOnly>
+					<div class="code">
+						<button @click="copyToKeyboard">
+							Copy
+						</button>
+						<VueCodeHighlight>{{ weirdHTML2 }}</VueCodeHighlight>
+					</div>
+				</ClientOnly>
 			</div>
 		</div>
 	</section>
@@ -46,7 +57,10 @@
 export default {
 	data() {
 		return {
-			weirdHTML: '<template><UiFields name="Your_form_name_here" /></template>'
+			weirdHTML: `<template>
+	<UiFields name="Your_form_name_here" />
+</template>`,
+			weirdHTML2: '<UiFields name="Your_form_name_here" component="fieldset" class="container-class"/>'
 		};
 	}
 };
