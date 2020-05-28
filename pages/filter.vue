@@ -212,8 +212,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import '~tools';
-
 * {
 	box-sizing: border-box;
 	margin: 0;
