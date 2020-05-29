@@ -73,10 +73,10 @@
 				Persistent time
 				</h4>
 				<p>
-					You can change the time your data stays in the localstorage with the <code>persistentTimme</code> key (time in microseconds. Defaults to: <code>4320000</code> (1000 * 60 * 60 * 12 - half a day)
+					You can change the time your data stays in the localstorage with the <code>persistentTime</code> key (time in microseconds. Defaults to: <code>4320000</code> (1000 * 60 * 60 * 12 - half a day)
 				</p>
 				<h4 id="lang">
-				Languague
+				Language
 				</h4>
 				<p>
 					You can change the default language used for validation with the <code>lang</code> key. Defaults to <code>en</code>. <code>nl</code> is the only other option at this moment.
@@ -85,7 +85,7 @@
 				Class name
 				</h4>
 				<p>
-					You can change the default class name used for all the components with the <code>className</code> key. Defaults to <code>ui-fields</code>
+					You can change the base class name used for all the components with the <code>className</code> key. Defaults to <code>ui-fields</code>
 				</p>
 				<h4 id="base-url">
 				Base URL
@@ -123,7 +123,7 @@ import uiFields from 'vue-ui-fields';
 
 Vue.use(uiFields, {
 	persistentTime: 1000 * 60,
-	baseURL: 'https://youreserver.com',
+	baseURL: 'https://yourserver.com',
 	lang: 'nl',
 	projectName: 'Test',
 	className: 'test'
