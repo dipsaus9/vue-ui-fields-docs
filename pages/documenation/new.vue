@@ -6,13 +6,6 @@
 					Documentation - New Form
 				</h1>
 				<p>
-					Create a new form to start.
-				</p>
-			</div>
-		</div>
-		<div class="content">
-			<div>
-				<p>
 					When using UI Fields you first have to start by creating a new form instance. You can do this by using the UI Fields prototype created by installing UI Fields.
 				</p>
 				<ClientOnly>
@@ -26,7 +19,11 @@
 				<p>
 					Creating a new instance also returns the instance. You can also call this instance with the prototype. All functions are available on both methods.
 				</p>
-				<h3>Template</h3>
+			</div>
+		</div>
+		<div class="content">
+			<div>
+				<h2>Template</h2>
 				<p>
 					You can now use the UI Fields component in your template. This will automaticaly render the form (without fields for now).
 				</p>
@@ -49,6 +46,18 @@
 						<VueCodeHighlight>{{ weirdHTML2 }}</VueCodeHighlight>
 					</div>
 				</ClientOnly>
+				<h2>Class name</h2>
+				<p>
+					You can also change the base class name of the form. This class will be used as base for the entire form. This overwrites the base class you use in the install option.
+				</p>
+				<ClientOnly>
+					<div class="code">
+						<button @click="copyToKeyboard">
+							Copy
+						</button>
+						<VueCodeHighlight>{{ withClassName }}</VueCodeHighlight>
+					</div>
+				</ClientOnly>
 			</div>
 		</div>
 	</section>
@@ -60,7 +69,12 @@ export default {
 			weirdHTML: `<template>
 	<UiFields name="Your_form_name_here" />
 </template>`,
-			weirdHTML2: '<UiFields name="Your_form_name_here" component="fieldset" class="container-class"/>'
+			weirdHTML2: `<UiFields 
+	name="Your_form_name_here"
+	component="fieldset"
+	class="container-class"
+/>`,
+			withClassName: 'this.$uiFields.new(\'Your_form_name_here\', \'my-awesome-class\');'
 		};
 	}
 };

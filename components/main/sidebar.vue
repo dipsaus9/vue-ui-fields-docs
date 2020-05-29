@@ -23,7 +23,7 @@ export default {
 			docs: [
 				{ name: 'Install', url: 'Install', children: [] },
 				{ name: 'New form', url: 'new', children: [] },
-				{ name: 'SetField', url: 'set-field', children: [] },
+				{ name: 'Set Field(s)', url: 'set-field', children: [] },
 				{ name: 'Validation', url: 'Validation', children: [] },
 				{ name: 'Conditions', url: 'Conditions', children: [] },
 				{ name: 'Helper functions', url: 'Helpers', children: [] },
