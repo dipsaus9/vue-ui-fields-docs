@@ -8,6 +8,13 @@
 				<NuxtLink class="sidebar__link" :to="`${base}/${page.url.split(' ').join('-').toLowerCase()}`">
 					{{ page.name }}
 				</NuxtLink>
+				<ul v-if="page.children && page.children.length">
+					<li v-for="(subPage, key) in page.children" :key="key" class="sidebar__item-secondary">
+						<NuxtLink class="sidebar__link" :to="`${base}/${page.url.split(' ').join('-').toLowerCase()}${subPage.url}`">
+							{{ subPage.name }}
+						</NuxtLink>
+					</li>
+				</ul>
 			</li>
 		</ul>
 	</div>

@@ -20,7 +20,7 @@
 					All components in UI Fields can be used seperately and are lazyloaded. UI Fields uses simple-crypto-js and validator js as a dependency.
 				</p>
 				<p>
-					UI Fields is using the prototype of Vue. The data is being managed by JS Maps. Understanding Maps helps understanding data formatting in Ui Fields. For more information <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map" target="_blank">check out the documenation.</a>
+					UI Fields is using the prototype of Vue. The data is being managed by JS Maps. Understanding Maps helps understanding data formatting in Ui Fields. For more information <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map" target="_blank">check out the documentation.</a>
 				</p>
 				<h2>
 					Table of index
@@ -44,42 +44,42 @@
 						</span>
 						<ul>
 							<li>
-								<NuxtLink to="/documenation/install">
+								<NuxtLink to="/documentation/install">
 									Install
 								</NuxtLink>
 							</li>
 							<li>
-								<NuxtLink to="/documenation/new">
+								<NuxtLink to="/documentation/new">
 									New form
 								</NuxtLink>
 							</li>
 							<li>
-								<NuxtLink to="/documenation/set-field">
+								<NuxtLink to="/documentation/set-field">
 									Set Field
 								</NuxtLink>
 							</li>
 							<li>
-								<NuxtLink to="/documenation/validation">
+								<NuxtLink to="/documentation/validation">
 									Validation
 								</NuxtLink>
 							</li>
 							<li>
-								<NuxtLink to="/documenation/condition">
+								<NuxtLink to="/documentation/condition">
 									Condition fields
 								</NuxtLink>
 							</li>
 							<li>
-								<NuxtLink to="/documenation/subscribe">
+								<NuxtLink to="/documentation/subscribe">
 									Subscribe
 								</NuxtLink>
 							</li>
 							<li>
-								<NuxtLink to="/documenation/helpers">
+								<NuxtLink to="/documentation/helpers">
 									Helper functions
 								</NuxtLink>
 							</li>
 							<li>
-								<NuxtLink to="/documenation/best-practices">
+								<NuxtLink to="/documentation/best-practices">
 									Best practices
 								</NuxtLink>
 							</li>

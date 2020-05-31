@@ -13,7 +13,7 @@
 						<button @click="copyToKeyboard">
 							Copy
 						</button>
-						<VueCodeHighlight>git clone vue-ui-fields</VueCodeHighlight>
+						<VueCodeHighlight>npm i vue-ui-fields</VueCodeHighlight>
 					</div>
 				</ClientOnly>
 			</div>

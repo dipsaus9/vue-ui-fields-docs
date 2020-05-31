@@ -6,7 +6,7 @@
 					Documentation - Validation
 				</h1>
 				<p>
-					The idea of UI Fields started a long time ago.
+					UI Fields gives you the opportunity to validate al fields client side.
 				</p>
 			</div>
 		</div>

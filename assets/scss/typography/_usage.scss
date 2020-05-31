@@ -30,6 +30,18 @@ section {
         list-style: disc;
       }
     }
+    h3, h4, h5 {
+      margin: 2rem 0;
+      &:before {
+        content: '#';
+        color: #3eaf7c;
+      }
+    }
+    h3 {
+      &:before {
+        padding-right: rem(5);
+      }
+    }
   }
 }
 

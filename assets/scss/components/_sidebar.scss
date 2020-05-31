@@ -5,25 +5,15 @@
 	padding: 1.5rem;
 	overflow-y: auto;
 	border-right: 1px solid #eaecef;
-	position: fixed;
-	top: 3.6rem;
+	position: sticky;
+	top: 0;
 	&__links {
 		padding: 0 rem(12);
 		margin: 0;
 		font-weight: 400;
 	}
-	&__item {
-		margin: 0.5rem 0;
-		transition: 0.3s;
-	}
-	&__item:hover {
-		transform: translateX(5px);
-	}
 	&__link {
 		color: #2c3e50;
-	}
-	> .sidebar__link {
-		display: block;
 	}
 	div {
 		margin-top: rem(15);
@@ -35,24 +25,54 @@
     margin: 0;
 		padding: rem(5) 0;
 		position: relative;
+		&.sidebar__item-secondary {
+			padding: 0;
+			&:before {
+				content: none;
+			}
+		}
+		> ul {
+			display: none;
+		}
     a {
 			text-decoration: none;
-      font-size: rem(15);
+			font-size: rem(15);
+			position: relative;
       font-weight: 400;
 			line-height: rem(21);
+			left: 0;
+			transition: .2s ease-in-out;
+			&:hover, &:focus {
+				left: 5px;
+			}
 			&:hover, &:focus, &.nuxt-link-active {
 				color: #3eaf7c;
 			}
 			&.nuxt-link-active {
+				&:hover, &:focus {
+					&:before {
+						left: rem(-41);
+					}
+				}
 				&:before {
 					content: '';
+					transition: .2s ease-in-out;
 					display: block;
 					position: absolute;
 					left: -2.25rem;
-					top: 0;
+					top: rem(-5);
 					width: 4px;
-					height: 100%;
+					height: calc(100% + 10px);
 					background: #3eaf7c;
+				}
+				& + ul {
+					display: flex;
+					flex-direction: column;
+					li a {
+						&:before {
+							content: none;
+						}
+					}
 				}
 			}
     }
