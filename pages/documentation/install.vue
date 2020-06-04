@@ -107,8 +107,13 @@
 					UI Fields is not compiled yet, so you need a runtime compiler from Vue. Also UI Fields uses async / await, so you might have to babel this.
 				</p>
 			</div>
+			<div class="next">
+				<NuxtLink to="/documentation/new">
+					New Form
+				</NuxtLink>
 		</div>
-	</section>
+	</div>
+</section>
 </template>
 <script>
 export default {

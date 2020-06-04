@@ -59,6 +59,11 @@
 					</div>
 				</ClientOnly>
 			</div>
+			<div class="next">
+				<NuxtLink to="/documentation/set-field">
+					Set field(s)
+				</NuxtLink>
+		</div>
 		</div>
 	</section>
 </template>

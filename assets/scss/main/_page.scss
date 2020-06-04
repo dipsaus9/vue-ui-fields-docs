@@ -13,6 +13,17 @@
 
 div.content {
 	display: flex;
+	.next {
+		display: flex;
+		justify-content: flex-end;
+		width: 100%;
+		margin: rem(48 0);
+		a {
+			&:after {
+				content: '→';
+			}
+		}
+	}
 }
 section .content {
 	display: flex;
