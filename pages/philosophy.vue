@@ -37,6 +37,12 @@
 						<VueCodeHighlight>npm i vue-ui-fields</VueCodeHighlight>
 					</div>
 				</ClientOnly>
+				<p>
+					UI Fields creates a form based on a two steps. First you need to
+					create a new form so UI Fields knows you are creating html. After this
+					you can add fields to the form with the setField function. Now you are
+					ready to go, this will render all the html you need for your form.
+				</p>
 			</div>
 		</div>
 	</section>

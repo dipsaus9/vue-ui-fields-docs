@@ -6,7 +6,10 @@
 					Documentation - Validation
 				</h1>
 				<p>
-					UI Fields gives you the opportunity to validate al fields client side. Within UI Fields there are some validation options included from <code>validator.js</code>, others are just simpel validation rules. You can add multiple validation rules to a single field.
+					UI Fields gives you the opportunity to validate al fields client side.
+					Within UI Fields there are some validation options included from
+					<code>validator.js</code>, others are just simpel validation rules.
+					You can add multiple validation rules to a single field.
 				</p>
 			</div>
 		</div>
@@ -14,7 +17,8 @@
 			<div>
 				<h2>Validation</h2>
 				<p>
-					To enable validation you can add the validation option in the setField function descrbed in the
+					To enable validation you can add the validation option in the setField
+					function descrbed in the
 					<NuxtLink to="/documentation/set-field">
 						Set Field(s)
 					</NuxtLink>
@@ -29,13 +33,17 @@
 					</div>
 				</ClientOnly>
 				<p>
-					This example code add the required validation rule to the field. If the field is still empty after the blur event on the field the error message will show. All messages are defined but can be overwritten.
+					This example code add the required validation rule to the field. If
+					the field is still empty after the blur event on the field the error
+					message will show. All messages are defined but can be overwritten.
 				</p>
 				<h3 id="messages">
 					Messages
 				</h3>
 				<p>
-					UI Fields error messages are included in dutch and english. If you want to change the message given after an error you can by changing the validation string to an object.
+					UI Fields error messages are included in dutch and english. If you
+					want to change the message given after an error you can by changing
+					the validation string to an object.
 				</p>
 				<ClientOnly>
 					<div class="code">
@@ -46,7 +54,8 @@
 					</div>
 				</ClientOnly>
 				<p>
-					The message can be a string or a function. The function contains two parameters, first the value of the input and secondly the field name.
+					The message can be a string or a function. The function contains two
+					parameters, first the value of the input and secondly the field name.
 				</p>
 				<ClientOnly>
 					<div class="code">
@@ -58,7 +67,9 @@
 				</ClientOnly>
 				<h3>Options</h3>
 				<p>
-					Some validation rules need some extra data. For example the <code>min</code> validation. In this example the min value of the number input has to be 5.
+					Some validation rules need some extra data. For example the
+					<code>min</code> validation. In this example the min value of the
+					number input has to be 5.
 				</p>
 				<ClientOnly>
 					<div class="code">
@@ -73,27 +84,24 @@
 					The predefined validation rules are:
 				</p>
 				<ul>
-					<li>
-						<code>required</code> - False if empty
-					</li>
+					<li><code>required</code> - False if empty</li>
 					<li>
 						<code>text</code> - False if contains something else then letters
 					</li>
+					<li><code>url</code> - False if no URL</li>
 					<li>
-						<code>url</code> - False if no URL
+						<code>vat</code> - False if not a valid VAT (needs country or
+						<code>any</code>, can be string or array)
 					</li>
 					<li>
-						<code>vat</code> - False if not a valid VAT (needs country or <code>any</code>, can be string or array)
+						<code>postalcode</code> - False if not a valid postalcode (needs
+						country or <code>any</code>, can be string or array)
 					</li>
 					<li>
-						<code>postalcode</code> - False if not a valid postalcode (needs country or <code>any</code>, can be string or array)
+						<code>phone</code> - False if not a valid phonenumber (needs country
+						or <code>any</code>, can be string or array)
 					</li>
-					<li>
-						<code>phone</code> - False if not a valid phonenumber (needs country or <code>any</code>, can be string or array)
-					</li>
-					<li>
-						<code>number</code> - False if not a number
-					</li>
+					<li><code>number</code> - False if not a number</li>
 					<li>
 						<NuxtLink to="#notequalto">
 							<code>notequalto</code> - False if matching other field
@@ -105,32 +113,29 @@
 						</NuxtLink>
 					</li>
 					<li>
-						<code>minlength</code> - False if less then minlength (needs minlength option)
+						<code>minlength</code> - False if less then minlength (needs
+						minlength option)
 					</li>
+					<li><code>min</code> - False if less then min (needs min option)</li>
 					<li>
-						<code>min</code> - False if less then min (needs min option)
+						<code>maxlength</code> - False if more then maxlength (needs
+						maxlength option)
 					</li>
+					<li><code>max</code> - False if more then max (needs max option)</li>
 					<li>
-						<code>maxlength</code> - False if more then maxlength (needs maxlength option)
+						<code>includes</code> - False if value not in array (needs array as
+						option)
 					</li>
-					<li>
-						<code>max</code> - False if more then max (needs max option)
-					</li>
-					<li>
-						<code>includes</code> - False if value not in array (needs array as option)
-					</li>
-					<li>
-						<code>email</code> - False if not a valid email
-					</li>
-					<li>
-						<code>creditcard</code> - False if not a valid creditcard
-					</li>
+					<li><code>email</code> - False if not a valid email</li>
+					<li><code>creditcard</code> - False if not a valid creditcard</li>
 				</ul>
 				<h3 id="notequalto">
 					notequalto
 				</h3>
 				<p>
-					This validation option is if you want to check if a field value is not the same as an other field. You can check this by passing the function of the other field.
+					This validation option is if you want to check if a field value is not
+					the same as an other field. You can check this by passing the function
+					of the other field.
 				</p>
 				<ClientOnly>
 					<div class="code">
@@ -144,7 +149,9 @@
 					equalto
 				</h3>
 				<p>
-					This validation option is if you want to check if a field value is the same as an other field. You can check this by passing the function of the other field.
+					This validation option is if you want to check if a field value is the
+					same as an other field. You can check this by passing the function of
+					the other field.
 				</p>
 				<ClientOnly>
 					<div class="code">
@@ -158,7 +165,10 @@
 					Custom
 				</h2>
 				<p>
-					It is also possible to write your own custom validation. Custom validaiton requires all options to be added. For example this validation will only work when the value is matching the option passed into the validation.
+					It is also possible to write your own custom validation. Custom
+					validaiton requires all options to be added. For example this
+					validation will only work when the value is matching the option passed
+					into the validation.
 				</p>
 				<ClientOnly>
 					<div class="code">
@@ -168,6 +178,11 @@
 						<VueCodeHighlight>{{ custom }}</VueCodeHighlight>
 					</div>
 				</ClientOnly>
+			</div>
+			<div class="next">
+				<NuxtLink to="/documentation/conditions">
+					Conditions
+				</NuxtLink>
 			</div>
 		</div>
 	</section>
@@ -271,8 +286,8 @@ export default {
 			}
 		]
 	}
-);`
+);`,
 		};
-	}
+	},
 };
 </script>

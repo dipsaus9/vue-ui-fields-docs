@@ -1,3 +1,4 @@
+<!-- eslint-disable --->
 <template>
 	<section>
 		<div class="intro">
@@ -15,9 +16,7 @@
 						<button @click="copyToKeyboard">
 							Copy
 						</button>
-						<VueCodeHighlight>
-							this.$uiFields.new('Your_form_name_here');
-						</VueCodeHighlight>
+						<VueCodeHighlight>this.$uiFields.new('Your_form_name_here');</VueCodeHighlight>
 					</div>
 				</ClientOnly>
 				<p>
@@ -90,6 +89,7 @@ export default {
 	component="fieldset"
 	class="container-class"
 />`,
+			/* eslint-disable */
 			withClassName:
 				"this.$uiFields.new('Your_form_name_here', 'my-awesome-class');",
 		};
