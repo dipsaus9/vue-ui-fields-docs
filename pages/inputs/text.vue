@@ -18,7 +18,7 @@
 					type: 'text'
 				}
 			</VueCodeHighlight>
-			</div>
+		</div>
 		<form novalidate :class="isCode ? 'hide' : ''" @submit.prevent="submit">
 			<client-only>
 				<uiFields name="form" class="form" component="fieldset" />
@@ -28,10 +28,6 @@
 </template>
 
 <script>
-
-
-
-
 export default {
 	data() {
 		return {

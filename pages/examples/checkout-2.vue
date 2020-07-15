@@ -1,6 +1,5 @@
-
 <template>
-<!-- Scholtens werkplek formulier beter maken. Subscribe functions toevoegen voor ander andress -->
+	<!-- Scholtens werkplek formulier beter maken. Subscribe functions toevoegen voor ander andress -->
 	<section>
 		<div class="intro">
 			<h1 class="intro__title">
@@ -14,270 +13,65 @@
 		<div class="usage" :class="!isCode ? 'hide' : ''">
 			<h2>Syntax</h2>
 			<VueCodeHighlight language="javascript">
-				this.$uiFields.new('checkout');
-				this.$uiFields.new('different-address');
-
-				this.$uiFields.setFields('checkout', [
-					{
-						name: 'person',
-						type: 'select',
-						label: 'What are you',
-						options: [
-							{
-								name: 'individual',
-								label: 'Individual',
-								value: 'individual'
-							},
-							{
-								name: 'company',
-								label: 'Company',
-								value: 'individual'
-							}
-						],
-						validation: [
-							{
-								name: 'required'
-							}
-						]
-					},
-					{
-						name: 'firstname',
-						type: 'text',
-						label: 'firstname',
-						validation: [
-							{
-								name: 'required'
-							},
-							{
-								name: 'text'
-							}
-						]
-					},
-					{
-						name: 'lastname',
-						type: 'text',
-						label: 'Lastname',
-						validation: [
-							{
-								name: 'required'
-							},
-							{
-								name: 'text'
-							}
-						]
-					},
-					{
-						name: 'email',
-						type: 'email',
-						label: 'E-mail',
-						validation: [
-							{
-								name: 'required'
-							},
-							{
-								name: 'email'
-							}
-						]
-					},
-					{
-						name: 'phone',
-						type: 'phone',
-						label: 'Phonenumber',
-						validation: [
-							{
-								name: 'required'
-							},
-							{
-								name: 'phone'
-							}
-						]
-					},
-					{
-						name: 'postalcode',
-						type: 'text',
-						label: 'Postalcode',
-						validation: [
-							{
-								name: 'required'
-							},
-							{
-								name: 'postalcode'
-							}
-						]
-					},
-					{
-						name: 'street',
-						type: 'text',
-						label: 'Street',
-						validation: [
-							{
-								name: 'required'
-							},
-							{
-								name: 'text'
-							}
-						]
-					},
-					{
-						name: 'housenumber',
-						type: 'number',
-						label: 'Housenumber',
-						validation: [
-							{
-								name: 'required'
-							},
-							{
-								name: 'number'
-							}
-						]
-					},
-					{
-						name: 'city',
-						type: 'text',
-						label: 'City',
-						validation: [
-							{
-								name: 'required'
-							},
-							{
-								name: 'text'
-							}
-						]
-					},
-					{
-						name: 'country',
-						type: 'select',
-						label: 'Country',
-						options: [
-							{
-								name: 'netherland',
-								label: 'Netherland',
-								value: 'NL'
-							},
-							{
-								name: 'belgium',
-								label: 'Belgium',
-								value: 'BE'
-							},
-							{
-								name: 'germany',
-								label: 'Germany',
-								value: 'GE'
-							},
-							{
-								name: 'luxembourg',
-								label: 'Luxembourg',
-								value: 'L'
-							}
-						],
-						validation: [
-							{
-								name: 'required'
-							}
-						]
-					},
-					{
-						name: 'diff-address',
-						type: 'checkbox',
-						options: [
-							{
-								name: 'other-address',
-								label: 'Other deliver address',
-								value: 'true'
-							}
-						]
-					}
-				]);
-
-				this.$uiFields.setFields('different-address', [
-					{
-						name: 'diff-firstname',
-						type: 'text',
-						label: 'Firstname',
-					},
-					{
-						name: 'diff-lastname',
-						type: 'text',
-						label: 'Lastname',
-					},
-					{
-						name: 'diff-email',
-						type: 'email',
-						label: 'E-mail',
-					},
-					{
-						name: 'diff-postalcode',
-						type: 'text',
-						label: 'Postalcode',
-					},
-					{
-						name: 'diff-street',
-						type: 'text',
-						label: 'street',
-					},
-					{
-						name: 'diff-housenumber',
-						type: 'text',
-						label: 'Housenumber',
-					},
-					{
-						name: 'diff-city',
-						type: 'text',
-						label: 'City',
-					},
-					{
-						name: 'country',
-						type: 'select',
-						label: 'Country',
-						options: [
-							{
-								name: 'netherland',
-								label: 'Netherland',
-								value: 'NL'
-							},
-							{
-								name: 'belgium',
-								label: 'Belgium',
-								value: 'BE'
-							},
-							{
-								name: 'germany',
-								label: 'Germany',
-								value: 'GE'
-							},
-							{
-								name: 'luxembourg',
-								label: 'Luxembourg',
-								value: 'L'
-							}
-						]
-					}
-				]);
+				this.$uiFields.new('checkout'); this.$uiFields.new('different-address');
+				this.$uiFields.setFields('checkout', [ { name: 'person', type: 'select',
+				label: 'What are you', options: [ { name: 'individual', label:
+				'Individual', value: 'individual' }, { name: 'company', label:
+				'Company', value: 'individual' } ], validation: [ { name: 'required' } ]
+				}, { name: 'firstname', type: 'text', label: 'firstname', validation: [
+				{ name: 'required' }, { name: 'text' } ] }, { name: 'lastname', type:
+				'text', label: 'Lastname', validation: [ { name: 'required' }, { name:
+				'text' } ] }, { name: 'email', type: 'email', label: 'E-mail',
+				validation: [ { name: 'required' }, { name: 'email' } ] }, { name:
+				'phone', type: 'phone', label: 'Phonenumber', validation: [ { name:
+				'required' }, { name: 'phone' } ] }, { name: 'postalcode', type: 'text',
+				label: 'Postalcode', validation: [ { name: 'required' }, { name:
+				'postalcode' } ] }, { name: 'street', type: 'text', label: 'Street',
+				validation: [ { name: 'required' }, { name: 'text' } ] }, { name:
+				'housenumber', type: 'number', label: 'Housenumber', validation: [ {
+				name: 'required' }, { name: 'number' } ] }, { name: 'city', type:
+				'text', label: 'City', validation: [ { name: 'required' }, { name:
+				'text' } ] }, { name: 'country', type: 'select', label: 'Country',
+				options: [ { name: 'netherland', label: 'Netherland', value: 'NL' }, {
+				name: 'belgium', label: 'Belgium', value: 'BE' }, { name: 'germany',
+				label: 'Germany', value: 'GE' }, { name: 'luxembourg', label:
+				'Luxembourg', value: 'L' } ], validation: [ { name: 'required' } ] }, {
+				name: 'diff-address', type: 'checkbox', options: [ { name:
+				'other-address', label: 'Other deliver address', value: 'true' } ] } ]);
+				this.$uiFields.setFields('different-address', [ { name:
+				'diff-firstname', type: 'text', label: 'Firstname', }, { name:
+				'diff-lastname', type: 'text', label: 'Lastname', }, { name:
+				'diff-email', type: 'email', label: 'E-mail', }, { name:
+				'diff-postalcode', type: 'text', label: 'Postalcode', }, { name:
+				'diff-street', type: 'text', label: 'street', }, { name:
+				'diff-housenumber', type: 'text', label: 'Housenumber', }, { name:
+				'diff-city', type: 'text', label: 'City', }, { name: 'country', type:
+				'select', label: 'Country', options: [ { name: 'netherland', label:
+				'Netherland', value: 'NL' }, { name: 'belgium', label: 'Belgium', value:
+				'BE' }, { name: 'germany', label: 'Germany', value: 'GE' }, { name:
+				'luxembourg', label: 'Luxembourg', value: 'L' } ] } ]);
 			</VueCodeHighlight>
-		</VueCodeHighlight>
->
-</div>
+		</div>
 
 		<form novalidate :class="isCode ? 'hide' : ''" @submit.prevent="submit">
 			<client-only>
 				<h2>Example</h2>
 				<uiFields name="checkout" class="checkout" component="fieldset" />
-				<uiFields name="different-address" class="different-address" component="fieldset" />
+				<uiFields
+					name="different-address"
+					class="different-address"
+					component="fieldset"
+				/>
 			</client-only>
 		</form>
 	</section>
 </template>
 
 <script>
-
-
-
-
 export default {
-
 	data() {
 		return {
-			isCode: false
+			isCode: false,
 		};
 	},
 	mounted() {
@@ -293,19 +87,19 @@ export default {
 					{
 						name: 'individual',
 						label: 'Individual',
-						value: 'individual'
+						value: 'individual',
 					},
 					{
 						name: 'company',
 						label: 'Company',
-						value: 'individual'
-					}
+						value: 'individual',
+					},
 				],
 				validation: [
 					{
-						name: 'required'
-					}
-				]
+						name: 'required',
+					},
+				],
 			},
 			{
 				name: 'firstname',
@@ -313,12 +107,12 @@ export default {
 				label: 'firstname',
 				validation: [
 					{
-						name: 'required'
+						name: 'required',
 					},
 					{
-						name: 'text'
-					}
-				]
+						name: 'text',
+					},
+				],
 			},
 			{
 				name: 'lastname',
@@ -326,12 +120,12 @@ export default {
 				label: 'Lastname',
 				validation: [
 					{
-						name: 'required'
+						name: 'required',
 					},
 					{
-						name: 'text'
-					}
-				]
+						name: 'text',
+					},
+				],
 			},
 			{
 				name: 'email',
@@ -339,12 +133,12 @@ export default {
 				label: 'E-mail',
 				validation: [
 					{
-						name: 'required'
+						name: 'required',
 					},
 					{
-						name: 'email'
-					}
-				]
+						name: 'email',
+					},
+				],
 			},
 			{
 				name: 'phone',
@@ -352,12 +146,12 @@ export default {
 				label: 'Phonenumber',
 				validation: [
 					{
-						name: 'required'
+						name: 'required',
 					},
 					{
-						name: 'phone'
-					}
-				]
+						name: 'phone',
+					},
+				],
 			},
 			{
 				name: 'postalcode',
@@ -365,12 +159,12 @@ export default {
 				label: 'Postalcode',
 				validation: [
 					{
-						name: 'required'
+						name: 'required',
 					},
 					{
-						name: 'postalcode'
-					}
-				]
+						name: 'postalcode',
+					},
+				],
 			},
 			{
 				name: 'street',
@@ -378,12 +172,12 @@ export default {
 				label: 'Street',
 				validation: [
 					{
-						name: 'required'
+						name: 'required',
 					},
 					{
-						name: 'text'
-					}
-				]
+						name: 'text',
+					},
+				],
 			},
 			{
 				name: 'housenumber',
@@ -391,12 +185,12 @@ export default {
 				label: 'Housenumber',
 				validation: [
 					{
-						name: 'required'
+						name: 'required',
 					},
 					{
-						name: 'number'
-					}
-				]
+						name: 'number',
+					},
+				],
 			},
 			{
 				name: 'city',
@@ -404,12 +198,12 @@ export default {
 				label: 'City',
 				validation: [
 					{
-						name: 'required'
+						name: 'required',
 					},
 					{
-						name: 'text'
-					}
-				]
+						name: 'text',
+					},
+				],
 			},
 			{
 				name: 'country',
@@ -419,29 +213,29 @@ export default {
 					{
 						name: 'netherland',
 						label: 'Netherland',
-						value: 'NL'
+						value: 'NL',
 					},
 					{
 						name: 'belgium',
 						label: 'Belgium',
-						value: 'BE'
+						value: 'BE',
 					},
 					{
 						name: 'germany',
 						label: 'Germany',
-						value: 'GE'
+						value: 'GE',
 					},
 					{
 						name: 'luxembourg',
 						label: 'Luxembourg',
-						value: 'L'
-					}
+						value: 'L',
+					},
 				],
 				validation: [
 					{
-						name: 'required'
-					}
-				]
+						name: 'required',
+					},
+				],
 			},
 			{
 				name: 'diff-address',
@@ -450,10 +244,10 @@ export default {
 					{
 						name: 'other-address',
 						label: 'Other deliver address',
-						value: 'true'
-					}
-				]
-			}
+						value: 'true',
+					},
+				],
+			},
 		]);
 
 		this.$uiFields.setFields('different-address', [
@@ -500,25 +294,25 @@ export default {
 					{
 						name: 'netherland',
 						label: 'Netherland',
-						value: 'NL'
+						value: 'NL',
 					},
 					{
 						name: 'belgium',
 						label: 'Belgium',
-						value: 'BE'
+						value: 'BE',
 					},
 					{
 						name: 'germany',
 						label: 'Germany',
-						value: 'GE'
+						value: 'GE',
 					},
 					{
 						name: 'luxembourg',
 						label: 'Luxembourg',
-						value: 'L'
-					}
-				]
-			}
+						value: 'L',
+					},
+				],
+			},
 		]);
 
 		this.$uiFields.setCondition(
@@ -531,7 +325,7 @@ export default {
 	methods: {
 		toggle() {
 			this.isCode = !this.isCode;
-		}
-	}
+		},
+	},
 };
 </script>

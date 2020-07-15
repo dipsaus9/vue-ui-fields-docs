@@ -29,9 +29,7 @@
 					]
 				}
 			</VueCodeHighlight>
-		</VueCodeHighlight>
->
-</div>
+		</div>
 
 		<form novalidate :class="isCode ? 'hide' : ''" @submit.prevent="submit">
 			<client-only>

@@ -1,4 +1,4 @@
-/* eslint-disable vue/html-indent */
+
 <template>
 	<section>
 		<div class="intro">
@@ -30,9 +30,7 @@
 					]
 				}
 			</VueCodeHighlight>
-		</VueCodeHighlight>
->
-</div>
+		</div>
 
 		<form novalidate :class="isCode ? 'hide' : ''" @submit.prevent="submit">
 			<client-only>
@@ -41,14 +39,8 @@
 		</form>
 	</section>
 </template>
-
 <script>
-
-
-
-
 export default {
-
 	data() {
 		return {
 			isCode: false

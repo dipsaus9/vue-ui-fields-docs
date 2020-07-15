@@ -9,8 +9,9 @@
 				Validation
 			</h2>
 			<p class="intro__info">
-				If you want to validate a email in an input field you can use the email validation.
-				This validation checks if the input value contains a monkeytail (@) and a dot (.).
+				If you want to validate a email in an input field you can use the email
+				validation. This validation checks if the input value contains a
+				monkeytail (@) and a dot (.).
 			</p>
 			<button class="intro__toggle" @click="toggle()">
 				{{ !isCode ? 'Syntax' : 'Test form' }}
@@ -20,19 +21,9 @@
 		<div class="usage" :class="!isCode ? 'hide' : ''">
 			<h2>Syntax</h2>
 			<VueCodeHighlight language="javascript">
-				{
-					name: 'email',
-					type: 'text',
-					validation: [
-						{
-							name: 'email'
-						}
-					]
-				}
+				{ name: 'email', type: 'text', validation: [ { name: 'email' } ] }
 			</VueCodeHighlight>
-		</VueCodeHighlight>
->
-</div>
+		</div>
 
 		<form novalidate :class="isCode ? 'hide' : ''" @submit.prevent="submit">
 			<client-only>
@@ -43,15 +34,10 @@
 </template>
 
 <script>
-
-
-
-
 export default {
-
 	data() {
 		return {
-			isCode: false
+			isCode: false,
 		};
 	},
 	mounted() {
@@ -64,16 +50,16 @@ export default {
 				label: 'Example',
 				validation: [
 					{
-						name: 'email'
-					}
-				]
-			}
+						name: 'email',
+					},
+				],
+			},
 		]);
 	},
 	methods: {
 		toggle() {
 			this.isCode = !this.isCode;
-		}
-	}
+		},
+	},
 };
 </script>

@@ -13,17 +13,9 @@
 		<div class="usage" :class="!isCode ? 'hide' : ''">
 			<h2>Syntax</h2>
 			<VueCodeHighlight language="javascript">
-				{
-					name: 'price',
-					type: 'range',
-					label: 'Price',
-					min: 0,
-					max: 100
-				}
+				{ name: 'price', type: 'range', label: 'Price', min: 0, max: 100 }
 			</VueCodeHighlight>
-		</VueCodeHighlight>
->
-</div>
+		</div>
 
 		<form novalidate :class="isCode ? 'hide' : ''" @submit.prevent="submit">
 			<client-only>
@@ -34,15 +26,10 @@
 </template>
 
 <script>
-
-
-
-
 export default {
-
 	data() {
 		return {
-			isCode: false
+			isCode: false,
 		};
 	},
 	mounted() {
@@ -54,14 +41,14 @@ export default {
 				type: 'range',
 				label: 'Price',
 				min: 0,
-				max: 100
-			}
+				max: 100,
+			},
 		]);
 	},
 	methods: {
 		toggle() {
 			this.isCode = !this.isCode;
-		}
-	}
+		},
+	},
 };
 </script>

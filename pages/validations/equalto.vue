@@ -9,8 +9,9 @@
 				Validation
 			</h2>
 			<p class="intro__info">
-				If you want to check if a value of another field is equal to some other field you can use this validation.
-				If field A has a value of 'hello' and field B has value of 'hey', this validation gives an error
+				If you want to check if a value of another field is equal to some other
+				field you can use this validation. If field A has a value of 'hello' and
+				field B has value of 'hey', this validation gives an error
 			</p>
 			<button class="intro__toggle" @click="toggle()">
 				{{ !isCode ? 'Syntax' : 'Test form' }}
@@ -20,24 +21,11 @@
 		<div class="usage" :class="!isCode ? 'hide' : ''">
 			<h2>Syntax</h2>
 			<VueCodeHighlight language="javascript">
-				{
-					name: 'value1',
-					type: 'text'
-				},
-				{
-					name: 'value2',
-					type: 'text',
-					validation: [
-						{
-							name: 'equalTo',
-							options: () => this.$uiFields.getValue('equalto', 'value1')
-						}
-					]
-				}
+				{ name: 'value1', type: 'text' }, { name: 'value2', type: 'text',
+				validation: [ { name: 'equalTo', options: () =>
+				this.$uiFields.getValue('equalto', 'value1') } ] }
 			</VueCodeHighlight>
-		</VueCodeHighlight>
->
-</div>
+		</div>
 
 		<form novalidate :class="isCode ? 'hide' : ''" @submit.prevent="submit">
 			<client-only>
@@ -48,15 +36,10 @@
 </template>
 
 <script>
-
-
-
-
 export default {
-
 	data() {
 		return {
-			isCode: false
+			isCode: false,
 		};
 	},
 	mounted() {
@@ -75,16 +58,16 @@ export default {
 				validation: [
 					{
 						name: 'equalTo',
-						options: () => this.$uiFields.getValue('equalto', 'value1')
-					}
-				]
-			}
+						options: () => this.$uiFields.getValue('equalto', 'value1'),
+					},
+				],
+			},
 		]);
 	},
 	methods: {
 		toggle() {
 			this.isCode = !this.isCode;
-		}
-	}
+		},
+	},
 };
 </script>

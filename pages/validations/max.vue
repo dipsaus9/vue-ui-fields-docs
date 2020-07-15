@@ -9,8 +9,9 @@
 				Validation
 			</h2>
 			<p class="intro__info">
-				This validation checks if the in put is a number and if this number is bigger than the number you want to.
-				So if there's a number bigger than 5, 6 is not valid.
+				This validation checks if the in put is a number and if this number is
+				bigger than the number you want to. So if there's a number bigger than
+				5, 6 is not valid.
 			</p>
 			<button class="intro__toggle" @click="toggle()">
 				{{ !isCode ? 'Syntax' : 'Test form' }}
@@ -20,20 +21,10 @@
 		<div class="usage" :class="!isCode ? 'hide' : ''">
 			<h2>Syntax</h2>
 			<VueCodeHighlight language="javascript">
-				{
-					name: 'maximum',
-					type: 'number',
-					validation: [
-						{
-							name: 'max',
-							options: 5
-						}
-					]
-				}
+				{ name: 'maximum', type: 'number', validation: [ { name: 'max', options:
+				5 } ] }
 			</VueCodeHighlight>
-		</VueCodeHighlight>
->
-</div>
+		</div>
 
 		<form novalidate :class="isCode ? 'hide' : ''" @submit.prevent="submit">
 			<client-only>
@@ -44,15 +35,10 @@
 </template>
 
 <script>
-
-
-
-
 export default {
-
 	data() {
 		return {
-			isCode: false
+			isCode: false,
 		};
 	},
 	mounted() {
@@ -66,16 +52,16 @@ export default {
 				validation: [
 					{
 						name: 'max',
-						options: 5
-					}
-				]
-			}
+						options: 5,
+					},
+				],
+			},
 		]);
 	},
 	methods: {
 		toggle() {
 			this.isCode = !this.isCode;
-		}
-	}
+		},
+	},
 };
 </script>

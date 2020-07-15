@@ -13,80 +13,35 @@
 			<h2>Syntax</h2>
 			<VueCodeHighlight language="javascript">
 				this.$uiFields.new('login-username');
-
-				this.$uiFields.setFields('login-username', [
-					{
-						name: 'username',
-						type: 'text',
-						label: 'Username',
-						validation: [
-							{
-								name: 'required'
-							},
-							{
-								name: 'minlength',
-								options: 8
-							},
-							{
-								name: 'maxlength',
-								options: 30
-							}
-						]
-					},
-					{
-						name: 'password1',
-						type: 'password',
-						label: 'Password 1',
-						validation: [
-							{
-								name: 'minlength',
-								options: 8
-							},
-							{
-								name: 'maxlength',
-								options: 20
-							}
-						]
-					},
-					{
-						name: 'password2',
-						type: 'password',
-						label: 'Password 2',
-						validation: [
-							{
-								name: 'required'
-							},
-							{
-								name: 'equalTo',
-								options: () => this.$uiFields.getValue('validation', 'password1')
-							}
-						]
-					}
-				]);
+				this.$uiFields.setFields('login-username', [ { name: 'username', type:
+				'text', label: 'Username', validation: [ { name: 'required' }, { name:
+				'minlength', options: 8 }, { name: 'maxlength', options: 30 } ] }, {
+				name: 'password1', type: 'password', label: 'Password 1', validation: [
+				{ name: 'minlength', options: 8 }, { name: 'maxlength', options: 20 } ]
+				}, { name: 'password2', type: 'password', label: 'Password 2',
+				validation: [ { name: 'required' }, { name: 'equalTo', options: () =>
+				this.$uiFields.getValue('validation', 'password1') } ] } ]);
 			</VueCodeHighlight>
-		</VueCodeHighlight>
->
-</div>
+		</div>
 
 		<form novalidate :class="isCode ? 'hide' : ''" @submit.prevent="submit">
 			<client-only>
 				<h2>Example</h2>
-				<uiFields name="login-username" class="login-username" component="fieldset" />
+				<uiFields
+					name="login-username"
+					class="login-username"
+					component="fieldset"
+				/>
 			</client-only>
 		</form>
 	</section>
 </template>
 
 <script>
-
-
-
-
 export default {
-
 	data() {
 		return {
-			isCode: false
+			isCode: false,
 		};
 	},
 	mounted() {
@@ -99,17 +54,17 @@ export default {
 				label: 'Username',
 				validation: [
 					{
-						name: 'required'
+						name: 'required',
 					},
 					{
 						name: 'minlength',
-						options: 8
+						options: 8,
 					},
 					{
 						name: 'maxlength',
-						options: 30
-					}
-				]
+						options: 30,
+					},
+				],
 			},
 			{
 				name: 'password1',
@@ -118,13 +73,13 @@ export default {
 				validation: [
 					{
 						name: 'minlength',
-						options: 8
+						options: 8,
 					},
 					{
 						name: 'maxlength',
-						options: 20
-					}
-				]
+						options: 20,
+					},
+				],
 			},
 			{
 				name: 'password2',
@@ -132,20 +87,20 @@ export default {
 				label: 'Password 2',
 				validation: [
 					{
-						name: 'required'
+						name: 'required',
 					},
 					{
 						name: 'equalTo',
-						options: () => this.$uiFields.getValue('validation', 'password1')
-					}
-				]
-			}
+						options: () => this.$uiFields.getValue('validation', 'password1'),
+					},
+				],
+			},
 		]);
 	},
 	methods: {
 		toggle() {
 			this.isCode = !this.isCode;
-		}
-	}
+		},
+	},
 };
 </script>

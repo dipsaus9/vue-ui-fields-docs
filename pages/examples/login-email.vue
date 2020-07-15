@@ -13,55 +13,16 @@
 			<h2>Syntax</h2>
 			<VueCodeHighlight language="javascript">
 				this.$uiFields.new('login-email');
-
-				this.$uiFields.setFields('login-email', [
-					{
-						name: 'username',
-						type: 'text',
-						label: 'Email',
-						validation: [
-							{
-								name: 'required'
-							},
-							{
-								name: 'email'
-							}
-						]
-					},
-					{
-						name: 'password1',
-						type: 'password',
-						label: 'Password 1',
-						validation: [
-							{
-								name: 'minlength',
-								options: 8
-							},
-							{
-								name: 'maxlength',
-								options: 20
-							},
-						]
-					},
-					{
-						name: 'password2',
-						type: 'password',
-						label: 'Password 2',
-						validation: [
-							{
-								name: 'required'
-							},
-							{
-								name: 'equalTo',
-								options: () => this.$uiFields.getValue('validation', 'password1')
-							}
-						]
-					}
-				]);
+				this.$uiFields.setFields('login-email', [ { name: 'username', type:
+				'text', label: 'Email', validation: [ { name: 'required' }, { name:
+				'email' } ] }, { name: 'password1', type: 'password', label: 'Password
+				1', validation: [ { name: 'minlength', options: 8 }, { name:
+				'maxlength', options: 20 }, ] }, { name: 'password2', type: 'password',
+				label: 'Password 2', validation: [ { name: 'required' }, { name:
+				'equalTo', options: () => this.$uiFields.getValue('validation',
+				'password1') } ] } ]);
 			</VueCodeHighlight>
-		</VueCodeHighlight>
->
-</div>
+		</div>
 
 		<form novalidate :class="isCode ? 'hide' : ''" @submit.prevent="submit">
 			<client-only>
@@ -73,15 +34,10 @@
 </template>
 
 <script>
-
-
-
-
 export default {
-
 	data() {
 		return {
-			isCode: false
+			isCode: false,
 		};
 	},
 	mounted() {
@@ -94,12 +50,12 @@ export default {
 				label: 'Email',
 				validation: [
 					{
-						name: 'required'
+						name: 'required',
 					},
 					{
-						name: 'email'
-					}
-				]
+						name: 'email',
+					},
+				],
 			},
 			{
 				name: 'password1',
@@ -108,13 +64,13 @@ export default {
 				validation: [
 					{
 						name: 'minlength',
-						options: 8
+						options: 8,
 					},
 					{
 						name: 'maxlength',
-						options: 20
+						options: 20,
 					},
-				]
+				],
 			},
 			{
 				name: 'password2',
@@ -122,20 +78,20 @@ export default {
 				label: 'Password 2',
 				validation: [
 					{
-						name: 'required'
+						name: 'required',
 					},
 					{
 						name: 'equalTo',
-						options: () => this.$uiFields.getValue('validation', 'password1')
-					}
-				]
-			}
+						options: () => this.$uiFields.getValue('validation', 'password1'),
+					},
+				],
+			},
 		]);
 	},
 	methods: {
 		toggle() {
 			this.isCode = !this.isCode;
-		}
-	}
+		},
+	},
 };
 </script>

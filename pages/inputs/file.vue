@@ -13,14 +13,9 @@
 		<div class="usage" :class="!isCode ? 'hide' : ''">
 			<h2>Syntax</h2>
 			<VueCodeHighlight language="javascript">
-				{
-					name: 'portrait',
-					type: 'file'
-				}
+				{ name: 'portrait', type: 'file' }
 			</VueCodeHighlight>
-		</VueCodeHighlight>
->
-</div>
+		</div>
 
 		<form novalidate :class="isCode ? 'hide' : ''" @submit.prevent="submit">
 			<client-only>
@@ -31,15 +26,10 @@
 </template>
 
 <script>
-
-
-
-
 export default {
-
 	data() {
 		return {
-			isCode: false
+			isCode: false,
 		};
 	},
 	mounted() {
@@ -48,14 +38,14 @@ export default {
 		this.$uiFields.setFields('form', [
 			{
 				name: 'portrait',
-				type: 'file'
-			}
+				type: 'file',
+			},
 		]);
 	},
 	methods: {
 		toggle() {
 			this.isCode = !this.isCode;
-		}
-	}
+		},
+	},
 };
 </script>

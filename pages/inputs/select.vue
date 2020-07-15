@@ -13,21 +13,10 @@
 		<div class="usage" :class="!isCode ? 'hide' : ''">
 			<h2>Syntax</h2>
 			<VueCodeHighlight language="javascript">
-				{
-					name: 'country',
-					type: 'select',
-					options: [
-						{
-							name: 'netherland',
-							label: 'Netherland',
-							value: 'NL'
-						}
-					]
-				}
+				{ name: 'country', type: 'select', options: [ { name: 'netherland',
+				label: 'Netherland', value: 'NL' } ] }
 			</VueCodeHighlight>
-		</VueCodeHighlight>
->
-</div>
+		</div>
 
 		<form novalidate :class="isCode ? 'hide' : ''" @submit.prevent="submit">
 			<client-only>
@@ -38,15 +27,10 @@
 </template>
 
 <script>
-
-
-
-
 export default {
-
 	data() {
 		return {
-			isCode: false
+			isCode: false,
 		};
 	},
 	mounted() {
@@ -60,16 +44,16 @@ export default {
 					{
 						name: 'netherland',
 						label: 'Netherland',
-						value: 'NL'
-					}
-				]
-			}
+						value: 'NL',
+					},
+				],
+			},
 		]);
 	},
 	methods: {
 		toggle() {
 			this.isCode = !this.isCode;
-		}
-	}
+		},
+	},
 };
 </script>

@@ -9,7 +9,8 @@
 				Validation
 			</h2>
 			<p class="intro__info">
-				This validation checks if the input field is not empty.If it is empty and there's no valid value you see an error.
+				This validation checks if the input field is not empty.If it is empty
+				and there's no valid value you see an error.
 			</p>
 			<button class="intro__toggle" @click="toggle()">
 				{{ !isCode ? 'Syntax' : 'Test form' }}
@@ -19,19 +20,9 @@
 		<div class="usage" :class="!isCode ? 'hide' : ''">
 			<h2>Syntax</h2>
 			<VueCodeHighlight language="javascript">
-				{
-					name: 'required',
-					type: 'text',
-					validation: [
-						{
-							name: 'required'
-						}
-					]
-				}
+				{ name: 'required', type: 'text', validation: [ { name: 'required' } ] }
 			</VueCodeHighlight>
-		</VueCodeHighlight>
->
-</div>
+		</div>
 
 		<form novalidate :class="isCode ? 'hide' : ''" @submit.prevent="submit">
 			<client-only>
@@ -42,15 +33,10 @@
 </template>
 
 <script>
-
-
-
-
 export default {
-
 	data() {
 		return {
-			isCode: false
+			isCode: false,
 		};
 	},
 	mounted() {
@@ -63,16 +49,16 @@ export default {
 				label: 'Example',
 				validation: [
 					{
-						name: 'required'
-					}
-				]
-			}
+						name: 'required',
+					},
+				],
+			},
 		]);
 	},
 	methods: {
 		toggle() {
 			this.isCode = !this.isCode;
-		}
-	}
+		},
+	},
 };
 </script>

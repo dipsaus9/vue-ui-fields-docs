@@ -9,8 +9,9 @@
 				Validation
 			</h2>
 			<p class="intro__info">
-				This validation checks the input length. If you want the maximum input length
-				of 8 than this validation gives an error when your input value contains more than 8 characters.
+				This validation checks the input length. If you want the maximum input
+				length of 8 than this validation gives an error when your input value
+				contains more than 8 characters.
 			</p>
 			<button class="intro__toggle" @click="toggle()">
 				{{ !isCode ? 'Syntax' : 'Test form' }}
@@ -20,20 +21,10 @@
 		<div class="usage" :class="!isCode ? 'hide' : ''">
 			<h2>Syntax</h2>
 			<VueCodeHighlight language="javascript">
-				{
-					name: 'maxlength',
-					type: 'text',
-					validation: [
-						{
-							name: 'maxlength',
-							options: 5
-						}
-					]
-				}
+				{ name: 'maxlength', type: 'text', validation: [ { name: 'maxlength',
+				options: 5 } ] }
 			</VueCodeHighlight>
-		</VueCodeHighlight>
->
-</div>
+		</div>
 
 		<form novalidate :class="isCode ? 'hide' : ''" @submit.prevent="submit">
 			<client-only>
@@ -44,15 +35,10 @@
 </template>
 
 <script>
-
-
-
-
 export default {
-
 	data() {
 		return {
-			isCode: false
+			isCode: false,
 		};
 	},
 	mounted() {
@@ -66,16 +52,16 @@ export default {
 				validation: [
 					{
 						name: 'maxlength',
-						options: 5
-					}
-				]
-			}
+						options: 5,
+					},
+				],
+			},
 		]);
 	},
 	methods: {
 		toggle() {
 			this.isCode = !this.isCode;
-		}
-	}
+		},
+	},
 };
 </script>

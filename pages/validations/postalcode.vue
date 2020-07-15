@@ -19,21 +19,10 @@
 		<div class="usage" :class="!isCode ? 'hide' : ''">
 			<h2>Syntax</h2>
 			<VueCodeHighlight language="javascript">
-				{
-					name: 'postalcode1',
-					type: 'text',
-					label: 'Validation as object in array',
-					validation: [
-						{
-							name: 'postalcode',
-							options: ['NL', 'DE']
-						}
-					]
-				}
+				{ name: 'postalcode1', type: 'text', label: 'Validation as object in
+				array', validation: [ { name: 'postalcode', options: ['NL', 'DE'] } ] }
 			</VueCodeHighlight>
-		</VueCodeHighlight>
->
-</div>
+		</div>
 
 		<form novalidate :class="isCode ? 'hide' : ''" @submit.prevent="submit">
 			<client-only>
@@ -44,15 +33,10 @@
 </template>
 
 <script>
-
-
-
-
 export default {
-
 	data() {
 		return {
-			isCode: false
+			isCode: false,
 		};
 	},
 	mounted() {
@@ -66,16 +50,16 @@ export default {
 				validation: [
 					{
 						name: 'postalcode',
-						options: ['NL', 'DE']
-					}
-				]
-			}
+						options: ['NL', 'DE'],
+					},
+				],
+			},
 		]);
 	},
 	methods: {
 		toggle() {
 			this.isCode = !this.isCode;
-		}
-	}
+		},
+	},
 };
 </script>
