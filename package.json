@@ -1,7 +1,7 @@
 {
 	"name": "vue-ui-fields-tests",
 	"version": "1.0.0",
-	"description": "My grand Matise Nuxt.js project",
+	"description": "Documentation of Vue UI Fields",
 	"author": "Dennis Dipsaus",
 	"private": true,
 	"scripts": {

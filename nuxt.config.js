@@ -1,4 +1,3 @@
-import pkg from './package';
 import config from './config/latest';
 
 if (config.env === 'development') {
@@ -12,38 +11,42 @@ export default {
 	},
 
 	/*
-   ** Headers of the page
-   */
+	 ** Headers of the page
+	 */
 	head: {
 		title: 'UI Fields documenatation',
 		meta: [
 			{ charset: 'utf-8' },
 			{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
-			{ hid: 'description', name: 'description', content: pkg.description },
+			{
+				hid: 'description',
+				name: 'description',
+				content: 'Documentation of Vue UI Fields',
+			},
 		],
 		link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
 	},
 
 	/*
-   ** Customize the progress bar color
-   */
+	 ** Customize the progress bar color
+	 */
 	loading: {
 		color: '#2c3e50', //,
 	},
 
 	/*
-   ** Plugins to load before mounting the App
-   */
+	 ** Plugins to load before mounting the App
+	 */
 	plugins: ['~plugins/ui-fields.client.js', '~plugins/globals.js'],
 
 	/*
-   ** Nuxt.js modules
-   */
+	 ** Nuxt.js modules
+	 */
 	modules: ['nuxt-rfg-icon', '@nuxtjs/axios', '@nuxtjs/style-resources'],
 
 	/*
-   ** Axios module configuration
-   */
+	 ** Axios module configuration
+	 */
 	axios: {
 		retry: {
 			retries: 3,
@@ -61,12 +64,12 @@ export default {
 		fallback: true,
 	},
 	/*
-   ** Build configuration
-   */
+	 ** Build configuration
+	 */
 	build: {
 		/*
-     ** Build plugins
-     */
+		 ** Build plugins
+		 */
 		plugins: [],
 
 		// babel: {
@@ -77,8 +80,8 @@ export default {
 		transpile: [], // Name of NPM packages to be transpiled
 
 		/*
-     ** You can extend webpack config here
-     */
+		 ** You can extend webpack config here
+		 */
 		extend(config, ctx) {
 			// Define toolset shortcut
 			config.resolve.alias['~tools'] = 'assets/scss/tools.scss';
@@ -94,8 +97,8 @@ export default {
 	},
 
 	/*
-   ** Global CSS
-   */
+	 ** Global CSS
+	 */
 	css: [
 		{
 			src: '~assets/scss/app.scss',

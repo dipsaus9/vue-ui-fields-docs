@@ -6,7 +6,15 @@
 					Documentation - Conditions
 				</h1>
 				<p>
-					Vue UI Fields gives you the opportunity to toggle fields or forms based on logic. By using conditions you can create complex forms with just a single line of code.
+					Vue UI Fields gives you the opportunity to toggle fields or forms
+					based on logic. By using conditions you can create complex forms with
+					just a single line of code. For example you can show extra fields
+					depending on a select value of a first form.
+				</p>
+				<p>
+					A condition is dependent of a form, a field and its value and ofcourse
+					the form you want to toggle. You can toggle a form or a field with the
+					last 2 parameters.
 				</p>
 				<ClientOnly>
 					<div class="code">
@@ -26,6 +34,42 @@
 				<p>
 					The set condition can contain 4 variables, 3 required, 1 optional.
 				</p>
+				<h3>
+					Dependent form
+				</h3>
+				<p>
+					The first paramater is the form the field is located in. This is
+					important so UI Fields knows where to look
+				</p>
+				<h3>
+					Dependent field
+				</h3>
+				<p>
+					The second paramater is the field where the value is dependent of.
+				</p>
+				<h3>
+					Value
+				</h3>
+				<p>
+					The third value contains the value the field needs to contain to
+					enable the form you want to toggle. This can be either a value or a
+					function.
+				</p>
+				<h3>
+					Form
+				</h3>
+				<p>
+					The fourth paramater is the form you want to toggle. If the value
+					returns true this form will be visible
+				</p>
+				<h3>
+					Field
+				</h3>
+				<p>
+					The last parameter is optional. If you want to toggle a single field
+					instead of a form you can add the option. The field has to be in the
+					form of the 4th paramater.
+				</p>
 			</div>
 		</div>
 	</section>
@@ -37,9 +81,11 @@ export default {
 			start: `this.$uiFields.setCondition(
 	'Your_form_name',
 	'Your_field_name',
-	'The_value'
+	'The_value',
+	'The_form_you_want_to_toggle',
+	'The_field_you_want_to_toggle' //optional
 );`,
 		};
-	}
+	},
 };
 </script>

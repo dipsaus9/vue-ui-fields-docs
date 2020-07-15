@@ -6,19 +6,38 @@
 					Philosophy
 				</h1>
 				<p>
-					The idea of UI Fields started a long time ago.
+					The idea of UI Fields started a long time ago. For multiple projects
+					some people at Matise created some component based forms to manage the
+					checkout of a ecommerce website. As these componenents progressed we
+					found multiple issues regarding the state management of Vue. This is
+					why we created a global Vuex state management that can create forms.
+					This was the first version of UI Fields.
 				</p>
 			</div>
 		</div>
 		<div class="content">
-			<ClientOnly>
-				<div class="code">
-					<button @click="copyToKeyboard">
-						Copy
-					</button>
-					<VueCodeHighlight>git clone @matise/ui-fields</VueCodeHighlight>
-				</div>
-			</ClientOnly>
+			<div>
+				<p>
+					Vue UI Fields has progressed from a Vuex dependend plugin to a full
+					lightweight component plugin with some reactive ES6 state management.
+					This way the plugin doesn't use too much JavaScript and all data will
+					be removed on destroy events. This prevents JS memomery issues.
+				</p>
+				<p>
+					To get started on UI Fields download the node module and follow the
+					instructions. UI Fields offers a way to create simple forms to complex
+					logic for toggle methods and SSR validation combined with client
+					validation.
+				</p>
+				<ClientOnly>
+					<div class="code">
+						<button @click="copyToKeyboard">
+							Copy
+						</button>
+						<VueCodeHighlight>npm i vue-ui-fields</VueCodeHighlight>
+					</div>
+				</ClientOnly>
+			</div>
 		</div>
 	</section>
 </template>
