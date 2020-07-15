@@ -4,6 +4,7 @@
 
 * {
 	box-sizing: border-box;
+	scroll-behavior: smooth;
 }
 
 body {
@@ -18,7 +19,7 @@ body {
 }
 
 header {
-	position: fixed;
+	position: relative;
 	left: 0;
 	top: 0;
 	width: 100vw;
@@ -30,6 +31,7 @@ header {
 	background: white;
 	z-index: 1;
 	a {
+		text-decoration: none;
 		font-size: 1.3rem;
 		color: #2c3e50;
 		font-weight: 600;
@@ -37,8 +39,7 @@ header {
 }
 
 section {
-	padding-top: 3.6rem;
+	// padding-top: 3.6rem;
 	width: calc(100% - 20rem);
-	left: 20rem;
 	position: relative;
 }
