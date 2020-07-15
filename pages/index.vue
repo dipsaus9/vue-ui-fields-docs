@@ -6,7 +6,8 @@
 					UI Fields
 				</h1>
 				<p>
-					UI Fields is a plugin to easily create full functional forms in your Vue application. Validate your fields and post them to your server.
+					UI Fields is a plugin to easily create full functional forms in your
+					Vue application. Validate your fields and post them to your server.
 				</p>
 			</div>
 		</div>
@@ -16,11 +17,24 @@
 					Usage
 				</h2>
 				<p>
-					UI Fields can be used to create simple to even complex forms. UI Fields is a JSON based component system. This means you can create a complete form by just using functions and some JSON.
-					All components in UI Fields can be used seperately and are lazyloaded. UI Fields uses simple-crypto-js and validator js as a dependency.
+					UI Fields can be used to create simple to even complex forms. UI
+					Fields is a JSON based component system. This means you can create a
+					complete form by just using functions and some JSON. All components in
+					UI Fields can be used seperately and are lazyloaded. UI Fields uses
+					simple-crypto-js and validator js as a dependency.
 				</p>
 				<p>
-					UI Fields is using the prototype of Vue. The data is being managed by JS Maps. Understanding Maps helps understanding data formatting in Ui Fields. For more information <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map" target="_blank">check out the documentation.</a>
+					UI Fields is using the prototype of Vue. The data is being managed by
+					JS Maps. Understanding Maps helps understanding data formatting in Ui
+					Fields. For more information
+					<a
+						href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map"
+						target="_blank"
+					>
+						check out the documentation.
+					</a>
+					As Vue doesn't have support for Map reactivity UI Fields offerse some
+					workarounds to make your app reactive.
 				</p>
 				<h2>
 					Table of index
@@ -38,7 +52,7 @@
 							</li>
 						</ul>
 					</li>
-						<li>
+					<li>
 						<span>
 							Documentation
 						</span>

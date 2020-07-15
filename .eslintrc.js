@@ -2,20 +2,18 @@ module.exports = {
 	root: true,
 	env: {
 		browser: true,
-		node: true
+		node: true,
 	},
 	parserOptions: {
-		parser: 'babel-eslint'
+		parser: 'babel-eslint',
 	},
 	extends: [
 		'eslint:recommended',
 		'plugin:vue/recommended',
-		'plugin:nuxt/recommended'
+		'plugin:nuxt/recommended',
 	],
 	// required to lint *.vue files
-	plugins: [
-		'only-warn'
-	],
+	plugins: ['only-warn'],
 	// add your custom rules here
 	rules: {
 		semi: ['warn', 'always'],
@@ -37,20 +35,20 @@ module.exports = {
 				outerIIFEBody: 1,
 				FunctionDeclaration: {
 					parameters: 2,
-					body: 1
+					body: 1,
 				},
 				CallExpression: {
-					arguments: 1
+					arguments: 1,
 				},
 				ArrayExpression: 1, //Use 1 tab for array notation
-				ObjectExpression: 1 //Use 1 tab for object notation
-			}
+				ObjectExpression: 1, //Use 1 tab for object notation
+			},
 		],
 		'newline-per-chained-call': [
 			'warn',
 			{
-				ignoreChainWithDepth: 2
-			}
+				ignoreChainWithDepth: 2,
+			},
 		],
 		'nuxt/no-cjs-in-config': 0,
 		'vue/no-unused-components': 'warn',
@@ -94,8 +92,8 @@ module.exports = {
 			'warn',
 			{
 				singleline: 'never',
-				multiline: 'always'
-			}
+				multiline: 'always',
+			},
 		],
 		'vue/html-end-tags': 'warn',
 		'vue/html-indent': 'off',
@@ -105,8 +103,8 @@ module.exports = {
 			{
 				startTag: 'never',
 				endTag: 'never',
-				selfClosingTag: 'always'
-			}
+				selfClosingTag: 'always',
+			},
 		],
 		'vue/max-attributes-per-line': [
 			'warn',
@@ -114,9 +112,9 @@ module.exports = {
 				singleline: 4,
 				multiline: {
 					max: 1,
-					allowFirstLine: false
-				}
-			}
+					allowFirstLine: false,
+				},
+			},
 		],
 		'vue/mustache-interpolation-spacing': ['warn', 'always'],
 		'vue/no-multi-spaces': 'warn',
@@ -131,6 +129,6 @@ module.exports = {
 		'vue/this-in-template': 'error',
 		'vue/attributes-order': 'warn',
 		'vue/max-attributes-per-line': 0,
-		'vue/no-v-html': 0
-	}
+		'vue/no-v-html': 0,
+	},
 };

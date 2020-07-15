@@ -1,7 +1,7 @@
 {
 	"name": "vue-ui-fields-tests",
 	"version": "1.0.0",
-	"description": "My grand Matise Nuxt.js project",
+	"description": "Documentation of Vue UI Fields",
 	"author": "Dennis Dipsaus",
 	"private": true,
 	"scripts": {
@@ -33,6 +33,7 @@
 		"eslint-config-prettier": "^6.10.0",
 		"eslint-friendly-formatter": "^4.0.1",
 		"eslint-loader": "^3.0.3",
+		"eslint-plugin-import": "^2.22.0",
 		"eslint-plugin-nuxt": "^0.5.1",
 		"eslint-plugin-only-warn": "^1.0.2",
 		"eslint-plugin-prettier": "^3.1.2",
