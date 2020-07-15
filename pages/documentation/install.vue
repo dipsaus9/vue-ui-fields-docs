@@ -13,7 +13,7 @@
 						<button @click="copyToKeyboard">
 							Copy
 						</button>
-						<VueCodeHighlight>git clone vue-ui-fields</VueCodeHighlight>
+						<VueCodeHighlight>npm i vue-ui-fields</VueCodeHighlight>
 					</div>
 				</ClientOnly>
 			</div>
@@ -22,7 +22,8 @@
 			<div>
 				<h2>Install</h2>
 				<p>
-					To install Vue UI Fields in your project simply include UI Fields and install it as a plugin.
+					To install Vue UI Fields in your project simply include UI Fields and
+					install it as a plugin.
 				</p>
 				<ClientOnly>
 					<div class="code">
@@ -30,7 +31,7 @@
 							Copy
 						</button>
 						<VueCodeHighlight>{{ install }}</VueCodeHighlight>
-				</div>
+					</div>
 				</ClientOnly>
 				<h3>Options</h3>
 				<p>
@@ -64,34 +65,43 @@
 					</li>
 				</ul>
 				<h4 id="project-name">
-				Project name
+					Project name
 				</h4>
 				<p>
-					You can define your project name withe the <code>projectName</code> key. This name will be used to store your data in the localstorage. The default value is `VueUiFields`.
+					You can define your project name withe the
+					<code>projectName</code> key. This name will be used to store your
+					data in the localstorage. The default value is `VueUiFields`.
 				</p>
 				<h4 id="persistent-time">
-				Persistent time
+					Persistent time
 				</h4>
 				<p>
-					You can change the time your data stays in the localstorage with the <code>persistentTime</code> key (time in microseconds. Defaults to: <code>4320000</code> (1000 * 60 * 60 * 12 - half a day)
+					You can change the time your data stays in the localstorage with the
+					<code>persistentTime</code> key (time in microseconds. Defaults to:
+					<code>4320000</code> (1000 * 60 * 60 * 12 - half a day)
 				</p>
 				<h4 id="lang">
-				Language
+					Languague
 				</h4>
 				<p>
-					You can change the default language used for validation with the <code>lang</code> key. Defaults to <code>en</code>. <code>nl</code> is the only other option at this moment.
+					You can change the default language used for validation with the
+					<code>lang</code> key. Defaults to <code>en</code>. <code>nl</code> is
+					the only other option at this moment.
 				</p>
 				<h4 id="lang">
-				Class name
+					Class name
 				</h4>
 				<p>
-					You can change the base class name used for all the components with the <code>className</code> key. Defaults to <code>ui-fields</code>
+					You can change the base class name used for all the components with
+					the <code>className</code> key. Defaults to <code>ui-fields</code>
 				</p>
 				<h4 id="base-url">
-				Base URL
+					Base URL
 				</h4>
 				<p>
-					You can change the base url to send out forms with the <code>baseURL</code> key. This feature only works when using helper functions.
+					You can change the base url to send out forms with the
+					<code>baseURL</code> key. This feature only works when using helper
+					functions.
 				</p>
 				<h3>Example</h3>
 				<ClientOnly>
@@ -102,10 +112,19 @@
 						<VueCodeHighlight>{{ installOptions }}</VueCodeHighlight>
 					</div>
 				</ClientOnly>
-				<h4>Runtime compiler</h4>
+				<h4>
+					Runtime compiler
+				</h4>
 				<p>
-					UI Fields is not compiled yet, so you need a runtime compiler from Vue. Also UI Fields uses async / await, so you might have to babel this.
+					UI Fields is not compiled yet, so you need a runtime compiler from
+					Vue. Also UI Fields uses async / await, so you might have to babel
+					this.
 				</p>
+			</div>
+			<div class="next">
+				<NuxtLink to="/documentation/new">
+					New Form
+				</NuxtLink>
 			</div>
 		</div>
 	</section>
@@ -127,8 +146,8 @@ Vue.use(uiFields, {
 	lang: 'nl',
 	projectName: 'Test',
 	className: 'test'
-});`
+});`,
 		};
-	}
+	},
 };
 </script>

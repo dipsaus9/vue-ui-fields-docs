@@ -3,7 +3,7 @@
 		<div class="intro">
 			<div>
 				<h1>
-					Documentation - setField (s)
+					Documentation - setField(s)
 				</h1>
 				<p>
 					After initing a new form you can add fields to the instance. You can do this by the prototype helper or directly on to the instance. If you are using the instance you don't have to add the first paramater. All functions can be used for a single object or an array of objects with the plural form of the function.
@@ -33,7 +33,7 @@
 			<div>
 				<h2>Options</h2>
 				<p>
-					Initing a field uses some base options for adjusting data in the component itself.
+					While creating a new field you can add some options for the component.
 				</p>
 				<ul>
 					<li>
@@ -147,7 +147,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="#options">
+						<a href="#selectoptions">
 							options (Only for select and checkbox)
 						</a>
 					</li>
@@ -330,11 +330,12 @@
 							here
 						</NuxtLink>
 				</p>
-				<h4 id="options">
+				<h4 id="selectoptions">
 					Options (only for select and checkbox)
 				</h4>
 				<p>
 					<code>options</code> You can add options for the select and checkbox input. The option attribute is always an array containing four possible values.
+				</p>
 					<ul>
 						<li>
 							<code>label</code>
@@ -349,6 +350,7 @@
 							<code>disabled</code>
 						</li>
 					</ul>
+				<p>
 					The label attribute is being used for the visual end.
 					The value attribute is the direct value of the option.
 					The selected attribute can be used to select the first active value, this value can be overwritten.

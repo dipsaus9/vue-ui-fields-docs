@@ -6,7 +6,7 @@
 					Documentation - New Form
 				</h1>
 				<p>
-					When using UI Fields you first have to start by creating a new form instance. You can do this by using the UI Fields prototype created by installing UI Fields.
+					To create a new form with UI Fields you have to create a new form instance. You can do this by using the UI Fields prototype `$uiFields` created by installing UI Fields.
 				</p>
 				<ClientOnly>
 					<div class="code">
@@ -17,7 +17,7 @@
 					</div>
 				</ClientOnly>
 				<p>
-					Creating a new instance also returns the instance. You can also call this instance with the prototype. All functions are available on both methods.
+					Creating a new instance returns it. You can also call this instance with the prototype. All functions are available using both methods.
 				</p>
 			</div>
 		</div>
@@ -36,7 +36,7 @@
 					</div>
 				</ClientOnly>
 				<p>
-					The component contains some options you can change. You can always change the class name by simply adding the class element to it. You can also change the first html element wrapping all fields. You can do this by adding a component tag.
+					The component contains some options you can change. You can always change the class name by simply adding the class attribute to it. You can change the first html element wrapping all fields, by adding a `component` attribute.
 				</p>
 				<ClientOnly>
 					<div class="code">
@@ -48,7 +48,7 @@
 				</ClientOnly>
 				<h2>Class name</h2>
 				<p>
-					You can also change the base class name of the form. This class will be used as base for the entire form. This overwrites the base class you use in the install option.
+					You can change the base class name of the form, this class will be used as base for the entire form. This overwrites the base class you use in the install option.
 				</p>
 				<ClientOnly>
 					<div class="code">
@@ -59,6 +59,11 @@
 					</div>
 				</ClientOnly>
 			</div>
+			<div class="next">
+				<NuxtLink to="/documentation/set-field">
+					Set field(s)
+				</NuxtLink>
+		</div>
 		</div>
 	</section>
 </template>
