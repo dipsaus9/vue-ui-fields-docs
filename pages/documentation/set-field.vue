@@ -6,11 +6,12 @@
 					Documentation - setField(s)
 				</h1>
 				<p>
-					After initing a new form you can add fields to the instance. You can
-					do this by the prototype helper or directly on to the instance. If you
-					are using the instance you don't have to add the first paramater. All
-					functions can be used for a single object or an array of objects with
-					the plural form of the function.
+					After creating a form you can add fields to your form by using the
+					setField(s) function. By adding fields the plugin will update your
+					component with the new fields and settings. The function can be used
+					as a single field with the <code>setField</code> function or multiple
+					fields at once with the <code>setFields</code> function containing an
+					array of data.
 				</p>
 				<ClientOnly>
 					<div class="code">
@@ -21,7 +22,7 @@
 					</div>
 				</ClientOnly>
 				<p>
-					Or add more fields
+					Or more fields at once
 				</p>
 				<ClientOnly>
 					<div class="code">
@@ -37,7 +38,9 @@
 			<div>
 				<h2>Options</h2>
 				<p>
-					While creating a new field you can add some options for the component.
+					When creating a new field to your form you can adapt the settings with
+					the following options. Most options have the same name and outcome as
+					the default HTML output of that element.
 				</p>
 				<ul>
 					<li>

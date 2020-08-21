@@ -9,14 +9,14 @@
 				<p>
 					To create a new form with UI Fields you have to create a new form
 					instance. You can do this by using the UI Fields prototype
-					<code>$uiFields</code> created by installing UI Fields.
+					<code>$uiFields</code>.
 				</p>
 				<ClientOnly>
 					<div class="code">
 						<button @click="copyToKeyboard">
 							Copy
 						</button>
-						<VueCodeHighlight>this.$uiFields.new('Your_form_name_here');</VueCodeHighlight>
+						<VueCodeHighlight>{{ installCommand }}</VueCodeHighlight>
 					</div>
 				</ClientOnly>
 				<p>
@@ -41,10 +41,10 @@
 					</div>
 				</ClientOnly>
 				<p>
-					The component contains some options you can change. You can always
-					change the class name by simply adding the class attribute to it. You
-					can change the first html element wrapping all fields, by adding a
-					<code>component</code> attribute.
+					The component some props required to render the component. Beside the
+					name property you can add classes or change the component rendered by
+					the component. This can be done by changing the
+					<code>component</code> property.
 				</p>
 				<ClientOnly>
 					<div class="code">
@@ -92,6 +92,7 @@ export default {
 			/* eslint-disable */
 			withClassName:
 				"this.$uiFields.new('Your_form_name_here', 'my-awesome-class');",
+			installCommand: `this.$uiFields.new('Your_form_name_here');`,
 		};
 	},
 };

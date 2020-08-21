@@ -6,10 +6,14 @@
 					Documentation - Validation
 				</h1>
 				<p>
-					UI Fields gives you the opportunity to validate al fields client side.
-					Within UI Fields there are some validation options included from
-					<code>validator.js</code>, others are just simpel validation rules.
-					You can add multiple validation rules to a single field.
+					UI Fields gives you the abbility to validate your form with the help
+					of Vue. By adding some settings to your setField function you can
+					create simple or complex validation rules to make sure your users
+					won't submit wrong data. UI Fields uses a combination of
+					<code>validator.js</code>, and native JS rules.
+				</p>
+				<p>
+					All validation happens at the blur event of the input
 				</p>
 			</div>
 		</div>
