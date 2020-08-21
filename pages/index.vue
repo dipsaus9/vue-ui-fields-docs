@@ -6,8 +6,10 @@
 					UI Fields
 				</h1>
 				<p>
-					UI Fields is a plugin to easily create full functional forms in your
-					Vue application. Validate your fields and post them to your server.
+					UI Fields is a Vue plugin for creating full functional forms in your
+					application. UI Fields offers a way to create a full form with just
+					one function. From here you can validate or add complex logic to your
+					form.
 				</p>
 			</div>
 		</div>
@@ -17,11 +19,10 @@
 					Usage
 				</h2>
 				<p>
-					UI Fields can be used to create simple to even complex forms. UI
-					Fields is a JSON based component system. This means you can create a
-					complete form by just using functions and some JSON. All components in
-					UI Fields can be used seperately and are lazyloaded. UI Fields uses
-					simple-crypto-js and validator js as a dependency.
+					UI Fields can be used to create simple to complex forms in Vue. UI
+					Fields uses global Vue functions to render your form. UI Fields gives
+					you the advantage to consistently create forms and even add logic to
+					make your form even better.
 				</p>
 				<p>
 					UI Fields is using the prototype of Vue. The data is being managed by
@@ -33,8 +34,8 @@
 					>
 						check out the documentation.
 					</a>
-					As Vue doesn't have support for Map reactivity UI Fields offerse some
-					workarounds to make your app reactive.
+					As Vue doesn't have support for Map reactivity UI Fields offers
+					functions to listen to events and changes.
 				</p>
 				<h2>
 					Table of index

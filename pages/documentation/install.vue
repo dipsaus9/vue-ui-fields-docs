@@ -22,8 +22,8 @@
 			<div>
 				<h2>Install</h2>
 				<p>
-					To install Vue UI Fields in your project simply include UI Fields and
-					install it as a plugin.
+					To install Vue UI Fields in your project include the UI Fields package
+					and install it as a plugin.
 				</p>
 				<ClientOnly>
 					<div class="code">
@@ -35,7 +35,8 @@
 				</ClientOnly>
 				<h3>Options</h3>
 				<p>
-					You can include some options to change the default settings
+					The following options can be used to change the default plugin
+					behaviour.
 				</p>
 				<ul>
 					<li>
@@ -68,7 +69,7 @@
 					Project name
 				</h4>
 				<p>
-					You can define your project name withe the
+					You can define your project name with the
 					<code>projectName</code> key. This name will be used to store your
 					data in the localstorage. The default value is `VueUiFields`.
 				</p>
@@ -78,7 +79,7 @@
 				<p>
 					You can change the time your data stays in the localstorage with the
 					<code>persistentTime</code> key (time in microseconds. Defaults to:
-					<code>4320000</code> (1000 * 60 * 60 * 12 - half a day)
+					<code>4320000</code> (1000 * 60 * 60 * 12 = half a day)
 				</p>
 				<h4 id="lang">
 					Languague
