@@ -6,10 +6,10 @@
 					Documentation - Validation
 				</h1>
 				<p>
-					UI Fields gives you the abbility to validate your form with the help
-					of Vue. By adding some settings to your setField function you can
-					create simple or complex validation rules to make sure your users
-					won't submit wrong data. UI Fields uses a combination of
+					UI Fields gives you the ability to validate your form with the help of
+					Vue. By adding some settings to your setField function you can create
+					simple or complex validation rules to make sure your users won't
+					submit wrong data. UI Fields uses a combination of
 					<code>validator.js</code>, and native JS rules.
 				</p>
 				<p>

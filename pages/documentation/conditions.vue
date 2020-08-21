@@ -6,15 +6,16 @@
 					Documentation - Conditions
 				</h1>
 				<p>
-					Vue UI Fields gives you the opportunity to toggle fields or forms
-					based on logic. By using conditions you can create complex forms with
-					just a single line of code. For example you can show extra fields
-					depending on a select value of a first form.
+					When creating larger forms there is often a need for conditional
+					fields. For example in a checkout you want to ship your product to a
+					different address. Vue UI Fields gives you the opportunity to toggle
+					fields or forms based on logic. By using conditions you can create
+					complex forms with just a single line of code.
 				</p>
 				<p>
-					A condition is dependent of a form, a field and its value and ofcourse
-					the form you want to toggle. You can toggle a form or a field with the
-					last 2 parameters.
+					A condition is dependent of a form, a field and its value and the form
+					you want to toggle. You can toggle a form or a field with the last 2
+					parameters.
 				</p>
 				<ClientOnly>
 					<div class="code">
@@ -70,6 +71,19 @@
 					instead of a form you can add the option. The field has to be in the
 					form of the 4th paramater.
 				</p>
+				<h3>Example</h3>
+				<p>
+					As described above we can show a new part of a form depending on a
+					value by the user.
+				</p>
+				<ClientOnly>
+					<div class="code">
+						<button @click="copyToKeyboard">
+							Copy
+						</button>
+						<VueCodeHighlight>{{ example }}</VueCodeHighlight>
+					</div>
+				</ClientOnly>
 			</div>
 		</div>
 	</section>
@@ -85,6 +99,30 @@ export default {
 	'The_form_you_want_to_toggle',
 	'The_field_you_want_to_toggle' //optional
 );`,
+			example: `this.$uiFields.setFields('checkout', [
+	{
+		name: 'optional_value',
+		type: 'checkbox',
+		options: [
+			{
+				value: true,
+				label: 'Do you want to ship your order to a different address?'
+			}
+		]
+	},
+	{
+		name: 'shipping_address'
+	}
+]);
+
+this.$uiFields.setCondition(
+	'checkout',
+	'optional_value',
+	true,
+	'checkout',
+	'shipping_address'
+);
+`,
 		};
 	},
 };
