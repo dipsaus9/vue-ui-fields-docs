@@ -272,7 +272,7 @@ export default {
 	}
 ]);`,
 			custom: `this.$uiFields.new('validation-test');
-			this.$uiFields.setField('validation-test', 
+this.$uiFields.setField('validation-test', 
 	{
 		name: 'value',
 		type: 'text',
