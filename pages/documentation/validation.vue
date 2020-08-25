@@ -172,16 +172,11 @@
 					It is also possible to write your own custom validation. Custom
 					validaiton requires all options to be added. For example this
 					validation will only work when the value is matching the option passed
-					into the validation.
+					into the validation - so for this example the string
+					<code>UiFields is awesome</code>. Validation will only work on blur
+					event!
 				</p>
-				<ClientOnly>
-					<div class="code">
-						<button @click="copyToKeyboard">
-							Copy
-						</button>
-						<VueCodeHighlight>{{ custom }}</VueCodeHighlight>
-					</div>
-				</ClientOnly>
+				<CodeToggle :code="custom" name="validation-test" />
 			</div>
 			<div class="next">
 				<NuxtLink to="/documentation/conditions">
@@ -276,17 +271,18 @@ export default {
 		]
 	}
 ]);`,
-			custom: `this.$uiFields.setField('Your_form_name', 
+			custom: `this.$uiFields.new('validation-test');
+			this.$uiFields.setField('validation-test', 
 	{
-		name: 'value2',
+		name: 'value',
 		type: 'text',
-		label: 'Value 2',
+		label: 'Value',
 		validation: [
 			{
 				name: 'custom',
-				options: 'test',
+				options: 'UiFields is awesome',
 				message: 'Is not matching the validation',
-				validation: (value, option) => value === option
+				validation: (value, option) => value.toLowerCase() === option.toLowerCase()
 			}
 		]
 	}

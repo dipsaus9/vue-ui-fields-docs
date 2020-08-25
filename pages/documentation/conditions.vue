@@ -76,14 +76,7 @@
 					As described above we can show a new part of a form depending on a
 					value by the user.
 				</p>
-				<ClientOnly>
-					<div class="code">
-						<button @click="copyToKeyboard">
-							Copy
-						</button>
-						<VueCodeHighlight>{{ example }}</VueCodeHighlight>
-					</div>
-				</ClientOnly>
+				<CodeToggle :code="example" name="checkout" />
 			</div>
 		</div>
 	</section>
@@ -99,26 +92,34 @@ export default {
 	'The_form_you_want_to_toggle',
 	'The_field_you_want_to_toggle' //optional
 );`,
-			example: `this.$uiFields.setFields('checkout', [
+			example: `this.$uiFields.new('checkout');
+this.$uiFields.setFields('checkout', [
 	{
 		name: 'optional_value',
 		type: 'checkbox',
 		options: [
 			{
-				value: true,
+				value: 'true',
 				label: 'Do you want to ship your order to a different address?'
 			}
 		]
 	},
 	{
-		name: 'shipping_address'
+		name: 'shipping_address',
+		label: 'Address',
+		type: 'text'
 	}
 ]);
 
 this.$uiFields.setCondition(
 	'checkout',
 	'optional_value',
-	true,
+	(val) => {
+		if (Array.isArray(val)) {
+			return val.includes('true');
+		}
+		return false;
+	},
 	'checkout',
 	'shipping_address'
 );

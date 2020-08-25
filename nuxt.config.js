@@ -9,7 +9,7 @@ export default {
 	env: {
 		environment: config.env || 'production',
 	},
-
+	components: true,
 	/*
 	 ** Headers of the page
 	 */
